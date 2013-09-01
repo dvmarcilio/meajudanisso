@@ -15,10 +15,6 @@ Dado(/^que existem perguntas com votos$/) do
   pending # express the regexp above with the code you wish you had
 end
 
-Quando(/^eu estou na pagina de visualizar perguntas por votos$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
 Então(/^eu devo ver perguntas ordenadas decrescentemente pela quantidade de votos$/) do
   pending # express the regexp above with the code you wish you had
 end
