@@ -2,7 +2,7 @@ Não existem perguntas com votos
 
 %table#perguntas
 	%tbody
-		- @perguntas.each do |pergunta|
+		- @perguntas.bem_votadas do |pergunta|
 			%tr
 				%td#votos= pergunta.votos
 				%td= pergunta.titulo
