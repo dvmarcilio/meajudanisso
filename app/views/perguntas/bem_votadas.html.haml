@@ -4,5 +4,6 @@ Não existem perguntas com votos
 	%tbody
 		- @perguntas.each do |pergunta|
 			%tr
-				%td= pergunta.titulo
 				%td= pergunta.votos
+				%td= pergunta.titulo
+				

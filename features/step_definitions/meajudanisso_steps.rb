@@ -30,7 +30,13 @@ Então(/^eu devo ver as perguntas com sua quantidade de votos$/) do
 end
 
 Então(/^eu devo ver as perguntas ordenadas decrescentemente pela quantidade de votos$/) do
-  pending # express the regexp above with the code you wish you had
+  perguntas_votos_decrescente = @perguntas.sort_by {|titulo, votos| votos}.reverse
+  perguntas_votos_decrescente.each_with_index do |pergunta, index|
+  	within_table('perguntas') do
+  		page.should have_selector("td:nth-child(" + index.to_s + ")", text: pergunta.votos)
+  		page.should have_selector("td:nth-child(" + index.to_s + ")", text: pergunta.titulo) 
+  	end
+  end
 end
 
 
