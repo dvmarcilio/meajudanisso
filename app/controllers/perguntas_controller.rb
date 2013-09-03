@@ -10,7 +10,7 @@ class PerguntasController < ApplicationController
 				Pergunta.new("Como testar conteúdo de tabela no Cucumber", 2),
 				Pergunta.new("O que é um gemset no RVM ?", 10),
 				Pergunta.new("invalid multibyte char (US-ASCII) with Rails and Ruby 1.9", 40)
-			].each(&block)
+			].sort_by{|titulo,votos| votos}.reverse.each(&block)
 		end
 	end
 end
