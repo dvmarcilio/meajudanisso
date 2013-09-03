@@ -31,13 +31,9 @@ end
 
 Então(/^eu devo ver as perguntas ordenadas decrescentemente pela quantidade de votos$/) do
   perguntas_votos_decrescente = @perguntas.sort_by {|titulo, votos| votos}.reverse
-  perguntas_votos_decrescente.each do |pergunta|
-  	index = 0
+  perguntas_votos_decrescente.each_with_index do |pergunta, index|
   	within_table('perguntas') do
-  		index+=1
-  		page.should have_css("td:nth-child(#{index})", text: pergunta.votos)
-  		index+=1
-  		page.should have_css("td:nth-child(#{index})", text: pergunta.titulo) 
+  		page.should have_css("tr:nth-child(#{index+1})", text: pergunta.votos)
   	end
   end
 end
