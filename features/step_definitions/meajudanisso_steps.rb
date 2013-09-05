@@ -14,8 +14,8 @@ end
 Pergunta = Struct.new :titulo, :votos
 Dado(/^que existem perguntas com votos$/) do
 	@perguntas = [
-		Pergunta.new("Como testar conteúdo de tabela no Cucumber", 2),
-		Pergunta.new("O que é um gemset no RVM ?", 10),
+		Pergunta.new("Como testar conteudo de tabela no Cucumber", 2),
+		Pergunta.new("O que e um gemset no RVM ?", 10),
 		Pergunta.new("invalid multibyte char (US-ASCII) with Rails and Ruby 1.9", 40)
 	]
 end
@@ -24,7 +24,7 @@ Então(/^eu devo ver as perguntas com sua quantidade de votos$/) do
   @perguntas.each do |pergunta|
   	within_table('perguntas') do
   		page.should have_css("td", text: pergunta.titulo)
-  		page.should have_css("td", text: pergunta.votos)
+  		page.should have_css("td#votos", text: pergunta.votos)
   	end
   end
 end
