@@ -2,10 +2,11 @@ require 'spec_helper'
 
 describe PerguntasController do
 	describe "GET /bem_votadas" do
-		it "usa um presenter de colecao de perguntas" do
+		#TODO resolver esse 3 hard-coded
+		it "obtem as 3 perguntas mais votadas" do
 			perguntas_presenter = double
 			
-			MeAjudaNisso::Perguntas::Presenters::Collection.stub(:for) { perguntas_presenter }		
+			MeAjudaNisso::Perguntas.stub(:bem_votadas) { perguntas_presenter }		
 			
 			get :bem_votadas
 			expect(assigns(:perguntas)).to be(perguntas_presenter)

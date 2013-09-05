@@ -10,6 +10,6 @@ class PerguntasController < ApplicationController
 				Pergunta.new("O que e um gemset no RVM ?", 10),
 				Pergunta.new("invalid multibyte char (US-ASCII) with Rails and Ruby 1.9", 40)
 		]
-		@perguntas = MeAjudaNisso::Perguntas::Presenters::Collection.for(perguntas)
+		@perguntas = MeAjudaNisso::Perguntas.bem_votadas
 	end
 end
