@@ -4,5 +4,4 @@ class Pergunta < ActiveRecord::Base
   def self.bem_votadas
   	all
   end
-  
 end

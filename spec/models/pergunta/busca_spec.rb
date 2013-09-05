@@ -10,7 +10,7 @@ describe "Buscando perguntas" do
 			end
 		end
 		
-		it "retorna todos as perguntas" do
+		it "retorna todas as perguntas" do
 			p1 = Pergunta.create! titulo: "p1", votos: 10
 			p2 = Pergunta.create! titulo: "p2", votos: 20
 			p3 = Pergunta.create! titulo: "p3", votos: 30

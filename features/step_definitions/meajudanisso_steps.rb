@@ -1,6 +1,6 @@
 # encoding: utf-8
-
 Dado(/^que não existem perguntas com votos$/) do
+	Pergunta.destroy_all
 end
 
 Quando(/^eu estou na página de visualizar perguntas por votos$/) do
@@ -11,12 +11,11 @@ Então(/^eu devo ver que não existem perguntas com votos$/) do
   page.should have_content("Não existem perguntas com votos")
 end
 
-Pergunta = Struct.new :titulo, :votos
 Dado(/^que existem perguntas com votos$/) do
 	@perguntas = [
-		Pergunta.new("Como testar conteudo de tabela no Cucumber", 2),
-		Pergunta.new("O que e um gemset no RVM ?", 10),
-		Pergunta.new("invalid multibyte char (US-ASCII) with Rails and Ruby 1.9", 40)
+		Pergunta.create!(titulo: "Como testar conteudo de tabela no Cucumber", votos: 2),
+		Pergunta.create!(titulo: "O que e um gemset no RVM ?", votos: 10),
+		Pergunta.create!(titulo: "invalid multibyte char (US-ASCII) with Rails and Ruby 1.9", votos: 40)
 	]
 end
 

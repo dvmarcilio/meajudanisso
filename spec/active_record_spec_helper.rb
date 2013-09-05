@@ -6,7 +6,7 @@ ActiveRecord::Base.establish_connection(connection_info)
 
 RSpec.configure do |config|
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean_with(:truncation)
   end
   config.before(:each) do
