@@ -1,0 +1,3 @@
+%h1 #{@pergunta.titulo}
+
+= button_to 'Votar', votar_pergunta_path(@pergunta) , method: "put"

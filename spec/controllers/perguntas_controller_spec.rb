@@ -11,5 +11,16 @@ describe PerguntasController do
 			get :bem_votadas
 			expect(assigns(:perguntas)).to be(perguntas_presenter)
 		end
+		
+		describe "GET /show" do
+			it "atribui a pergunta" do
+				pergunta = double
+				::Pergunta.stub(:find).with("5") { pergunta }
+			
+				get :show, id: "5"
+				expect(assigns(:pergunta)).to be(pergunta)
+			end
+		end
+		
 	end
 end
