@@ -37,4 +37,28 @@ Então(/^eu devo ver as perguntas ordenadas decrescentemente pela quantidade de 
   end
 end
 
+Dado(/^que uma pergunta existe$/) do
+  @pergunta = Pergunta.create!(titulo: "Como escrever melhores cenarios no Cucumber", votos: 0)
+  @votos = @pergunta.votos
+end
+
+Dado(/^que estou na página de visualização dessa pergunta$/) do
+  visit pergunta_path(@pergunta)
+end
+
+Quando(/^eu voto na pergunta$/) do
+  click_on "Votar"
+end
+
+Então(/^eu devo ver uma mensagem de confirmação$/) do
+  page.should have_content("Voto confirmado!")
+end
+
+Então(/^eu devo ver a pergunta com um voto a mais$/) do
+  page.should have_css(".votos .pergunta", text: @votos+1)
+end
+
+
+
+
 

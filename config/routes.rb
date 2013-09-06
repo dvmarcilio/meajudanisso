@@ -1,5 +1,7 @@
 MeAjudaNisso::Application.routes.draw do
- resources :perguntas, only: [] do
- 	get :bem_votadas, :on => :collection
+ resources :perguntas do
+ 	collection do
+	 	get :bem_votadas
+	end
  end
 end
