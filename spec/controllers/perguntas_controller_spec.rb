@@ -24,10 +24,9 @@ describe PerguntasController do
 	end
 		
 	describe "PUT /votar" do
-		let(:votos_updater) { double(aumenta_voto: nil) }
-		
+
 		before do
-			stub_const("MeAjudaNisso::Perguntas::Voto", votos_updater)
+			MeAjudaNisso::Perguntas::Voto.stub(:aumenta_voto)
 		end
 		
 		it "redireciona de volta para a pagina de visualizacao" do
@@ -37,7 +36,7 @@ describe PerguntasController do
 			
 		it "aumenta o voto em UM da pergunta" do
 			
-			votos_updater.should_receive(:aumenta_voto).with("5")
+			MeAjudaNisso::Perguntas::Voto.should_receive(:aumenta_voto).with("5")
 			put :votar, id: "5"
 		end 
 	end

@@ -1,4 +1,5 @@
 require 'perguntas'
+require 'perguntas/voto'
 
 class PerguntasController < ApplicationController
 	def bem_votadas
