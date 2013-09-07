@@ -6,7 +6,8 @@ MeAjudaNisso::Application.routes.draw do
 	end
 	
 	member do
-		put :votar
+		put :votar_positivo
+		put :votar_negativo
 	end
  end
 end

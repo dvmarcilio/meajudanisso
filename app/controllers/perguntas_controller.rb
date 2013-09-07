@@ -10,7 +10,7 @@ class PerguntasController < ApplicationController
 		@pergunta = Pergunta.find(pergunta_id)
 	end
 	
-	def votar
+	def votar_positivo
 		MeAjudaNisso::Perguntas::Voto.aumenta_voto(pergunta_id)
 		flash[:info] = "Voto confirmado!"
 		redirect_to pergunta_url(pergunta_id)

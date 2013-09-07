@@ -23,21 +23,21 @@ describe PerguntasController do
 		end
 	end
 		
-	describe "PUT /votar" do
+	describe "PUT /votar_positivo" do
 
 		before do
 			MeAjudaNisso::Perguntas::Voto.stub(:aumenta_voto)
 		end
 		
 		it "redireciona de volta para a pagina de visualizacao" do
-			put :votar, id: "5"
+			put :votar_positivo, id: "5"
 			expect(response).to redirect_to(pergunta_url("5"))
 		end
 			
 		it "aumenta o voto em UM da pergunta" do
 			
 			MeAjudaNisso::Perguntas::Voto.should_receive(:aumenta_voto).with("5")
-			put :votar, id: "5"
+			put :votar_positivo, id: "5"
 		end 
 	end
 
