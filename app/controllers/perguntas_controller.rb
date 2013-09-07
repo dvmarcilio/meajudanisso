@@ -16,6 +16,12 @@ class PerguntasController < ApplicationController
 		redirect_to pergunta_url(pergunta_id)
 	end
 	
+	def votar_negativo
+	  MeAjudaNisso::Perguntas::Voto.diminui_voto(pergunta_id)
+	  flash[:info] = "Voto confirmado!"
+	  redirect_to pergunta_url(pergunta_id)
+	end
+	
 	private
 		def pergunta_id
 			params[:id]

@@ -21,6 +21,7 @@ describe PerguntasController do
 			get :show, id: "5"
 			expect(assigns(:pergunta)).to be(pergunta)
 		end
+		
 	end
 		
 	describe "PUT /votar_positivo" do
@@ -34,11 +35,29 @@ describe PerguntasController do
 			expect(response).to redirect_to(pergunta_url("5"))
 		end
 			
-		it "aumenta o voto em UM da pergunta" do
-			
+		it "aumenta o voto da pergunta" do
 			MeAjudaNisso::Perguntas::Voto.should_receive(:aumenta_voto).with("5")
 			put :votar_positivo, id: "5"
-		end 
+		end
+		 
+	end
+	
+	describe "PUT /votar_negativo" do
+	  
+	  before do
+			MeAjudaNisso::Perguntas::Voto.stub(:diminui_voto)
+		end
+	  
+	  it "redireciona de volta para a pagina de visualizacao" do
+	    put :votar_negativo, id: "5"
+	    expect(response).to redirect_to(pergunta_url("5"))
+	  end
+	  
+	  it "diminiu o voto da pergunta" do
+      MeAjudaNisso::Perguntas::Voto.should_receive(:diminui_voto).with("5")
+      put :votar_negativo, id: "5"
+	  end
+	   
 	end
 
 end
