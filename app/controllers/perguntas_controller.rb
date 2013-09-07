@@ -11,6 +11,7 @@ class PerguntasController < ApplicationController
 	
 	def votar
 		MeAjudaNisso::Perguntas::Voto.aumenta_voto(pergunta_id)
+		flash[:info] = "Voto confirmado!"
 		redirect_to pergunta_url(pergunta_id)
 	end
 	

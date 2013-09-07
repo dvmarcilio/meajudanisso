@@ -1,0 +1,17 @@
+!!! 5
+%html
+  %head
+    %title Me Ajuda Nisso
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+
+  %body		
+    - if flash[:info]
+      #info.message= flash[:info]
+    - elsif flash[:warning]
+      #warning.message= flash[:warning]
+    - elsif flash[:error]
+      #error.message = flash[:error]
+
+  = yield

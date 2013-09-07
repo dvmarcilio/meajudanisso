@@ -4,4 +4,8 @@ class Pergunta < ActiveRecord::Base
   def self.bem_votadas
   	all
   end
+  
+  def atualiza_voto(voto)
+  	self.update_attributes votos: (self.votos + voto)
+  end
 end

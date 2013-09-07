@@ -55,7 +55,7 @@ Então(/^eu devo ver uma mensagem de confirmação$/) do
 end
 
 Então(/^eu devo ver a pergunta com um voto a mais$/) do
-  page.should have_css(".votos .pergunta", text: @votos+1)
+  page.should have_css(".pergunta#votos", text: @votos+1)
 end
 
 

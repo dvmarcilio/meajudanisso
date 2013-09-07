@@ -11,3 +11,25 @@
  *= require_self
  *= require_tree .
  */
+ 
+#error {
+	color: red;
+	text-align: center;
+  background: rosybrown;
+  margin: 1em 0;
+  padding: 4px;
+}
+#warning {
+	color: yellow;
+	text-align: center;
+  background: rosybrown;
+  margin: 1em 0;
+  padding: 4px;
+}
+#info {
+	color: green;
+	text-align: center;
+  background: rosybrown;
+  margin: 1em 0;
+  padding: 4px;
+}
