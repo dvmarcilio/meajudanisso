@@ -11,16 +11,35 @@ describe PerguntasController do
 			get :bem_votadas
 			expect(assigns(:perguntas)).to be(perguntas_presenter)
 		end
+	end
 		
-		describe "GET /show" do
-			it "atribui a pergunta" do
-				pergunta = double
-				::Pergunta.stub(:find).with("5") { pergunta }
+	describe "GET /show" do
+		it "atribui a pergunta" do
+			pergunta = double
+			::Pergunta.stub(:find).with("5") { pergunta }
 			
-				get :show, id: "5"
-				expect(assigns(:pergunta)).to be(pergunta)
-			end
+			get :show, id: "5"
+			expect(assigns(:pergunta)).to be(pergunta)
+		end
+	end
+		
+	describe "PUT /votar" do
+		let(:votos_updater) { double(aumenta_voto: nil) }
+		
+		before do
+			stub_const("MeAjudaNisso::Perguntas::Voto", votos_updater)
 		end
 		
+		it "redireciona de volta para a pagina de visualizacao" do
+			put :votar, id: "5"
+			expect(response).to redirect_to(pergunta_url("5"))
+		end
+			
+		it "aumenta o voto em UM da pergunta" do
+			
+			votos_updater.should_receive(:aumenta_voto).with("5")
+			put :votar, id: "5"
+		end 
 	end
+
 end
