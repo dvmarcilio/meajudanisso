@@ -1,7 +1,7 @@
 %h1 #{@pergunta.titulo}
 
-= button_to 'Votar +', votar_positivo_pergunta_path(@pergunta) , method: "put"
-= button_to 'Votar -', votar_negativo_pergunta_path(@pergunta) , method: "put"
+= button_to 'Votar +', positivo_pergunta_voto_path(@pergunta) , method: "put"
+= button_to 'Votar -', negativo_pergunta_voto_path(@pergunta) , method: "put"
 
 %section.pergunta
   Votos: 
