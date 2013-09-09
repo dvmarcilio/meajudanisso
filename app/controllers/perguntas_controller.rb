@@ -1,5 +1,5 @@
 require 'perguntas'
-require 'perguntas/voto'
+require 'perguntas/votos'
 
 class PerguntasController < ApplicationController
 	def bem_votadas
@@ -11,13 +11,13 @@ class PerguntasController < ApplicationController
 	end
 	
 	def votar_positivo
-		MeAjudaNisso::Perguntas::Voto.aumenta_voto(pergunta_id)
+		MeAjudaNisso::Perguntas::Votos.aumenta_voto(pergunta_id)
 		flash[:info] = "Voto confirmado!"
 		redirect_to pergunta_url(pergunta_id)
 	end
 	
 	def votar_negativo
-	  MeAjudaNisso::Perguntas::Voto.diminui_voto(pergunta_id)
+	  MeAjudaNisso::Perguntas::Votos.diminui_voto(pergunta_id)
 	  flash[:info] = "Voto confirmado!"
 	  redirect_to pergunta_url(pergunta_id)
 	end

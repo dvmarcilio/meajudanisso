@@ -27,7 +27,7 @@ describe PerguntasController do
 	describe "PUT /votar_positivo" do
 
 		before do
-			MeAjudaNisso::Perguntas::Voto.stub(:aumenta_voto)
+			MeAjudaNisso::Perguntas::Votos.stub(:aumenta_voto)
 		end
 		
 		it "redireciona de volta para a pagina de visualizacao" do
@@ -36,7 +36,7 @@ describe PerguntasController do
 		end
 			
 		it "aumenta o voto da pergunta" do
-			MeAjudaNisso::Perguntas::Voto.should_receive(:aumenta_voto).with("5")
+			MeAjudaNisso::Perguntas::Votos.should_receive(:aumenta_voto).with("5")
 			put :votar_positivo, id: "5"
 		end
 		 
@@ -45,7 +45,7 @@ describe PerguntasController do
 	describe "PUT /votar_negativo" do
 	  
 	  before do
-			MeAjudaNisso::Perguntas::Voto.stub(:diminui_voto)
+			MeAjudaNisso::Perguntas::Votos.stub(:diminui_voto)
 		end
 	  
 	  it "redireciona de volta para a pagina de visualizacao" do
@@ -54,7 +54,7 @@ describe PerguntasController do
 	  end
 	  
 	  it "diminiu o voto da pergunta" do
-      MeAjudaNisso::Perguntas::Voto.should_receive(:diminui_voto).with("5")
+      MeAjudaNisso::Perguntas::Votos.should_receive(:diminui_voto).with("5")
       put :votar_negativo, id: "5"
 	  end
 	   

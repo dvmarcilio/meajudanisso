@@ -10,7 +10,7 @@ MeAjudaNisso::Application.routes.draw do
 		put :votar_negativo
 	end
 	
-	resource :voto, controller: "perguntas/voto", only: [] do
+	resource :votos, controller: "perguntas/votos", only: [] do
 	  put :positivo, :negativo, :on => :member
 	end
  end

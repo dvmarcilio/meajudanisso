@@ -1,6 +1,6 @@
 module MeAjudaNisso
 	module Perguntas
-		class Voto
+		class Votos
 			
 			def self.aumenta_voto(pergunta_id)
 				::Pergunta.find(pergunta_id).atualiza_voto(+1)
