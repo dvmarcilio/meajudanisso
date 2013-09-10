@@ -5,11 +5,6 @@ MeAjudaNisso::Application.routes.draw do
 	 	get :bem_votadas
 	end
 	
-	member do
-		put :votar_positivo
-		put :votar_negativo
-	end
-	
 	resource :votos, controller: "perguntas/votos", only: [] do
 	  put :positivo, :negativo, :on => :member
 	end

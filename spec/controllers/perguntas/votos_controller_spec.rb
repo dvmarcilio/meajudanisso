@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe Perguntas::VotosController do
 		
 	describe "PUT /positivo" do
