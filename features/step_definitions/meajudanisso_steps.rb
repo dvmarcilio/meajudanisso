@@ -46,10 +46,6 @@ Dado(/^que estou na página de visualização dessa pergunta$/) do
   visit pergunta_path(@pergunta)
 end
 
-Quando(/^eu voto na pergunta$/) do
-  click_on "Votar"
-end
-
 Então(/^eu devo ver uma mensagem de confirmação$/) do
   page.should have_content("Voto confirmado!")
 end
