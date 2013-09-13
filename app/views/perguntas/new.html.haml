@@ -1,0 +1,11 @@
+%h1 Fazer uma pergunta
+
+= form_tag perguntas_path do
+
+  = label :pergunta, :titulo, 'Título'
+  = text_field :pergunta, :titulo
+  
+  = label :pergunta, :tags, 'Tags'
+  = text_field :pergunta, :tags
+  
+  = submit_tag 'Criar Pergunta'

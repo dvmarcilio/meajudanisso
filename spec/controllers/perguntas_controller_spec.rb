@@ -22,4 +22,25 @@ describe PerguntasController do
 			expect(assigns(:pergunta)).to be(pergunta)
 		end
 	end
+ 
+  describe "GET /new" do
+    it "resposta HTTP sucesso (200)" do
+      get :new
+      expect(response).to be_success
+    end
+    
+    it "carrega a pagina de nova pergunta" do
+      get :new
+      expect(response).to render_template('new')
+    end 
+  end
+  
+  describe "POST /create" do
+    it "redireciona para a pagina de visualizacao da pergunta criada" do
+      #TODO instalar FactoryGirl
+      pergunta = FactoryGirl(:pergunta)
+      post :create, :id => 2
+      expect(response).to redirect_to(pergunta_url(2))
+    end 
+  end
 end

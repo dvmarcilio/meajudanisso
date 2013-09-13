@@ -1,5 +1,5 @@
 class Pergunta < ActiveRecord::Base
-  attr_accessible :titulo, :votos
+  attr_accessible :titulo, :votos, :tags
   
   def self.bem_votadas
   	all
