@@ -41,6 +41,11 @@ describe PerguntasController do
         expect(response).to be_redirect
       end
       
+      it "redireciona para a pagina de visualizacao da pergunta criada" do
+        post :create, pergunta: FactoryGirl.attributes_for(:pergunta)
+        response.should redirect_to pergunta_url(Pergunta.last)
+      end
+      
       it "salva a nova pergunta no banco de dados" do
         lambda do
           post :create
