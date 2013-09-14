@@ -6,8 +6,8 @@ Funcionalidade: Relacionar tags a uma pergunta
   Eu quero poder relacionar tags a minha pergunta
   
   Cenário: Relacionar UMA tag a uma nova pergunta
-    Dado que eu estou na pagina de fazer uma nova pergunta
-    E preenchi os dados da pergunta
+    Dado que eu estou na página de fazer uma pergunta
+    E eu preencho os dados da pergunta corretamente
     Quando eu relaciono uma tag à pergunta
     E clico em criar pergunta
     Então eu devo estar na pagina de visualização dessa pergunta
