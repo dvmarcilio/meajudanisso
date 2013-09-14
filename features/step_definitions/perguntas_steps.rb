@@ -1,6 +1,7 @@
 # encoding: utf-8
 Dado(/^que eu estou na pagina de fazer uma nova pergunta$/) do
-  visit new_pergunta_path
+  pending
+  #visit new_pergunta_path
 end
 
 Dado(/^preenchi os dados da pergunta$/) do
