@@ -19,9 +19,10 @@ end
 
 gem 'jquery-rails'
 
-group :test do
+group :development, :test do
 	gem 'database_cleaner', '1.0.1'
 	gem 'rspec-rails'
 	gem 'cucumber-rails', :require => false
+	gem 'factory_girl_rails'
 end
 

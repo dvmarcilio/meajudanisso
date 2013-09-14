@@ -36,11 +36,15 @@ describe PerguntasController do
   end
   
   describe "POST /create" do
-    it "redireciona para a pagina de visualizacao da pergunta criada" do
-      #TODO instalar FactoryGirl
-      pergunta = FactoryGirl(:pergunta)
-      post :create, :id => 2
-      expect(response).to redirect_to(pergunta_url(2))
-    end 
+      it "redireciona no sucesso" do
+        post :create
+        expect(response).to be_redirect
+      end
+      
+      it "salva a nova pergunta no banco de dados" do
+        lambda do
+          post :create
+        end.should change(Pergunta, :count).by(1)
+      end  
   end
 end
