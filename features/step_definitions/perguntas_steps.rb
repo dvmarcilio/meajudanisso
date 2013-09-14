@@ -28,7 +28,8 @@ def current_url
 end
 
 Quando(/^eu relaciono uma tag à pergunta$/) do
-  fill_in('Tags', :with => 'Java')
+  pending
+  #fill_in('Tags', :with => 'Java')
 end
 
 Quando(/^clico em criar pergunta$/) do

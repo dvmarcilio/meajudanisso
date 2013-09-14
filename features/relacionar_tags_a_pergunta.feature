@@ -10,5 +10,5 @@ Funcionalidade: Relacionar tags a uma pergunta
     E eu preencho os dados da pergunta corretamente
     Quando eu relaciono uma tag à pergunta
     E clico em criar pergunta
-    Então eu devo estar na pagina de visualização dessa pergunta
+    Então eu devo estar na página de visualização dessa pergunta
     E visualizar a pergunta com a tag
