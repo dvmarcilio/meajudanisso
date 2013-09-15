@@ -6,6 +6,9 @@
   = text_field :pergunta, :titulo
   %br
   %br
-  = text_area :editor, "", :class => "tinymce", :rows => 15, :cols => 5
+  = label :pergunta, :conteudo, 'Conteúdo'
+  = text_area :pergunta, :conteudo, :class => "tinymce"
   = tinymce
+  %br
+  %br
   = submit_tag 'Criar Pergunta'
