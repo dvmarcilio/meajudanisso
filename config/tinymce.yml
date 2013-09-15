@@ -1,0 +1,7 @@
+width: 600
+menubar: false
+toolbar1: bold italic | blockquote | link image | numlist bullist hr | outdent indent | undo redo | preview
+plugins:
+  - image
+  - link
+  - preview
