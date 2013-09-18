@@ -15,21 +15,21 @@
 #error {
 	color: red;
 	text-align: center;
-  background: rosybrown;
+  background: bisque;
   margin: 1em 0;
   padding: 4px;
 }
 #warning {
 	color: yellow;
 	text-align: center;
-  background: rosybrown;
+  background: bisque;
   margin: 1em 0;
   padding: 4px;
 }
 #info {
 	color: green;
 	text-align: center;
-  background: rosybrown;
+  background: bisque;
   margin: 1em 0;
   padding: 4px;
 }
