@@ -19,7 +19,7 @@ module Perguntas
 		  end
 		  
 		  def add_confirmation_msg
-		    flash[:info] = "Voto confirmado!"
+		    flash[:notice] = "Voto confirmado!"
 		  end
   end
 end
