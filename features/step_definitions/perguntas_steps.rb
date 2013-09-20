@@ -27,8 +27,8 @@ def current_url
   page.current_url
 end
 
-Então(/^devo ver "(.*?)"$/) do |arg1|
-  page.should have_content("Pergunta criada!")
+Então(/^devo ver "(.*?)"$/) do |texto|
+  page.should have_content(texto)
 end
 
 Quando(/^eu relaciono uma tag à pergunta$/) do
