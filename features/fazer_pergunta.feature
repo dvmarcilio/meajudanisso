@@ -9,4 +9,4 @@ Funcionalidade: Fazer uma pergunta
     Quando eu preencho os dados da pergunta corretamente
     E clico no botão "Criar Pergunta"
     Então eu devo estar na página de visualização dessa pergunta
-  
+    E devo ver "Pergunta criada!"

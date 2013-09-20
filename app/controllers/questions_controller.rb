@@ -8,8 +8,8 @@ class QuestionsController < ApplicationController
 	end
 	
 	def create
-	  @pergunta = Question.create!(params[:pergunta])
-	  redirect_to question_url(@pergunta.id)	  
+	  @pergunta = Question.create!(params[:question])
+	  redirect_to question_url(@pergunta.id), notice: "Pergunta criada!"	  
 	end
 	
 	def most_voted
