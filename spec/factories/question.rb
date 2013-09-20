@@ -1,7 +1,7 @@
 # encoding: utf-8
 FactoryGirl.define do
 
-  factory :pergunta do
+  factory :question do
     titulo 'Pergunta Teste'
   end
   

@@ -1,5 +1,5 @@
 module MeAjudaNisso
-	module Perguntas
+	module Questions
 		module Presenters
 			class Collection
 

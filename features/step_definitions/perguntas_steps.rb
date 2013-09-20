@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 Dado(/^que eu estou na página de fazer uma pergunta$/) do
-  visit new_pergunta_path
+  visit new_question_path
 end
 
 Quando(/^eu preencho os dados da pergunta corretamente$/) do
@@ -12,15 +12,15 @@ end
 
 def attrs_to_fill
   attrs_hash = {}
-  FactoryGirl.attributes_for(:pergunta, :with_content).each do |attribute, value|
-    attr_name = 'pergunta_' + attribute.to_s
+  FactoryGirl.attributes_for(:question, :with_content).each do |attribute, value|
+    attr_name = 'question_' + attribute.to_s
     attrs_hash.update(attr_name => value) 
   end
   return attrs_hash
 end
 
 Então(/^eu devo estar na página de visualização dessa pergunta$/) do
-  current_url.should eq(pergunta_url(Pergunta.last))
+  current_url.should eq(question_url(Question.last))
 end
 
 def current_url

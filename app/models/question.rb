@@ -1,11 +1,11 @@
-class Pergunta < ActiveRecord::Base
+class Question < ActiveRecord::Base
   attr_accessible :titulo, :votos, :conteudo
   
   def votos
     self[:votos] || 0
   end
   
-  def self.bem_votadas
+  def self.most_voted
   	all
   end
   

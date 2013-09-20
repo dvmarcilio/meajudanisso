@@ -1,11 +1,11 @@
 MeAjudaNisso::Application.routes.draw do
 
- resources :perguntas do
+ resources :questions do
  	collection do
-	 	get :bem_votadas
+	 	get :most_voted
 	end
 	
-	resource :votos, controller: "perguntas/votos", only: [] do
+	resource :votes, controller: "questions/votes", only: [] do
 	  put :positivo, :negativo, :on => :member
 	end
  end

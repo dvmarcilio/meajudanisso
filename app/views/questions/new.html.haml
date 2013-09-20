@@ -1,0 +1,14 @@
+%h1 Fazer uma pergunta
+
+= form_tag questions_path do
+
+  = label :question, :titulo, 'Título'
+  = text_field :question, :titulo
+  %br
+  %br
+  = label :question, :conteudo, 'Conteúdo'
+  = text_area :question, :conteudo, :class => "tinymce"
+  = tinymce
+  %br
+  %br
+  = submit_tag 'Criar Pergunta'

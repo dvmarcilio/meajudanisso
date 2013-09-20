@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-describe PerguntasController do
-	describe "GET /bem_votadas" do
+describe QuestionsController do
+	describe "GET /most_voted" do
 		#TODO resolver esse 3 hard-coded
 		it "obtem as 3 perguntas mais votadas" do
 			perguntas_presenter = double
 			
-			MeAjudaNisso::Perguntas.stub(:bem_votadas) { perguntas_presenter }		
+			MeAjudaNisso::Questions.stub(:most_voted) { perguntas_presenter }		
 			
-			get :bem_votadas
+			get :most_voted
 			expect(assigns(:perguntas)).to be(perguntas_presenter)
 		end
 	end
@@ -16,7 +16,7 @@ describe PerguntasController do
 	describe "GET /show" do
 		it "atribui a pergunta" do
 			pergunta = double
-			::Pergunta.stub(:find).with("5") { pergunta }
+			::Question.stub(:find).with("5") { pergunta }
 			
 			get :show, id: "5"
 			expect(assigns(:pergunta)).to be(pergunta)
@@ -42,14 +42,14 @@ describe PerguntasController do
       end
       
       it "redireciona para a pagina de visualizacao da pergunta criada" do
-        post :create, pergunta: FactoryGirl.attributes_for(:pergunta)
-        response.should redirect_to pergunta_url(Pergunta.last)
+        post :create, question: FactoryGirl.attributes_for(:question)
+        response.should redirect_to question_url(Question.last)
       end
       
       it "salva a nova pergunta no banco de dados" do
         lambda do
           post :create
-        end.should change(Pergunta, :count).by(1)
+        end.should change(Question, :count).by(1)
       end  
   end
 end

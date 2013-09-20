@@ -1,9 +1,9 @@
 require 'active_record_spec_helper'
-require 'pergunta'
+require 'question'
 
 describe "Atualizando votos" do
 	it "aumenta votos em um" do
-		pergunta = Pergunta.create! votos: 0, titulo: "Teste"
+		pergunta = Question.create! votos: 0, titulo: "Teste"
 		
 		pergunta.atualiza_voto +1
 		pergunta.reload
@@ -11,7 +11,7 @@ describe "Atualizando votos" do
 	end
 	
 	it "diminui votos em um" do
-	  pergunta = Pergunta.create! votos: 0, titulo: "Teste"
+	  pergunta = Question.create! votos: 0, titulo: "Teste"
 	  
 	  pergunta.atualiza_voto -1
 	  pergunta.reload

@@ -1,10 +1,10 @@
 # encoding: utf-8
 Dado(/^que não existem perguntas com votos$/) do
-	Pergunta.destroy_all
+	Question.destroy_all
 end
 
 Quando(/^eu estou na página de visualizar perguntas por votos$/) do
-  visit bem_votadas_perguntas_url
+  visit most_voted_questions_url
 end
 
 Então(/^eu devo ver que não existem perguntas com votos$/) do
@@ -13,9 +13,9 @@ end
 
 Dado(/^que existem perguntas com votos$/) do
 	@perguntas = [
-		Pergunta.create!(titulo: "Como testar conteudo de tabela no Cucumber", votos: 2),
-		Pergunta.create!(titulo: "O que e um gemset no RVM ?", votos: 10),
-		Pergunta.create!(titulo: "invalid multibyte char (US-ASCII) with Rails and Ruby 1.9", votos: 40)
+		Question.create!(titulo: "Como testar conteudo de tabela no Cucumber", votos: 2),
+		Question.create!(titulo: "O que e um gemset no RVM ?", votos: 10),
+		Question.create!(titulo: "invalid multibyte char (US-ASCII) with Rails and Ruby 1.9", votos: 40)
 	]
 end
 
@@ -38,12 +38,12 @@ Então(/^eu devo ver as perguntas ordenadas decrescentemente pela quantidade de 
 end
 
 Dado(/^que uma pergunta existe$/) do
-  @pergunta = Pergunta.create!(titulo: "Como escrever melhores cenarios no Cucumber", votos: 0)
+  @pergunta = Question.create!(titulo: "Como escrever melhores cenarios no Cucumber", votos: 0)
   @votos = @pergunta.votos
 end
 
 Dado(/^que estou na página de visualização dessa pergunta$/) do
-  visit pergunta_path(@pergunta)
+  visit question_path(@pergunta)
 end
 
 Então(/^eu devo ver uma mensagem de confirmação$/) do
