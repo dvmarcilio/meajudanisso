@@ -32,14 +32,14 @@ Então(/^devo ver "(.*?)"$/) do |texto|
 end
 
 Quando(/^eu relaciono uma tag à pergunta$/) do
-  pending
-  #fill_in('Tags', :with => 'Java')
+  @tags = 'Java'
+  fill_in('Tags', :with => @tags)
 end
 
 Quando(/^clico em criar pergunta$/) do
   click_on "Criar Pergunta"
 end
 
-Então(/^visualizar a pergunta com a tag$/) do
-  pending 
+Então(/^visualizar as tags da pergunta$/) do
+  page.should have_css(".pergunta#tags", text: @tags)
 end

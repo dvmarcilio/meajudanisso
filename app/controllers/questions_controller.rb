@@ -24,5 +24,4 @@ class QuestionsController < ApplicationController
 		def pergunta_id
 			params[:id]
 		end
-	
 end

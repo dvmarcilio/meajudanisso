@@ -50,6 +50,6 @@ describe QuestionsController do
         lambda do
           post :create
         end.should change(Question, :count).by(1)
-      end  
+      end
   end
 end
