@@ -36,6 +36,11 @@ Quando(/^eu relaciono uma tag à pergunta$/) do
   fill_in('Tags', :with => @tags)
 end
 
+Quando(/^eu relaciono a\(s\) tag\(s\) "(.*?)" à pergunta$/) do |tags|
+  @tags = tags
+  fill_in('Tags', :with => @tags)
+end
+
 Quando(/^clico em criar pergunta$/) do
   click_on "Criar Pergunta"
 end
