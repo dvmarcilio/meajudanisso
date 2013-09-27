@@ -70,6 +70,10 @@ Quando(/^clico no botão "(.*?)"$/) do |botao|
   click_on botao
 end
 
+Quando(/^eu clico no link "(.*?)"$/) do |link|
+  click_link(link)
+end
+
 
 
 
