@@ -1,5 +1,7 @@
 MeAjudaNisso::Application.routes.draw do
 
+  root to: 'pages#home'
+
  resources :questions do
  	collection do
 	 	get :most_voted
@@ -9,5 +11,6 @@ MeAjudaNisso::Application.routes.draw do
 	  put :positivo, :negativo, :on => :member
 	end
  end
+ resources :users
  
 end
