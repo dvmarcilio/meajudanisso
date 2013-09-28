@@ -1,6 +1,8 @@
 class Question < ActiveRecord::Base
   attr_accessible :titulo, :votos, :conteudo, :tags
   serialize :tags, Array
+  
+  has_many :answers
 
   def votos
     self[:votos] || 0
