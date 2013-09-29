@@ -21,4 +21,8 @@ FactoryGirl.define do
     tags 'Ruby'
   end
   
+  trait :with_ten_votes do
+    votos 10
+  end
+  
 end

@@ -48,3 +48,25 @@ end
 Então(/^visualizar as tags da pergunta$/) do
   page.should have_css(".pergunta#tags", text: @tags)
 end
+
+Dado(/^que eu estou na página de visualização de uma pergunta$/) do
+  @pergunta = create_full_question
+  visit question_url(@pergunta)
+end
+
+def create_full_question
+  FactoryGirl.create(:question, :with_id, :with_content, :with_three_string_tags, :with_ten_votes)
+end
+
+Então(/^eu devo ver "Sua Resposta"$/) do
+  page.should have_css(".post_answer", text: "Sua Resposta")
+end
+
+Então(/^um campo de texto para responder$/) do
+  page.should have_css(".post_answer.text_area")
+end
+
+Então(/^um botão "(.*?)"$/) do |botao|
+  find_button(botao)
+end
+

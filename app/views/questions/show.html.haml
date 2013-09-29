@@ -8,3 +8,9 @@
   .pergunta#votos= @pergunta.votos
   Tags:
   .pergunta#tags= @pergunta.tags.join(', ')
+  
+%section.post_answer
+  %h2= label :answer, :conteudo, 'Sua Resposta'
+  .post_answer.text_area= text_area :answer, :conteudo, :class => "tinymce"
+  = tinymce
+  = submit_tag 'Responder'
