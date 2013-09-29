@@ -13,6 +13,7 @@ Funcionalidade: Cadastrar Usuário
 		Dado que estou na página de cadastro
 		Quando eu preencho o formulario com dados corretos
 		E clico no botão "Cadastrar"
-		Então eu devo ver a mensagem "Cadastro Realizado Com Sucesso!"
+		Então devo estar na página principal
+		E ver a mensagem "Cadastro Realizado Com Sucesso!"
 
 

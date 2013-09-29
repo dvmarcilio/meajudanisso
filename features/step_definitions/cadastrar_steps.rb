@@ -4,8 +4,6 @@ Dado(/^que estou na página principal$/) do
 end
 
 Então(/^eu devo estar na página de cadastro$/) do
-	#uri = URI.parse(current_url)
-	#(uri.path).should == new_user_path
 	current_path.should eq(new_user_path)
 end
 
@@ -14,9 +12,24 @@ Dado(/^que estou na página de cadastro$/) do
 end
 
 Quando(/^eu preencho o formulario com dados corretos$/) do
-  pending # express the regexp above with the code you wish you had
+  attrs_to_fill_user.each do |attribute, value|
+    fill_in(attribute, with: value)
+  end
 end
 
-Então(/^eu devo ver a mensagem "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Então(/^devo estar na página principal$/) do
+  current_path.should eq(root_path)
+end
+
+Então(/^ver a mensagem "(.*?)"$/) do |texto|
+  page.should have_content(texto)
+end
+
+def attrs_to_fill_user
+	attrs_hash = {}
+	FactoryGirl.attributes_for(:user).each do |attribute, value|
+		attr_name = 'user_' + attribute.to_s
+		attrs_hash.update(attr_name => value) 
+	end
+	return attrs_hash
 end

@@ -1,1 +1,11 @@
+%h1 Cadastrar
 
+= form_tag users_path do
+
+  = label :user, :nome, 'Nome'
+  = text_field :user, :nome
+  = label :user, :email, 'E-mail'
+  = text_field :user, :email
+  = label :user, :senha, 'Senha'
+  = text_field :user, :senha
+  = submit_tag 'Cadastrar'
