@@ -58,6 +58,22 @@ def create_full_question
   FactoryGirl.create(:question, :with_id, :with_content, :with_three_string_tags, :with_ten_votes)
 end
 
+Então(/^eu devo ver o título dessa pergunta$/) do
+  page.should have_content(@pergunta.titulo)
+end
+
+Então(/^o conteúdo dessa pergunta$/) do
+  page.should have_css(".pergunta#conteudo", text: @pergunta.conteudo)
+end
+
+Então(/^os votos dessa pergunta$/) do
+  page.should have_css(".pergunta#votos", text: @pergunta.votos)
+end
+
+Então(/^as tags dessa pergunta$/) do
+  page.should have_css(".pergunta#tags", text: @pergunta.tags.join(', '))
+end
+
 Então(/^eu devo ver "Sua Resposta"$/) do
   page.should have_css(".post_answer", text: "Sua Resposta")
 end

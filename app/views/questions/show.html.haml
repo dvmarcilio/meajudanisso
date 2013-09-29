@@ -3,13 +3,16 @@
 = button_to 'Votar +', positivo_question_votes_path(@pergunta) , method: "put"
 = button_to 'Votar -', negativo_question_votes_path(@pergunta) , method: "put"
 
-%section.pergunta 
+%section.pergunta
+  /TODO presenter também ? 
+  .pergunta#conteudo= @pergunta.conteudo
   .pergunta#votos= "Votos: #{@pergunta.votos}"
-  /TODO colocar isso num presenter
+  /TODO colocar num presenter
   .pergunta#tags= "Tags: #{@pergunta.tags.join(', ')}"
   
 %section.post_answer
   %h2= label :answer, :conteudo, 'Sua Resposta'
   .post_answer.text_area= text_area :answer, :conteudo, :class => "tinymce"
   = tinymce
+  %br
   = submit_tag 'Responder'
