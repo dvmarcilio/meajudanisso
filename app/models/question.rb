@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: questions
+#
+#  id         :integer          not null, primary key
+#  titulo     :string(255)
+#  conteudo   :text
+#  votos      :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  tags       :string(255)
+#
+
 class Question < ActiveRecord::Base
   attr_accessible :titulo, :votos, :conteudo, :tags
   serialize :tags, Array

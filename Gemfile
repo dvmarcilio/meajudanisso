@@ -4,6 +4,7 @@ ruby '1.9.3'
 
 gem 'rails', '3.2.14'
 gem 'bootstrap-sass'
+gem 'bcrypt-ruby','3.0.1'
 
 gem 'sqlite3'
 
@@ -29,5 +30,6 @@ group :development, :test do
 	gem 'rspec-rails'
 	gem 'cucumber-rails', :require => false
 	gem 'factory_girl_rails'
+	gem 'annotate'
 end
 
