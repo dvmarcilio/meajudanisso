@@ -1,4 +1,4 @@
-require 'active_record_spec_helper'
+require 'spec_helper'
 require 'question'
 
 describe "Relacionando tags" do
@@ -26,6 +26,11 @@ describe "Relacionando tags" do
   it "deve retornar um array vazio ao instanciar a pergunta" do
     pergunta = Question.new
     expect(pergunta.tags).to eq([])
+  end
+  
+  it "faz o join do array em uma string dividida por virgula" do
+    pergunta = Question.create!(tags: tags_string)
+    expect(pergunta.tags_string).to eq(tags_string)
   end  
 
 end

@@ -22,5 +22,8 @@ class Question < ActiveRecord::Base
   	self.update_attributes votos: (self.votos + voto)
   end
   
-  
+  def tags_string
+    tags.join(', ')
+  end
+   
 end
