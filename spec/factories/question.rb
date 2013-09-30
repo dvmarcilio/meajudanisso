@@ -13,6 +13,10 @@ FactoryGirl.define do
     conteudo 'Essa é a pergunta teste. bla bla bla bla'
   end
   
+  trait :with_html_content do
+    conteudo %Q{<p>Testando salvar <strong>HTML</strong>.</p> <ol> <li>um</li> <li>dois</li> <li>tres</li> </ol> }
+  end
+  
   trait :with_three_string_tags do
     tags 'Java, JEE, JSF'
   end

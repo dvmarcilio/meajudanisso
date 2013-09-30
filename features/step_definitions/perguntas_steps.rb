@@ -55,15 +55,20 @@ Dado(/^que eu estou na página de visualização de uma pergunta$/) do
 end
 
 def create_full_question
-  FactoryGirl.create(:question, :with_id, :with_content, :with_three_string_tags, :with_ten_votes)
+  FactoryGirl.create(:question, :with_id, :with_html_content, :with_three_string_tags, :with_ten_votes)
 end
 
 Então(/^eu devo ver o título dessa pergunta$/) do
   page.should have_content(@pergunta.titulo)
 end
 
+class Aview < ActionView::Base
+  include ApplicationHelper
+end
+
 Então(/^o conteúdo dessa pergunta$/) do
-  page.should have_css(".pergunta#conteudo", text: @pergunta.conteudo)
+  helper = Aview.new
+  page.should have_text(helper.strip_tags(@pergunta.conteudo))
 end
 
 Então(/^os votos dessa pergunta$/) do
