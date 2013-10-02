@@ -67,8 +67,12 @@ class Aview < ActionView::Base
 end
 
 Então(/^o conteúdo dessa pergunta$/) do
+  page.should have_text(strip_html_tags(@pergunta.conteudo))
+end
+
+def strip_html_tags(conteudo)
   helper = Aview.new
-  page.should have_text(helper.strip_tags(@pergunta.conteudo))
+  helper.strip_tags(conteudo)
 end
 
 Então(/^os votos dessa pergunta$/) do
@@ -98,7 +102,7 @@ end
 
 Então(/^ver minha resposta$/) do
   within(:css, "section.respostas") do
-    page.should have_text(@resposta.conteudo)
+    page.should have_text(strip_html_tags(@resposta.conteudo))
   end
 end
 
