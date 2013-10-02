@@ -51,7 +51,7 @@ end
 
 Dado(/^que eu estou na página de visualização de uma pergunta$/) do
   @pergunta = create_full_question
-  visit question_url(@pergunta)
+  step "que eu estou na página de visualização dessa pergunta"
 end
 
 def create_full_question
@@ -105,6 +105,23 @@ Então(/^ver minha resposta$/) do
     page.should have_text(strip_html_tags(@resposta.conteudo))
   end
 end
+
+Dado(/^que uma pergunta possui uma resposta com conteúdo HTML$/) do
+  @pergunta = FactoryGirl.create(:question)
+  @resposta = FactoryGirl.create(:answer, :with_html_content)
+  @pergunta.answers << @resposta
+  @pergunta.save!
+end
+
+Então(/^eu devo ver a resposta sem as tags HTML$/) do
+  step "ver minha resposta"
+end
+
+Dado(/^que eu estou na página de visualização dessa pergunta$/) do
+  visit question_url(@pergunta)
+end
+
+
 
 
 

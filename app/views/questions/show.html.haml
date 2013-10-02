@@ -10,7 +10,7 @@
   
 %section.respostas
   - @pergunta.answers.each do |answer|
-    = answer.conteudo
+    != answer.conteudo
   
 %section.post_answer
   %h2= label :answer, :conteudo, 'Sua Resposta'
