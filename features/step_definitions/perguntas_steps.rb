@@ -83,11 +83,24 @@ Então(/^eu devo ver "Sua Resposta"$/) do
   page.should have_css(".post_answer", text: "Sua Resposta")
 end
 
-Então(/^um campo de texto para responder$/) do
-  page.should have_css(".post_answer.text_area")
+Então(/^ver um campo de texto para responder$/) do
+  page.should have_css(".post_answer#text_area")
 end
 
-Então(/^um botão "(.*?)"$/) do |botao|
+Então(/^ver um botão "(.*?)"$/) do |botao|
   find_button(botao)
 end
+
+Quando(/^eu preencho minha resposta no campo de texto$/) do
+  @resposta = FactoryGirl.build(:answer)
+  fill_in('answer_conteudo', with: @resposta.conteudo)
+end
+
+Então(/^ver minha resposta$/) do
+  within(:css, "section.respostas") do
+    page.should have_text(@resposta.conteudo)
+  end
+end
+
+
 

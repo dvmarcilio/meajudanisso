@@ -8,9 +8,14 @@
   .pergunta#votos= "Votos: #{@pergunta.votos}"
   .pergunta#tags= "Tags: #{@pergunta.tags_string}"
   
+%section.respostas
+  - @pergunta.answers.each do |answer|
+    = answer.conteudo
+  
 %section.post_answer
   %h2= label :answer, :conteudo, 'Sua Resposta'
-  .post_answer.text_area= text_area :answer, :conteudo, :class => "tinymce"
-  = tinymce
-  %br
-  = submit_tag 'Responder'
+  = form_tag question_answers_path(@pergunta) do
+    .post_answer#text_area= text_area :answer, :conteudo, :class => "tinymce"
+    = tinymce
+    %br
+    = submit_tag 'Responder'

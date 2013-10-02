@@ -7,10 +7,13 @@ Funcionalidade: Responder uma pergunta
   Cenário: Visualizar o campo de texto para a resposta
     Dado que eu estou na página de visualização de uma pergunta
     Então eu devo ver "Sua Resposta"
-    E um campo de texto para responder
-    E um botão "Responder"
+    E ver um campo de texto para responder
+    E ver um botão "Responder"
   
   Cenário: Criar uma resposta válida
     Dado que eu estou na página de visualização de uma pergunta
-    
+    Quando eu preencho minha resposta no campo de texto
+    E clico no botão "Responder"
+    Então eu devo estar na página de visualização dessa pergunta
+    E ver minha resposta
     

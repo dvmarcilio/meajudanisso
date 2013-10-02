@@ -3,7 +3,7 @@ class CreateAnswers < ActiveRecord::Migration
     create_table :answers do |t| 
       t.text :conteudo
       t.integer :votos
-      t.references :questions
+      t.references :question
     end
   end
 
