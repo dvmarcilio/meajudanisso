@@ -28,5 +28,6 @@ group :development, :test do
 	gem 'rspec-rails'
 	gem 'cucumber-rails', :require => false
 	gem 'factory_girl_rails'
+	gem "shoulda-matchers"
 end
 
