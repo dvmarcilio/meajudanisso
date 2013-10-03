@@ -12,5 +12,6 @@ MeAjudaNisso::Application.routes.draw do
 	end
  end
  resources :users
+ match '/cadastrar',  to: 'users#new', via: 'get'
  
 end
