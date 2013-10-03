@@ -1,7 +1,8 @@
 %h1 #{@pergunta.titulo}
 
-= button_to 'Votar +', positivo_question_votes_path(@pergunta) , method: "put"
-= button_to 'Votar -', negativo_question_votes_path(@pergunta) , method: "put"
+#votar_pergunta
+  = button_to 'Votar +', positivo_question_votes_path(@pergunta) , method: "put"
+  = button_to 'Votar -', negativo_question_votes_path(@pergunta) , method: "put"
 
 %section.pergunta 
   .pergunta#conteudo!= @pergunta.conteudo
@@ -9,8 +10,11 @@
   .pergunta#tags= "Tags: #{@pergunta.tags_string}"
   
 %section.respostas
+  %h2#qtde_respostas= "#{@pergunta.answers.count} Respostas"
   - @pergunta.answers.each do |answer|
-    != answer.conteudo
+    .answer[answer]
+      .answer#conteudo!= answer.conteudo
+    %hr
   
 %section.post_answer
   %h2= label :answer, :conteudo, 'Sua Resposta'

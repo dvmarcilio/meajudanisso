@@ -121,7 +121,13 @@ Dado(/^que eu estou na página de visualização dessa pergunta$/) do
   visit question_url(@pergunta)
 end
 
+Dado(/^que uma pergunta possui (\d+) respostas$/) do |quantidade|
+  @pergunta = create_full_question
+  Integer(quantidade).times { @pergunta.answers.create }
+end
 
-
+Então(/^eu devo ver que ela tem (\d+) respostas$/) do |quantidade|
+  page.should have_css("#qtde_respostas", text: "#{quantidade} Respostas")
+end
 
 
