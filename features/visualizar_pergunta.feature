@@ -10,20 +10,25 @@ Funcionalidade: Visualizar pergunta
     E o conteúdo dessa pergunta
     E os votos dessa pergunta
     E as tags dessa pergunta
-   
+  
+  Cenário: Mensagem diferente para pergunta sem resposta
+    Uma pergunta sem resposta deve mostrar uma mensagem diferente.
+    
+    Dado que eu estou na página de visualização de uma pergunta sem resposta
+    Então eu devo ver que essa mensagem não foi respondida
+    
   Esquema do Cenário: Visualizar a quantidade de respostas da pergunta
     Dado que uma pergunta possui <quantidade> respostas
     E que eu estou na página de visualização dessa pergunta
     Então eu devo ver que ela tem <quantidade> respostas
     
     Exemplos:
-      | quantidade |
-      | 1 |
-      | 2 |
-      | 3 |
-      | 4 |
-      | 5 |
-      | 10|
-      | 15| 
+      | quantidade  |
+      | 2           |
+      | 3           |
+      | 4           |
+      | 5           |
+      | 10          |
+      | 15          | 
      
      
