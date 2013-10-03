@@ -10,7 +10,7 @@
   .pergunta#tags= "Tags: #{@pergunta.tags_string}"
   
 %section.respostas
-  %h2#qtde_respostas= "#{@pergunta.answers.count} Respostas"
+  %h2#qtde_respostas= @pergunta.answers.count > 1 ? "#{@pergunta.answers.count} Respostas" : "Essa mensagem não foi respondida"
   - @pergunta.answers.each do |answer|
     .answer[answer]
       .answer#conteudo!= answer.conteudo

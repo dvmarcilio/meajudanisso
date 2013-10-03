@@ -130,4 +130,13 @@ Então(/^eu devo ver que ela tem (\d+) respostas$/) do |quantidade|
   page.should have_css("#qtde_respostas", text: "#{quantidade} Respostas")
 end
 
+Dado(/^que eu estou na página de visualização de uma pergunta sem resposta$/) do
+  step "que eu estou na página de visualização de uma pergunta"
+end
+
+Então(/^eu devo ver que essa mensagem não foi respondida$/) do
+  page.should have_css("#qtde_respostas", text: "Essa mensagem não foi respondida")
+end
+
+
 
