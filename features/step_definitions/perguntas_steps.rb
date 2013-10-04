@@ -138,5 +138,6 @@ Então(/^eu devo ver que essa mensagem não foi respondida$/) do
   page.should have_css("#qtde_respostas", text: "Essa mensagem não foi respondida")
 end
 
-
-
+Então(/^eu devo estar na página de edição da pergunta$/) do
+  current_url.should eq(edit_question_url(@pergunta))
+end

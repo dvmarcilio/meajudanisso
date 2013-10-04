@@ -8,6 +8,9 @@
   .pergunta#conteudo!= @pergunta.conteudo
   .pergunta#votos= "Votos: #{@pergunta.votos}"
   .pergunta#tags= "Tags: #{@pergunta.tags_string}"
+  %br
+  = link_to 'editar', edit_question_path(@pergunta)
+  
   
 %section.respostas
   %h2#qtde_respostas= @pergunta.answers.count > 1 ? "#{@pergunta.answers.count} Respostas" : "Essa mensagem não foi respondida"

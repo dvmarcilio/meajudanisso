@@ -52,4 +52,14 @@ describe QuestionsController do
         end.should change(Question, :count).by(1)
       end
   end
+  
+  describe "GET /:id/edit/" do
+    
+    it "deve expor @pergunta como o id da pergunta passada" do
+      pergunta = FactoryGirl.create(:question)
+      get :edit, id: pergunta.id
+      expect(assigns(:pergunta)).to eq(pergunta)
+    end
+  end
+  
 end
