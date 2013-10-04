@@ -66,11 +66,11 @@ Então(/^eu devo ver a pergunta com um voto a menos$/) do
   page.should have_css(".pergunta#votos", text: @votos-1)
 end
 
-Quando(/^clico no botão "(.*?)"$/) do |botao|
+Quando(/^(?:eu )?clico no botão "(.*?)"$/) do |botao|
   click_on botao
 end
 
-Quando(/^eu clico no link "(.*?)"$/) do |link|
+Quando(/^(?:eu )?clico no link "(.*?)"$/) do |link|
   click_link(link)
 end
 
