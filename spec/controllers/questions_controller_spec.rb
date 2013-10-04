@@ -24,13 +24,13 @@ describe QuestionsController do
 	end
  
   describe "GET /new" do
+    before(:each) { get :new } 
+    
     it "resposta HTTP sucesso (200)" do
-      get :new
       expect(response).to be_success
     end
     
     it "carrega a pagina de nova pergunta" do
-      get :new
       expect(response).to render_template('new')
     end 
   end
@@ -51,14 +51,41 @@ describe QuestionsController do
           post :create
         end.should change(Question, :count).by(1)
       end
+      
+      it "adiciona uma mensagem no flash" do
+        post :create
+        expect(request.flash[:notice]).to_not be_empty
+      end
   end
   
-  describe "GET /:id/edit/" do
-    
-    it "deve expor @pergunta como o id da pergunta passada" do
+  describe "GET /:id/edit/" do   
+    it "deve expor @pergunta a partir do id passado" do
       pergunta = FactoryGirl.create(:question)
       get :edit, id: pergunta.id
       expect(assigns(:pergunta)).to eq(pergunta)
+    end
+  end
+  
+  describe "PUT /:id (#update)" do
+    before(:each) { @pergunta = FactoryGirl.create(:question) }
+    
+    it "redireciona para a pagina de visualizacao" do
+      put :update, id: @pergunta.id
+      expect(response).to redirect_to question_url(@pergunta)
+    end
+    
+    it "atualiza os atributos de pergunta" do
+      attrs = { :titulo => "Novo titulo", :conteudo => "Novo conteudo", :tags => "Ruby" }
+      put :update, id: @pergunta, question: attrs
+      @pergunta.reload
+      expect(@pergunta.titulo).to eq(attrs[:titulo])
+      expect(@pergunta.conteudo).to eq(attrs[:conteudo])
+      expect(@pergunta.tags_string).to eq(attrs[:tags])
+    end
+    
+    it "adiciona uma mensagem no flash" do
+      put :update, id: @pergunta.id
+      expect(request.flash[:notice]).to_not be_empty
     end
   end
   

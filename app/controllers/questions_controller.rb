@@ -16,6 +16,13 @@ class QuestionsController < ApplicationController
 	  @pergunta = Question.find(pergunta_id)
 	end
 	
+	def update
+	  @pergunta = Question.find(pergunta_id)
+	  @pergunta.update_attributes!(params[:question])
+	  flash[:notice] = "Pergunta editada"
+	  redirect_to question_url(@pergunta)
+	end
+	
 	def most_voted
 		@perguntas = MeAjudaNisso::Questions.most_voted
 	end

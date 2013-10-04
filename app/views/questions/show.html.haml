@@ -1,4 +1,4 @@
-%h1 #{@pergunta.titulo}
+%h1.pergunta#titulo #{@pergunta.titulo}
 
 #votar_pergunta
   = button_to 'Votar +', positivo_question_votes_path(@pergunta) , method: "put"
