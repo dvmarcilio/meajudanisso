@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  attr_accessible :titulo, :votos, :conteudo, :tags
+  attr_accessible :titulo, :votos, :conteudo, :tags, :tags_string
   serialize :tags, Array
   
   has_many :answers
@@ -12,6 +12,10 @@ class Question < ActiveRecord::Base
     if tags.is_a?(String)
       self[:tags] = tags.split(',').collect(&:strip)
     end
+  end
+  
+  def tags_string=(tags_string)
+    self[:tags] = tags_string.split(',').collect(&:strip)
   end
   
   def self.most_voted

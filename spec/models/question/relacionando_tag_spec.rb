@@ -31,6 +31,22 @@ describe "Relacionando tags" do
   it "faz o join do array em uma string dividida por virgula" do
     pergunta = Question.create!(tags: tags_string)
     expect(pergunta.tags_string).to eq(tags_string)
+  end
+  
+  it "responde a tags_string=" do
+    pergunta = Question.new
+    pergunta.respond_to?('tags_string=').should eq(true)
+  end
+  
+  it "atribui valor a tags atraves de chamada a tags_string=" do
+    pergunta = Question.new
+    pergunta.tags_string = tags_string
+    expect(pergunta.tags).to eq(tags_array)
   end  
+  
+  it "tags_string pode ser mass assigned" do
+    pergunta = Question.create(tags_string: tags_string)
+    expect(pergunta.tags_string).to eq(tags_string)
+  end
 
 end

@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
 	end
 	
 	def edit
-	  @pergunta = Question.find(pergunta_id)
+	  @question = Question.find(pergunta_id)
 	end
 	
 	def update

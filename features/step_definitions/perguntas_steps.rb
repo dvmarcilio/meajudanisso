@@ -144,13 +144,19 @@ Então(/^eu devo estar na página de edição da pergunta$/) do
   current_url.should eq(edit_question_url(@pergunta))
 end
 
+Então(/^os dados da pergunta estarem preenchidos$/) do
+  find_field("question_titulo").value.should eq(@pergunta.titulo)
+  find_field("question_conteudo").value.should eq(@pergunta.conteudo)
+  find_field("question_tags_string").value.should eq(@pergunta.tags_string)
+end
+
 Dado(/^que eu estou na página de edição de uma pergunta$/) do
   @pergunta = create_full_question
   visit edit_question_path(@pergunta)
 end
 
 Quando(/^eu edito a pergunta$/) do
-  @edit_attrs = { :question_conteudo => "Novo conteudo", :question_titulo => "Novo titulo", :question_tags => "Ruby" }
+  @edit_attrs = { :question_conteudo => "Novo conteudo", :question_titulo => "Novo titulo", :question_tags_string => "Ruby" }
   fill_hash(@edit_attrs)
   step('clico no botão "Editar"')
 end
@@ -160,8 +166,8 @@ Então(/^ver uma mensagem de confirmação da edição$/) do
 end
 
 Então(/^a pergunta atualizada$/) do
-  page.should have_css(".pergunta#titulo", text: @edit_attrs[:question_titulo])
-  page.should have_css(".pergunta#tags", text: @edit_attrs[:question_tags])
-  page.should have_css(".pergunta#conteudo", text: @edit_attrs[:question_conteudo])
+  page.should have_css(".pergunta#titulo", text: @edit_attrs[:pergunta_titulo])
+  page.should have_css(".pergunta#tags", text: @edit_attrs[:pergunta_tags])
+  page.should have_css(".pergunta#conteudo", text: @edit_attrs[:pergunta_conteudo])
 end
 

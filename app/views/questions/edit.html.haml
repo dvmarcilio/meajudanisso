@@ -1,6 +1,6 @@
 %h1 Editar pergunta
 
-= form_tag question_path(@pergunta), method: :put do
+= form_tag question_path(@question), method: :put do
 
   = label :question, :titulo, 'Título'
   = text_field :question, :titulo
@@ -11,8 +11,8 @@
   = tinymce
   %br
   %br
-  = label :question, :tags, 'Tags'
-  = text_field :question, :tags
+  = label :question, :tags_string, 'Tags'
+  = text_field :question, :tags_string
   %br
   %br
   = submit_tag 'Editar'
