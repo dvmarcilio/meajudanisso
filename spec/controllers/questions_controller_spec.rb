@@ -62,7 +62,7 @@ describe QuestionsController do
     it "deve expor @pergunta a partir do id passado" do
       pergunta = FactoryGirl.create(:question)
       get :edit, id: pergunta.id
-      expect(assigns(:pergunta)).to eq(pergunta)
+      expect(assigns(:question)).to eq(pergunta)
     end
   end
   
