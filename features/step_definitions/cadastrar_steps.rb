@@ -1,4 +1,7 @@
 # encoding: utf-8
+Então(/^devo estar na página profile$/) do
+  current_url.should eq(user_url(User.last))
+end
 Dado(/^que estou na página principal$/) do
   visit root_path
 end
@@ -32,4 +35,12 @@ def attrs_to_fill_user
 		attrs_hash.update(attr_name => value) 
 	end
 	return attrs_hash
+end
+
+Quando(/^eu preencho o formulario com dados incorretos$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Então(/^ver as mensagens de erros$/) do
+  pending # express the regexp above with the code you wish you had
 end

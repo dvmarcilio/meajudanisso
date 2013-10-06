@@ -13,7 +13,12 @@ Funcionalidade: Cadastrar Usuário
 		Dado que estou na página de cadastro
 		Quando eu preencho o formulario com dados corretos
 		E clico no botão "Cadastrar"
-		Então devo estar na página principal
-		E ver a mensagem "Cadastro Realizado Com Sucesso!"
+		Então devo estar na página profile
+		E ver a mensagem "Cadastro Realizado com Sucesso!"
 
-
+	Cenário: Cadastro inválido
+		Dado que estou na página de cadastro
+		Quando eu preencho o formulario com dados incorretos
+		E clico no botão "Cadastrar"
+		Então eu devo estar na página de cadastro
+		E ver as mensagens de erros
