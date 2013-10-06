@@ -4,16 +4,23 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		 @user = User.create!(params[:user])
-		 if @user.save
-		 	redirect_to @user
+		 @usuario = User.create(params[:user])
+		 if @usuario.save
+		 	flash[:success] = "Cadastro Realizado com Sucesso!"
+		 	redirect_to @usuario
 		 else
 		 	render 'new'
-			#redirect_to root_path, notice: "Cadastro Realizado Com Sucesso!"
 		end
 	end
 
 	def show
-	 	@user = User.find(params[:id])
+	 	@usuario = User.find(params[:id])
 	end
+
+	private
+
+    def user_params
+      params.require(:user).permit(:nome, :email, :password,
+                                   :password_confirmation)
+    end
 end
