@@ -13,7 +13,7 @@
   
   
 %section.respostas
-  %h2#qtde_respostas= @pergunta.answers.count > 1 ? "#{@pergunta.answers.count} Respostas" : "Essa mensagem não foi respondida"
+  %h2#qtde_respostas= @pergunta.answers.count > 0 ? pluralize(@pergunta.answers.count, 'Resposta', 'Respostas') : "Essa mensagem não foi respondida"
   - @pergunta.answers.each do |answer|
     .answer[answer]
       .answer#conteudo!= answer.conteudo
