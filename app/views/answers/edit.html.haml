@@ -1,0 +1,12 @@
+%h2.pergunta#titulo #{@answer.question.titulo}
+
+%section.pergunta
+  .pergunta#conteudo!= @answer.question.conteudo  
+
+%hr
+
+%section.resposta
+  %h2 Resposta
+  = text_area :answer, :conteudo, :class => "tinymce"
+  = tinymce
+

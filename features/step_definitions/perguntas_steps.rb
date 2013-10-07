@@ -173,6 +173,10 @@ Então(/^a pergunta atualizada$/) do
 end
 
 Dado(/^que uma pergunta com uma resposta existe$/) do
+  create_answer_question
+end
+
+def create_answer_question
   @resposta = FactoryGirl.create(:answer)
   @pergunta = @resposta.question
 end
@@ -181,8 +185,18 @@ Então(/^eu devo estar na página de edição da resposta$/) do
   current_url.should eq(edit_question_answer_url(@pergunta,@resposta))
 end
 
+Dado(/^que eu estou na página de edição de uma resposta$/) do
+  create_answer_question
+  visit edit_question_answer_url(@pergunta,@resposta)
+end
+
+Então(/^eu devo ver os dados da pergunta$/) do
+  step('eu devo ver o título dessa pergunta')
+  step('o conteúdo dessa pergunta')
+end
+
 Então(/^os dados da resposta devem estar preenchidos$/) do
-  pending # express the regexp above with the code you wish you had
+  find_field("answer_conteudo").value.should eq(@resposta.conteudo)
 end
 
 
