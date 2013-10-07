@@ -23,6 +23,14 @@ describe AnswersController do
       post_create
       response.should redirect_to question_url(question.id)
     end
-  end 
+  end
+  
+  describe "GET /questions/:question_id/answers/:id/edit" do
+    it "deve expor @answer a partir do id passado" do
+      answer = FactoryGirl.create(:answer)
+      get :edit, question_id: answer.question.id, id: answer.id
+      expect(assigns(:answer)).to eq(answer) 
+    end
+  end
 
 end

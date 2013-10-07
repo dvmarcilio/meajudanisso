@@ -5,7 +5,7 @@ Funcionalidade: Editar uma resposta
   Eu quero poder editar uma resposta
   
   Contexto:
-    Dado que uma pergunta possui uma resposta com conteúdo HTML
+    Dado que uma pergunta com uma resposta existe
     E que eu estou na página de visualização dessa pergunta
     
   Cenário: Entrar na página de edição de resposta

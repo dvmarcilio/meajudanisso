@@ -52,12 +52,8 @@ Então(/^visualizar as tags da pergunta$/) do
 end
 
 Dado(/^que eu estou na página de visualização de uma pergunta$/) do
-  @pergunta = create_full_question
+  @pergunta = FactoryGirl.create(:full_question)
   step "que eu estou na página de visualização dessa pergunta"
-end
-
-def create_full_question
-  FactoryGirl.create(:question, :with_id, :with_html_content, :with_three_string_tags, :with_ten_votes)
 end
 
 Então(/^eu devo ver o título dessa pergunta$/) do
@@ -98,7 +94,7 @@ Então(/^ver um botão "(.*?)"$/) do |botao|
 end
 
 Quando(/^eu preencho minha resposta no campo de texto$/) do
-  @resposta = FactoryGirl.build(:answer)
+  @resposta = Answer.new(conteudo: 'Conteudo Simples')
   fill_in('answer_conteudo', with: @resposta.conteudo)
 end
 
@@ -124,7 +120,7 @@ Dado(/^que eu estou na página de visualização dessa pergunta$/) do
 end
 
 Dado(/^que uma pergunta possui (\d+) respostas$/) do |quantidade|
-  @pergunta = create_full_question
+  @pergunta = FactoryGirl.create(:full_question)
   Integer(quantidade).times { @pergunta.answers.create }
 end
 
@@ -141,10 +137,9 @@ Então(/^eu devo ver que essa mensagem não foi respondida$/) do
 end
 
 Quando(/^eu clico no link "editar" da (pergunta|resposta)$/) do |tipo|
-  id = (tipo == ("pergunta") ? "editar_pergunta" : "")
+  id = (tipo == ("pergunta") ? "editar_pergunta" : "editar_resposta_#{@resposta.id}")
   click_link(id)
 end
-
 
 Então(/^eu devo estar na página de edição da pergunta$/) do
   current_url.should eq(edit_question_url(@pergunta))
@@ -157,7 +152,7 @@ Então(/^os dados da pergunta estarem preenchidos$/) do
 end
 
 Dado(/^que eu estou na página de edição de uma pergunta$/) do
-  @pergunta = create_full_question
+  @pergunta = FactoryGirl.create(:full_question)
   visit edit_question_path(@pergunta)
 end
 
@@ -176,4 +171,18 @@ Então(/^a pergunta atualizada$/) do
   page.should have_css(".pergunta#tags", text: @edit_attrs[:pergunta_tags])
   page.should have_css(".pergunta#conteudo", text: @edit_attrs[:pergunta_conteudo])
 end
+
+Dado(/^que uma pergunta com uma resposta existe$/) do
+  @resposta = FactoryGirl.create(:answer)
+  @pergunta = @resposta.question
+end
+
+Então(/^eu devo estar na página de edição da resposta$/) do
+  current_url.should eq(edit_question_answer_url(@pergunta,@resposta))
+end
+
+Então(/^os dados da resposta devem estar preenchidos$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
 
