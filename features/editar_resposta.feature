@@ -9,6 +9,6 @@ Funcionalidade: Editar uma resposta
     E que eu estou na página de visualização dessa pergunta
     
   Cenário: Entrar na página de edição de resposta
-    Quando eu clico no link "editar"
+    Quando eu clico no link "editar" da resposta
     Então eu devo estar na página de edição da resposta
     E os dados da resposta devem estar preenchidos

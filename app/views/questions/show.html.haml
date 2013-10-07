@@ -9,7 +9,7 @@
   .pergunta#votos= "Votos: #{@pergunta.votos}"
   .pergunta#tags= "Tags: #{@pergunta.tags_string}"
   %br
-  = link_to 'editar', edit_question_path(@pergunta)
+  = link_to 'editar', edit_question_path(@pergunta), id: 'editar_pergunta'
   
   
 %section.respostas

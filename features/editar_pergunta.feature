@@ -6,7 +6,7 @@ Funcionalidade: Editar uma pergunta
   
   Cenário: Entrar na página de edição
     Dado que eu estou na página de visualização de uma pergunta
-    Quando eu clico no link "editar"
+    Quando eu clico no link "editar" da pergunta
     Então eu devo estar na página de edição da pergunta
     E os dados da pergunta estarem preenchidos
     
