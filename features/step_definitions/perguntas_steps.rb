@@ -162,8 +162,9 @@ Quando(/^eu edito a pergunta$/) do
   step('clico no botão "Editar"')
 end
 
-Então(/^ver uma mensagem de confirmação da edição$/) do
-  page.should have_css("#notice.message", "Pergunta editada")
+Então(/^ver uma mensagem de confirmação da edição da (resposta|pergunta)$/) do |tipo|
+  msg = tipo.capitalize + " editada"
+  page.should have_css("#notice.message", msg)
 end
 
 Então(/^a pergunta atualizada$/) do

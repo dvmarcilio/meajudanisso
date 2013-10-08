@@ -14,5 +14,5 @@ Funcionalidade: Editar uma pergunta
     Dado que eu estou na página de edição de uma pergunta
     Quando eu edito a pergunta
     Então eu devo estar na página de visualização dessa pergunta
-    E ver uma mensagem de confirmação da edição
+    E ver uma mensagem de confirmação da edição da pergunta
     E a pergunta atualizada
