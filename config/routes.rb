@@ -1,7 +1,5 @@
 MeAjudaNisso::Application.routes.draw do
 
-  root to: 'pages#home'
-
  resources :questions do
  	collection do
 	 	get :most_voted
@@ -12,6 +10,11 @@ MeAjudaNisso::Application.routes.draw do
 	end
  end
  resources :users
+ resources :sessions, only: [:new, :create, :destroy]
+
+ root to: 'pages#home'
  match '/cadastrar',  to: 'users#new'
+ match '/login',  to: 'sessions#new',         via: 'get'
+ match '/logout', to: 'sessions#destroy',     via: 'delete'
  
 end
