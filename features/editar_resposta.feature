@@ -14,3 +14,10 @@ Funcionalidade: Editar uma resposta
     Dado que eu estou na página de edição de uma resposta
     Então eu devo ver os dados da pergunta
     E os dados da resposta devem estar preenchidos
+    
+  Cenário: Editar resposta
+    Dado que eu estou na página de edição de uma resposta
+    E eu edito o conteúdo da resposta
+    Então eu devo estar na página de visualização dessa pergunta
+    E ver uma mensagem de confirmação da edição da resposta
+    E a resposta atualizada
