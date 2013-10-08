@@ -7,6 +7,10 @@
 
 %section.resposta
   %h2 Resposta
-  = text_area :answer, :conteudo, :class => "tinymce"
-  = tinymce
+  = form_tag question_answer_path(@answer.question, @answer), method: :put do
+    = text_area :answer, :conteudo, :class => "tinymce"
+    = tinymce
+    %br
+    %br
+    = submit_tag 'Editar'
 

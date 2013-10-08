@@ -200,4 +200,18 @@ Então(/^os dados da resposta devem estar preenchidos$/) do
   find_field("answer_conteudo").value.should eq(@resposta.conteudo)
 end
 
+Dado(/^eu edito o conteúdo da resposta$/) do
+  @edit_attrs = { :answer_conteudo => "Novo conteudo" }
+  fill_hash(@edit_attrs)
+  step('clico no botão "Editar"')
+end
+
+Então(/^a resposta atualizada$/) do
+  within("div#answer_#{@resposta.id}") do
+    page.should have_css(".answer#conteudo", text: @edit_attrs[:answer_conteudo])
+  end
+end
+
+
+
 
