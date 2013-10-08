@@ -1,1 +1,14 @@
 %h1 Login
+.row
+  .span6.offset3
+    = form_for(:session,url:sessions_path) do |f|
+      = f.label:email
+      = f.text_field :email
+      = f.label :password
+      = f.password_field :password
+      = f.submit "Entrar"
+      %br
+      Novo Usuário?
+      =link_to "Clique Aqui!",logout_path
+
+	
