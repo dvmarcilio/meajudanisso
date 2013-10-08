@@ -1,0 +1,17 @@
+= form_tag questions_path, method: :get do
+  = text_field_tag :search, params[:search]
+  = submit_tag "Pesquisar"
+  
+%table
+  %thead
+    %tr
+      %th Votos
+      %th Titulo
+      %th Tags
+  %tbody
+    - @questions.each do |question|
+      %tr
+        %td= question.votos
+        %td= question.titulo
+        %td= question.tags_string
+  
