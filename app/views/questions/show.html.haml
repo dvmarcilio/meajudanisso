@@ -10,7 +10,8 @@
   .pergunta#tags= "Tags: #{@pergunta.tags_string}"
   %br
   = link_to 'editar', edit_question_path(@pergunta), id: 'editar_pergunta'
-  
+  .pergunta#created_at= "Criada em: #{@pergunta.created_at}"
+  .pergunta#updated_at= @pergunta.updated_at ? "Editada em: #{@pergunta.updated_at}" : ''  
   
 %section.respostas
   %h2#qtde_respostas= @pergunta.answers.count > 0 ? pluralize(@pergunta.answers.count, 'Resposta', 'Respostas') : "Essa mensagem não foi respondida"

@@ -81,6 +81,17 @@ Então(/^as tags dessa pergunta$/) do
   page.should have_css(".pergunta#tags", text: @pergunta.tags_string)
 end
 
+#TODO formatar essas datas.
+Então(/^quando ela foi criada$/) do
+  page.should have_css(".pergunta#created_at", text: @pergunta.created_at)
+end
+
+Então(/^quando ela foi editada$/) do
+  if @pergunta.updated_at
+    page.should have_css(".pergunta#updated_at", text: @pergunta.updated_at)
+  end
+end
+
 Então(/^eu devo ver "Sua Resposta"$/) do
   page.should have_css(".post_answer", text: "Sua Resposta")
 end

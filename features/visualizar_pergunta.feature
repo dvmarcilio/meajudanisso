@@ -10,6 +10,8 @@ Funcionalidade: Visualizar pergunta
     E o conteúdo dessa pergunta
     E os votos dessa pergunta
     E as tags dessa pergunta
+    E quando ela foi criada
+    E quando ela foi editada
   
   Cenário: Mensagem diferente para pergunta sem resposta
     Uma pergunta sem resposta deve mostrar uma mensagem diferente.
