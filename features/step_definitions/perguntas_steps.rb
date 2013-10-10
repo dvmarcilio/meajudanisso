@@ -56,6 +56,15 @@ Dado(/^que eu estou na página de visualização de uma pergunta$/) do
   step "que eu estou na página de visualização dessa pergunta"
 end
 
+Então(/^eu devo ver os dados dessa pergunta$/) do
+  step('eu devo ver o título dessa pergunta')
+  step('o conteúdo dessa pergunta')
+  step('os votos dessa pergunta')
+  step('as tags dessa pergunta')
+  step('quando ela foi criada')
+  step('quando ela foi editada')
+end
+
 Então(/^eu devo ver o título dessa pergunta$/) do
   page.should have_content(@pergunta.titulo)
 end
