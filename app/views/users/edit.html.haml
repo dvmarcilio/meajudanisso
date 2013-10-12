@@ -1,0 +1,21 @@
+%h1 Atualizar Perfil
+.row
+  .span6.offset3
+    = form_for (@usuario) do |f|
+      - if @usuario.errors.any?
+        %h8
+          = pluralize(@usuario.errors.count, "Error")
+        %ul 
+          - @usuario.errors.full_messages.each do |msg|
+            %li= msg
+      = f.label :Nome
+      = f.text_field :nome
+      = f.label :Email
+      = f.text_field :email
+      = f.label :Senha
+      = f.password_field :password
+      = f.label :Confirmar_Senha
+      = f.password_field :password_confirmation
+      = f.submit 'Atualizar'
+    = gravatar_for @usuario
+    %a{:href => "http://gravatar.com/emails"} Alterar
