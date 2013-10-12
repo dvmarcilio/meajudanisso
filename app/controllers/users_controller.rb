@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	before_filter :signed_in_user, only: [:edit, :update]
 	def new
 		@usuario = User.new
 	end
@@ -37,5 +38,14 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:nome, :email, :password,
                                    :password_confirmation)
+    end
+
+    def signed_in_user
+      redirect_to login_path, notice: "Por favor efetue o login!" unless signed_in?
+    end
+
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user?(@user)
     end
 end
