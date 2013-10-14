@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_filter :signed_in_user, only: [:edit, :update]
+ # before_action :correct_user,   only: [:edit, :update]
 	def new
 		@usuario = User.new
 	end
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-    	@usuario = User.find(params[:id])
+   	@usuario = User.find(params[:id])
   end
 
   def update
@@ -41,7 +42,10 @@ class UsersController < ApplicationController
     end
 
     def signed_in_user
-      redirect_to login_path, notice: "Por favor efetue o login!" unless signed_in?
+      unless signed_in?
+        store_location
+        redirect_to login_path, notice: "Por favor efetue o login!" unless signed_in?
+      end   
     end
 
     def correct_user
