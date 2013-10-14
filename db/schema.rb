@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131014192542) do
+ActiveRecord::Schema.define(:version => 20131009012820) do
 
   create_table "answers", :force => true do |t|
     t.text    "conteudo"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(:version => 20131014192542) do
     t.integer "question_id"
   end
 
-  create_table "comments", :force => true do |t|
+create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
     t.text     "comment"
     t.integer  "commentable_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20131014192542) do
   add_index "punches", ["average_time"], :name => "index_punches_on_average_time"
   add_index "punches", ["punchable_type", "punchable_id"], :name => "punchable_index"
 
+ActiveRecord::Schema.define(:version => 20130930193456) do
   create_table "questions", :force => true do |t|
     t.string   "titulo"
     t.text     "conteudo"
@@ -61,8 +62,10 @@ ActiveRecord::Schema.define(:version => 20131014192542) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "password_digest"
+    t.string   "remember_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
 end

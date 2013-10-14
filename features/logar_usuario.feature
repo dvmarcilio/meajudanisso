@@ -14,7 +14,7 @@ Funcionalidade: Logar no sistema
 		Quando eu preencho o formulario de login com dados corretos
 		E clico no botão "Entrar"
 		Então devo estar na página profile
-		E ver a mensagem "Bem vindo"
+		E ver a mensagem "Bem Vindo!"
 
 	Cenário: Login inválido
 		Dado que estou na página de login

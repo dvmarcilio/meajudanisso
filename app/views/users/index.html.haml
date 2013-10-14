@@ -1,0 +1,9 @@
+%h1 Lista de Usuários
+= will_paginate
+%ul
+  .users
+    - @users.each do |user|
+      %li
+        = gravatar_for user
+        = link_to user.nome,user
+= will_paginate

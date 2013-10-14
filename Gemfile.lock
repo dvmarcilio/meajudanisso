@@ -34,6 +34,8 @@ GEM
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
+    bootstrap-will_paginate (0.0.6)
+      will_paginate
     builder (3.0.4)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -86,7 +88,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25)
     mini_portile (0.5.1)
-    multi_json (1.8.0)
+    multi_json (1.8.1)
     multi_test (0.0.2)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
@@ -159,12 +161,12 @@ GEM
       ref
     thor (0.18.1)
     tilt (1.4.1)
-    tinymce-rails (4.0.6)
+    tinymce-rails (4.0.8)
       railties (>= 3.1.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.37)
+    tzinfo (0.3.38)
     uglifier (2.2.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
@@ -181,6 +183,7 @@ DEPENDENCIES
   annotate
   bcrypt-ruby (= 3.0.1)
   bootstrap-sass
+  bootstrap-will_paginate (= 0.0.6)
   coffee-rails (~> 3.2.1)
   cucumber-rails
   database_cleaner (= 1.0.1)
@@ -199,3 +202,4 @@ DEPENDENCIES
   therubyracer
   tinymce-rails
   uglifier (>= 1.0.3)
+  will_paginate (= 3.0.3)
