@@ -11,15 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20130927224818) do
+ActiveRecord::Schema.define(:version => 20130930193456) do
 
   create_table "answers", :force => true do |t|
     t.text    "conteudo"
     t.integer "votos"
     t.integer "question_id"
-
-ActiveRecord::Schema.define(:version => 20130930193456) do
+  end
 
   create_table "questions", :force => true do |t|
     t.string   "titulo"
