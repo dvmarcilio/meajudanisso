@@ -232,6 +232,19 @@ Então(/^a resposta atualizada$/) do
   end
 end
 
+Dado(/^que uma pergunta com visualizações existe$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Quando(/^eu visito a página de visualização dessa pergunta$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Então(/^eu devo ver a pergunta com uma visualização a mais$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+
 
 
 

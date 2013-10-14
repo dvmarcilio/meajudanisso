@@ -28,4 +28,8 @@ Funcionalidade: Visualizar pergunta
       | 10          |
       | 15          | 
      
-     
+  Cenário: Contagem de views da pergunta
+    Dado que uma pergunta com visualizações existe
+    Quando eu visito a página de visualização dessa pergunta
+    Então eu devo ver a pergunta com uma visualização a mais
+
