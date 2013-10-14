@@ -56,6 +56,15 @@ Dado(/^que eu estou na página de visualização de uma pergunta$/) do
   step "que eu estou na página de visualização dessa pergunta"
 end
 
+Então(/^eu devo ver os dados dessa pergunta$/) do
+  step('eu devo ver o título dessa pergunta')
+  step('o conteúdo dessa pergunta')
+  step('os votos dessa pergunta')
+  step('as tags dessa pergunta')
+  step('quando ela foi criada')
+  step('quando ela foi editada')
+end
+
 Então(/^eu devo ver o título dessa pergunta$/) do
   page.should have_content(@pergunta.titulo)
 end
@@ -79,6 +88,17 @@ end
 
 Então(/^as tags dessa pergunta$/) do
   page.should have_css(".pergunta#tags", text: @pergunta.tags_string)
+end
+
+#TODO formatar essas datas.
+Então(/^quando ela foi criada$/) do
+  page.should have_css(".pergunta#created_at", text: @pergunta.created_at)
+end
+
+Então(/^quando ela foi editada$/) do
+  if @pergunta.updated_at
+    page.should have_css(".pergunta#updated_at", text: @pergunta.updated_at)
+  end
 end
 
 Então(/^eu devo ver "Sua Resposta"$/) do
@@ -164,7 +184,7 @@ end
 
 Então(/^ver uma mensagem de confirmação da edição da (resposta|pergunta)$/) do |tipo|
   msg = tipo.capitalize + " editada"
-  page.should have_css("#notice.message", msg)
+  page.should have_css("#notice-message", msg)
 end
 
 Então(/^a pergunta atualizada$/) do
@@ -211,6 +231,20 @@ Então(/^a resposta atualizada$/) do
     page.should have_css(".answer#conteudo", text: @edit_attrs[:answer_conteudo])
   end
 end
+
+Dado(/^que uma pergunta com visualizações existe$/) do
+  @pergunta = FactoryGirl.create(:full_question)
+  @visualizacoes = @pergunta.hits
+end
+
+Quando(/^eu visito a página de visualização dessa pergunta$/) do
+  step('que eu estou na página de visualização dessa pergunta')
+end
+
+Então(/^eu devo ver a pergunta com uma visualização a mais$/) do
+  page.should have_css(".pergunta#visualizacoes", text: (@visualizacoes + 1) )
+end
+
 
 
 

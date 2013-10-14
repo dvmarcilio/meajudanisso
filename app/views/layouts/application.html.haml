@@ -1,0 +1,16 @@
+!!! 5
+%html
+  %head
+    %title Me Ajuda Nisso
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    = render 'layouts/shim'
+    
+  %body
+    = render 'layouts/header'
+    .container
+      - flash.each do |key, value|
+        .alert{:id => "#{key}-message"}= value
+      = yield
+      = render 'layouts/footer'

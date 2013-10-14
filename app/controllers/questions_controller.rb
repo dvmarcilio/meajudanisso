@@ -23,12 +23,18 @@ class QuestionsController < ApplicationController
 	  redirect_to question_url(@pergunta)
 	end
 	
+	def index
+	  @search = Question.search { fulltext params[:search] }
+	  @questions = @search.results
+	end
+	
 	def most_voted
 		@perguntas = MeAjudaNisso::Questions.most_voted
 	end
 	
 	def show
 		@pergunta = Question.find(pergunta_id)
+		@pergunta.punch(request)
 	end
 	
 	private
