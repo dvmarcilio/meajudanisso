@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
   	user = User.find_by_email(params[:session][:email])
   	if user && user.authenticate(params[:session][:password])
       sign_in user
-  		redirect_to user_path(user), notice: 'Bem Vindo!'
+  		redirect_back_or user
   	else
   	  flash[:error] = 'Email/Senha inválido'
   	  render 'new'
