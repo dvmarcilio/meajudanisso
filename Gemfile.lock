@@ -173,6 +173,7 @@ GEM
     voight_kampff (0.2.0)
       httpclient (~> 2.2)
       nokogiri (~> 1.6.0)
+    will_paginate (3.0.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
