@@ -233,15 +233,16 @@ Então(/^a resposta atualizada$/) do
 end
 
 Dado(/^que uma pergunta com visualizações existe$/) do
-  pending # express the regexp above with the code you wish you had
+  @pergunta = FactoryGirl.create(:full_question)
+  @visualizacoes = @pergunta.hits
 end
 
 Quando(/^eu visito a página de visualização dessa pergunta$/) do
-  pending # express the regexp above with the code you wish you had
+  step('que eu estou na página de visualização dessa pergunta')
 end
 
 Então(/^eu devo ver a pergunta com uma visualização a mais$/) do
-  pending # express the regexp above with the code you wish you had
+  page.should have_css(".pergunta#visualizacoes", text: (@visualizacoes + 1) )
 end
 
 

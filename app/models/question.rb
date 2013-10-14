@@ -16,6 +16,8 @@ class Question < ActiveRecord::Base
   serialize :tags, Array
   
   has_many :answers
+  
+  acts_as_punchable
 
   searchable do
     text :titulo, :boost => 5

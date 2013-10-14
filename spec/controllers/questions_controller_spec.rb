@@ -14,12 +14,18 @@ describe QuestionsController do
 	end
 		
 	describe "GET /show" do
+	  before(:each) { @pergunta = FactoryGirl.create(:question) }  
+	
 		it "atribui a pergunta" do
-			pergunta = double
-			::Question.stub(:find).with("5") { pergunta }
-			
-			get :show, id: "5"
-			expect(assigns(:pergunta)).to be(pergunta)
+			get :show, id: @pergunta.id
+			expect(assigns(:pergunta)).to eq(@pergunta)
+		end
+		
+		it "aumenta a contagem de visualizacao da pergunta" do
+		  views = @pergunta.hits
+		  get :show, id: @pergunta.id
+		  @pergunta.reload
+		  expect(@pergunta.hits).to eq((views+1))
 		end
 	end
  

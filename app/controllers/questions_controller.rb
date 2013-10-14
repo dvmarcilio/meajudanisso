@@ -34,6 +34,7 @@ class QuestionsController < ApplicationController
 	
 	def show
 		@pergunta = Question.find(pergunta_id)
+		@pergunta.punch(request)
 	end
 	
 	private

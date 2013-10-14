@@ -11,15 +11,39 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20130927224818) do
+ActiveRecord::Schema.define(:version => 20131014192542) do
 
   create_table "answers", :force => true do |t|
     t.text    "conteudo"
     t.integer "votos"
     t.integer "question_id"
+  end
 
-ActiveRecord::Schema.define(:version => 20130930193456) do
+  create_table "comments", :force => true do |t|
+    t.string   "title",            :limit => 50, :default => ""
+    t.text     "comment"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+  end
+
+  add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
+  add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "punches", :force => true do |t|
+    t.integer  "punchable_id",                                :null => false
+    t.string   "punchable_type", :limit => 20,                :null => false
+    t.datetime "starts_at",                                   :null => false
+    t.datetime "ends_at",                                     :null => false
+    t.datetime "average_time",                                :null => false
+    t.integer  "hits",                         :default => 1, :null => false
+  end
+
+  add_index "punches", ["average_time"], :name => "index_punches_on_average_time"
+  add_index "punches", ["punchable_type", "punchable_id"], :name => "punchable_index"
 
   create_table "questions", :force => true do |t|
     t.string   "titulo"
