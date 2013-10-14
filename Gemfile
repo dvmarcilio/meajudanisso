@@ -17,6 +17,7 @@ gem 'tinymce-rails'
 
 gem 'sunspot_rails'
 gem 'sunspot_solr'
+gem 'punching_bag'
 
 gem 'jquery-rails'
 
