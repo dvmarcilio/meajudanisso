@@ -227,9 +227,13 @@ Dado(/^eu edito o conteúdo da resposta$/) do
 end
 
 Então(/^a resposta atualizada$/) do
-  within("div#answer_#{@resposta.id}") do
+  within(current_answer_div) do
     page.should have_css(".answer#conteudo", text: @edit_attrs[:answer_conteudo])
   end
+end
+
+def current_answer_div
+  "div#answer_#{@resposta.id}"
 end
 
 Dado(/^que uma pergunta com visualizações existe$/) do
@@ -245,6 +249,21 @@ Então(/^eu devo ver a pergunta com uma visualização a mais$/) do
   expected_views = @visualizacoes + 1
   page.should have_css(".pergunta#visualizacoes", text: "Visualizações: #{expected_views}" )
 end
+
+Quando(/^eu voto positivo na resposta$/) do
+  within(current_answer_div) do
+    click_button("upvote_answer_#{@resposta.id}")
+  end
+end
+
+Então(/^eu devo ver uma mensagem de confirmação do voto na resposta$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Então(/^eu devo ver a resposta com um voto a mais$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
 
 
 
