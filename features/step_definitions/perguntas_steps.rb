@@ -242,7 +242,8 @@ Quando(/^eu visito a página de visualização dessa pergunta$/) do
 end
 
 Então(/^eu devo ver a pergunta com uma visualização a mais$/) do
-  page.should have_css(".pergunta#visualizacoes", text: (@visualizacoes + 1) )
+  expected_views = @visualizacoes + 1
+  page.should have_css(".pergunta#visualizacoes", text: "Visualizações: #{expected_views}" )
 end
 
 
