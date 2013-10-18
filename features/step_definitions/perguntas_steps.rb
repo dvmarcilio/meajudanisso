@@ -272,10 +272,38 @@ end
 
 Então(/^eu devo ver a resposta com um voto a mais$/) do
   expected_votes = FactoryGirl.build(:answer).votes_count + 1
-  within(current_answer_div) do
-    page.should have_css(".answer#votos", text: "Votos: #{expected_votes}")
-  end
+  check_answer_votes(expected_votes)
 end
+
+Dado(/^que eu já votei positivamente na resposta$/) do
+  step('eu voto positivo na resposta')
+end
+
+Quando(/^eu voto novamente positivo na resposta$/) do
+  step('eu voto positivo na resposta')
+end
+
+Então(/^eu devo uma mensagem que eu já votei na resposta$/) do
+  msg = "Você já votou nessa resposta"
+  page_should_have_warning_msg(msg)
+end
+
+def page_should_have_warning_msg(msg)
+  page.should have_css("#warning-message", text: msg)
+end
+
+Então(/^eu devo ver a resposta com o mesmo número de votos$/) do
+  expected_votes = @resposta.votes_count
+  check_answer_votes(expected_votes)
+end
+
+private
+  def check_answer_votes(expected_votes)
+    within(current_answer_div) do
+      page.should have_css(".answer#votos", text: "Votos: #{expected_votes}")
+    end
+  end
+
 
 
 

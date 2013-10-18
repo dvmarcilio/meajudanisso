@@ -1,3 +1,4 @@
+# encoding: utf-8
 class AnswersController < ApplicationController
 
   def create
@@ -17,8 +18,13 @@ class AnswersController < ApplicationController
   
   def vote_up
     @answer = Answer.find_by_id(answer_id)
-    current_user.vote_for(@answer)
-    redirect_to question_url(question), notice: "Voto positivo confirmado"
+    begin
+      current_user.vote_for(@answer)
+      redirect_to question_url(question), notice: "Voto positivo confirmado" 
+    rescue ActiveRecord::RecordInvalid
+      flash[:warning] = "Você já votou nessa resposta"
+      redirect_to question_url(question)
+    end
   end
   
   private
