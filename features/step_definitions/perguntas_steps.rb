@@ -184,7 +184,11 @@ end
 
 Então(/^ver uma mensagem de confirmação da edição da (resposta|pergunta)$/) do |tipo|
   msg = tipo.capitalize + " editada"
-  page.should have_css("#notice-message", msg)
+  page_should_have_notice_msg(msg)
+end
+
+def page_should_have_notice_msg(msg)
+  page.should have_css("#notice-message", text: msg)
 end
 
 Então(/^a pergunta atualizada$/) do
@@ -250,6 +254,11 @@ Então(/^eu devo ver a pergunta com uma visualização a mais$/) do
   page.should have_css(".pergunta#visualizacoes", text: "Visualizações: #{expected_views}" )
 end
 
+Dado(/^que eu estou na página de visualização de uma pergunta com uma resposta$/) do
+  step('que uma pergunta com uma resposta existe')
+  step('que eu estou na página de visualização dessa pergunta')
+end
+
 Quando(/^eu voto positivo na resposta$/) do
   within(current_answer_div) do
     click_button("upvote_answer_#{@resposta.id}")
@@ -257,12 +266,17 @@ Quando(/^eu voto positivo na resposta$/) do
 end
 
 Então(/^eu devo ver uma mensagem de confirmação do voto na resposta$/) do
-  pending # express the regexp above with the code you wish you had
+  msg = "Voto positivo confirmado"
+  page_should_have_notice_msg(msg)
 end
 
 Então(/^eu devo ver a resposta com um voto a mais$/) do
-  pending # express the regexp above with the code you wish you had
+  expected_votes = FactoryGirl.build(:answer).votes_count + 1
+  within(current_answer_div) do
+    page.should have_css(".answer#votos", text: "Votos: #{expected_votes}")
+  end
 end
+
 
 
 

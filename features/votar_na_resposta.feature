@@ -3,8 +3,8 @@ Funcionalidade: Votar em uma resposta
   #TODO Completar
   
   Contexto:
-    Dado que uma pergunta com uma resposta existe
-    E que eu estou na página de visualização dessa pergunta
+    Dado que eu fiz login no sistema
+    E que eu estou na página de visualização de uma pergunta com uma resposta
   
   Cenário: Votar positivamente na resposta
     Quando eu voto positivo na resposta

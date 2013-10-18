@@ -20,6 +20,7 @@ gem 'tinymce-rails'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'punching_bag'
+gem 'thumbs_up'
 
 gem 'jquery-rails'
 

@@ -5,6 +5,8 @@ ruby '1.9.3'
 gem 'rails', '3.2.14'
 gem 'bootstrap-sass'
 gem 'bcrypt-ruby','3.0.1'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
 gem 'sqlite3'
 
@@ -17,6 +19,7 @@ gem 'tinymce-rails'
 
 gem 'sunspot_rails'
 gem 'sunspot_solr'
+gem 'punching_bag'
 
 gem 'jquery-rails'
 

@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
   
+  acts_as_voter
+  
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end

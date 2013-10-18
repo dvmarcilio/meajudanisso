@@ -57,4 +57,27 @@ describe AnswersController do
       expect(answer.conteudo).to eq(attrs[:conteudo])
     end
   end
+  
+  describe "POST /questions/:question_id/answer/:id/vote_up (#vote_up)" do
+    
+    before(:each) do
+      @user = test_sign_in(FactoryGirl.create(:user))
+      @answer = FactoryGirl.create(:answer)
+      post :vote_up, id: @answer.id, question_id: @answer.question.id  
+    end
+          
+    it "redireciona para a pagina de visualizacao da pergunta" do
+      expect(response).to redirect_to question_url(@answer.question.id)
+    end
+      
+    it "adiciona uma mensagem :notice no flash" do
+      expect(request.flash[:notice]).to_not be_empty
+    end
+    
+    it "aumenta em um o voto da resposta" do
+      original_votes = FactoryGirl.build(:answer).votes_count
+      expected_votes = original_votes + 1
+      expect(@answer.votes_count).to eq(expected_votes)
+    end
+  end
 end

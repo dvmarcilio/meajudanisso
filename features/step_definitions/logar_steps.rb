@@ -8,10 +8,33 @@ Dado(/^que estou na página de login$/) do
 end
 
 Quando(/^eu preencho o formulario de login com dados corretos$/) do
-    user = FactoryGirl.create(:user)
+  step('que existe um usuário cadastrado')
+  fill_login_form(@user)
+end
+
+Dado(/^que eu fiz login no sistema$/) do
+  step('que existe um usuário cadastrado')
+  step('eu faço login com esse usuário')
+end
+
+Dado(/^que existe um usuário cadastrado$/) do
+  @user = FactoryGirl.create(:user)
+end
+
+Quando(/^eu faço login com esse usuário$/) do
+  step('que estou na página de login')
+  fill_login_form(@user)
+  step('clico no botão "Entrar"')
+end
+
+private
+  def fill_login_form(user)
     fill_in("Email", with: user.email)
     fill_in("Password", with: user.password)
-end
+  end
+  
+  
+
 
 
 

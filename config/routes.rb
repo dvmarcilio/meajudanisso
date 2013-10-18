@@ -5,12 +5,17 @@ MeAjudaNisso::Application.routes.draw do
 	 	get :most_voted
 	end
 	
-	resources :answers
+	resources :answers do
+	  member do
+	    post :vote_up
+	  end
+	end
 	
 	resource :votes, controller: "questions/votes", only: [] do
 	  put :positivo, :negativo, :on => :member
 	end
  end
+ 
  resources :users
  resources :sessions, only: [:new, :create, :destroy]
 
