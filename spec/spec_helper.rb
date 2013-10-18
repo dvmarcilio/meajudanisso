@@ -35,6 +35,11 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
   
+  ##
+  def test_sign_in(user)
+    controller.sign_in(user)
+  end
+  
   ## previnindo sunspot de rodar no rspec
   config.before(:each) do
     ::Sunspot.session = ::Sunspot::Rails::StubSessionProxy.new(::Sunspot.session)
