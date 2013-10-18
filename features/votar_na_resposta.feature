@@ -9,4 +9,10 @@ Funcionalidade: Votar em uma resposta
   Cenário: Votar positivamente na resposta
     Quando eu voto positivo na resposta
     Então eu devo ver uma mensagem de confirmação do voto na resposta
-    E eu devo ver a resposta com um voto a mais 
+    E eu devo ver a resposta com um voto a mais
+    
+  Cenário: Votar positivamente novamente na resposta
+    Dado que eu já votei positivamente na resposta
+    Quando eu voto novamente positivo na resposta
+    Então eu devo uma mensagem que eu já votei na resposta
+    E eu devo ver a resposta com o mesmo número de votos 
