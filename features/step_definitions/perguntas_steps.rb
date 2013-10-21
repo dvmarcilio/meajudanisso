@@ -275,7 +275,7 @@ Então(/^eu devo ver a resposta com um voto a mais$/) do
   check_answer_votes(expected_votes)
 end
 
-Dado(/^que eu já votei positivamente na resposta$/) do
+Dado(/^que eu já votei positivo na resposta$/) do
   step('eu voto positivo na resposta')
 end
 
