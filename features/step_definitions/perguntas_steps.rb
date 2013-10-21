@@ -157,7 +157,7 @@ Então(/^eu devo ver que essa mensagem não foi respondida$/) do
 end
 
 Quando(/^eu clico no link "editar" da (pergunta|resposta)$/) do |tipo|
-  id = (tipo == ("pergunta") ? "editar_pergunta" : "editar_resposta_#{@resposta.id}")
+  id = edit_link_id(tipo)
   click_link(id)
 end
 
@@ -236,10 +236,6 @@ Então(/^a resposta atualizada$/) do
   end
 end
 
-def current_answer_div
-  "div#answer_#{@resposta.id}"
-end
-
 Dado(/^que uma pergunta com visualizações existe$/) do
   @pergunta = FactoryGirl.create(:full_question)
   @visualizacoes = @pergunta.hits
@@ -259,19 +255,20 @@ Dado(/^que eu estou na página de visualização de uma pergunta com uma respost
   step('que eu estou na página de visualização dessa pergunta')
 end
 
-Quando(/^eu voto positivo na resposta$/) do
+Quando(/^eu voto (positivo|negativo) na resposta$/) do |tipo|
   within(current_answer_div) do
-    click_button("upvote_answer_#{@resposta.id}")
+    id = vote_button_id(tipo)
+    click_button(id)
   end
 end
 
-Então(/^eu devo ver uma mensagem de confirmação do voto na resposta$/) do
-  msg = "Voto positivo confirmado"
+Então(/^eu devo ver uma mensagem de confirmação do voto (positivo|negativo) na resposta$/) do |tipo|
+  msg = "Voto #{tipo} confirmado"
   page_should_have_notice_msg(msg)
 end
 
-Então(/^eu devo ver a resposta com um voto a mais$/) do
-  expected_votes = FactoryGirl.build(:answer).votes_count + 1
+Então(/^eu devo ver a resposta com um voto a (mais|menos)$/) do |factor|
+  expected_votes = expected_votes(factor)
   check_answer_votes(expected_votes)
 end
 
@@ -298,10 +295,33 @@ Então(/^eu devo ver a resposta com o mesmo número de votos$/) do
 end
 
 private
+
+  def current_answer_div
+    "div#answer_#{@resposta.id}"
+  end
+  
   def check_answer_votes(expected_votes)
     within(current_answer_div) do
       page.should have_css(".answer#votos", text: "Votos: #{expected_votes}")
     end
+  end
+  
+  def expected_votes(factor)
+    FactoryGirl.build(:answer).votes_count + factor(factor)
+  end
+  
+  def factor(factor)
+    factor.eql?('mais') ? +1 : -1
+  end
+  
+  def vote_button_id(tipo)
+    suffix = "_answer_#{@resposta.id}"
+    prefix = tipo.eql?('positivo') ? 'upvote' : 'downvote'
+    prefix + suffix
+  end
+  
+  def edit_link_id(tipo)
+    tipo == ("pergunta") ? "editar_pergunta" : "editar_resposta_#{@resposta.id}"
   end
 
 
