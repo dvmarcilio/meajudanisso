@@ -27,6 +27,12 @@ class AnswersController < ApplicationController
     end
   end
   
+  def vote_down
+    @answer = Answer.find_by_id(answer_id)
+    current_user.vote_against(@answer)
+    redirect_to question_url(question), notice: "Voto negativo confirmado"
+  end
+  
   private
     def question
       Question.find_by_id(params[:question_id])

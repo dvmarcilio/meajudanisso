@@ -6,9 +6,7 @@ MeAjudaNisso::Application.routes.draw do
 	end
 	
 	resources :answers do
-	  member do
-	    post :vote_up
-	  end
+	  post :vote_up, :vote_down, :on => :member
 	end
 	
 	resource :votes, controller: "questions/votes", only: [] do

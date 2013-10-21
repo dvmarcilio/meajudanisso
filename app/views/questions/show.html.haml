@@ -19,10 +19,11 @@
   - @pergunta.answers.each do |answer|
     .answer[answer]
       .answer#conteudo!= answer.conteudo
-      .answer#votos= "Votos: #{answer.votes_count}"
+      .answer#votos= "Votos: #{answer.plusminus}"
       %br
       = link_to 'editar', edit_question_answer_path(answer.id), id: "editar_resposta_#{answer.id}"
       = button_to 'UpVote', vote_up_question_answer_path(answer), id: "upvote_answer_#{answer.id}"
+      = button_to 'DownVote', vote_down_question_answer_path(answer), id: "downvote_answer_#{answer.id}"
     %hr
   
 %section.post_answer
