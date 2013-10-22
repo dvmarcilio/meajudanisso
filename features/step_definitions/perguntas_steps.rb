@@ -83,7 +83,7 @@ def strip_html_tags(conteudo)
 end
 
 Então(/^os votos dessa pergunta$/) do
-  page.should have_css(".pergunta#votos", text: @pergunta.votos)
+  page.should have_css(".pergunta#votos", text: @pergunta.plusminus)
 end
 
 Então(/^as tags dessa pergunta$/) do
@@ -207,12 +207,12 @@ def create_answer_question
 end
 
 Então(/^eu devo estar na página de edição da resposta$/) do
-  current_url.should eq(edit_question_answer_url(@pergunta,@resposta))
+  current_url.should eq(edit_answer_url(@resposta))
 end
 
 Dado(/^que eu estou na página de edição de uma resposta$/) do
   create_answer_question
-  visit edit_question_answer_url(@pergunta,@resposta)
+  visit edit_answer_url(@resposta)
 end
 
 Então(/^eu devo ver os dados da pergunta$/) do

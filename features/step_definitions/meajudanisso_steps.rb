@@ -38,8 +38,7 @@ Então(/^eu devo ver as perguntas ordenadas decrescentemente pela quantidade de 
 end
 
 Dado(/^que uma pergunta existe$/) do
-  @pergunta = Question.create!(titulo: "Como escrever melhores cenarios no Cucumber", votos: 0)
-  @votos = @pergunta.votos
+  @pergunta = Question.create!(titulo: "Como escrever melhores cenarios no Cucumber")
 end
 
 Dado(/^que estou na página de visualização dessa pergunta$/) do
