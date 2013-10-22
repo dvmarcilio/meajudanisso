@@ -2,7 +2,7 @@
 class SessionsController < ApplicationController
 
   def new
-
+       
   end
 
   def create
@@ -11,9 +11,9 @@ class SessionsController < ApplicationController
       sign_in user
       flash[:success] = "Bem Vindo!"
   		redirect_back_or user
-  	else
-  	  flash[:error] = 'Email/Senha inválido'
-  	  render 'new'
+    else
+  	     flash[:error] = 'Email/Senha inválido'
+  	     render 'new'
   	end
   end
 
