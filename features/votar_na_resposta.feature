@@ -16,6 +16,8 @@ Funcionalidade: Votar em uma resposta
     Então eu devo ver uma mensagem de confirmação do voto negativo na resposta
     E eu devo ver a resposta com um voto a menos
   
+  #TODO considerar todas as combinações ?
+  # tá longe do ideal esse teste
   Esquema do Cenário: Votar novamente na resposta
     Dado que eu já votei <fator> na resposta
     Quando eu voto novamente <fator> na resposta

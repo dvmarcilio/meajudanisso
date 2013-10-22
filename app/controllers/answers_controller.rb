@@ -29,8 +29,13 @@ class AnswersController < ApplicationController
   
   def vote_down
     @answer = Answer.find_by_id(answer_id)
-    current_user.vote_against(@answer)
-    redirect_to question_url(question), notice: "Voto negativo confirmado"
+    begin
+      current_user.vote_against(@answer)
+      redirect_to question_url(question), notice: "Voto negativo confirmado"
+    rescue ActiveRecord::RecordInvalid
+      flash[:warning] = "Você já votou nessa resposta"
+      redirect_to question_url(question)
+    end
   end
   
   private

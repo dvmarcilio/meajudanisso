@@ -290,7 +290,7 @@ def page_should_have_warning_msg(msg)
 end
 
 Então(/^eu devo ver a resposta com o mesmo número de votos$/) do
-  expected_votes = @resposta.votes_count
+  expected_votes = @resposta.plusminus
   check_answer_votes(expected_votes)
 end
 
@@ -306,7 +306,7 @@ private
   end
   
   def expected_votes(factor)
-    FactoryGirl.build(:answer).votes_count + factor(factor)
+    FactoryGirl.build(:answer).plusminus + factor(factor)
   end
   
   def factor(factor)

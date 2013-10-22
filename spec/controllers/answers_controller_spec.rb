@@ -105,17 +105,34 @@ describe AnswersController do
       post :vote_down, id: @answer.id, question_id: @answer.question.id  
     end
     
-    it "redireciona para a pagina de visualizacao da pergunta" do
-      expect(response).to redirect_to question_url(@answer.question.id)
+    context "voto valido" do
+      it "redireciona para a pagina de visualizacao da pergunta" do
+        expect(response).to redirect_to question_url(@answer.question.id)
+      end
+      
+      it "diminui em um o voto da resposta" do
+        original_votes = FactoryGirl.build(:answer).votes_count
+        expect(@answer.plusminus).to eq(original_votes -1)
+      end
+      
+      it "adiciona uma mensagem :notice no flash" do
+        expect(request.flash[:notice]).to_not be_empty
+      end  
     end
     
-    it "diminui em um o voto da resposta" do
-      original_votes = FactoryGirl.build(:answer).votes_count
-      expect(@answer.plusminus).to eq(original_votes -1)
+    context "voto invalido" do
+      before(:each) do
+        post :vote_down, id: @answer.id, question_id: @answer.question.id
+        @expected_votes = @answer.plusminus
+      end   
+      
+      it "adiciona uma mensagem :warning no flash" do 
+        expect(request.flash[:warning]).to_not be_empty
+      end
+      
+      it "nao altera a quantidade de votos" do
+        expect(@answer.plusminus).to eq(@expected_votes)
+      end  
     end
-    
-    it "adiciona uma mensagem :notice no flash" do
-      expect(request.flash[:notice]).to_not be_empty
-    end  
   end
 end
