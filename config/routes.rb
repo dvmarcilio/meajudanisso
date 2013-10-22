@@ -1,18 +1,23 @@
 MeAjudaNisso::Application.routes.draw do
 
- resources :questions do
- 	collection do
-	 	get :most_voted
-	end
+  resources :questions do
+   	collection do
+  	 	get :most_voted
+  	end
 	
-	resources :answers do
-	  post :vote_up, :vote_down, :on => :member
-	end
-	
-	resource :votes, controller: "questions/votes", only: [] do
-	  put :positivo, :negativo, :on => :member
-	end
- end
+  	resources :answers
+  	
+  	resources :votes, only: [] do
+	    post :up, :down, :on => :member
+	  end	
+  end
+  
+  resources :answers do
+    post :vote_up, :vote_down, :on => :member
+    resources :votes, only: [] do
+	    post :up, :down, :on => :member
+	  end	
+  end
  
  resources :users
  resources :sessions, only: [:new, :create, :destroy]

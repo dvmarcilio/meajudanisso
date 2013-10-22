@@ -1,5 +1,4 @@
 require 'questions'
-require 'questions/votes'
 
 class QuestionsController < ApplicationController
 	

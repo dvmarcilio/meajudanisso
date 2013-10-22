@@ -20,12 +20,8 @@ FactoryGirl.define do
       tags 'Ruby'
     end
     
-    trait :with_ten_votes do
-      votos 10
-    end
-    
     factory :question_with_id, traits: [:with_id]
-    factory :full_question, traits: [:with_html_content, :with_three_string_tags, :with_ten_votes]
+    factory :full_question, traits: [:with_html_content, :with_three_string_tags]
   end
   
     factory :answer do
