@@ -272,12 +272,12 @@ Então(/^eu devo ver a resposta com um voto a (mais|menos)$/) do |factor|
   check_answer_votes(expected_votes)
 end
 
-Dado(/^que eu já votei positivo na resposta$/) do
-  step('eu voto positivo na resposta')
+Dado(/^que eu já votei (positivo|negativo) na resposta$/) do |fator|
+  vote_by_factor(fator)
 end
 
-Quando(/^eu voto novamente positivo na resposta$/) do
-  step('eu voto positivo na resposta')
+Quando(/^eu voto novamente (positivo|negativo) na resposta$/) do |fator|
+  vote_by_factor(fator)
 end
 
 Então(/^eu devo uma mensagem que eu já votei na resposta$/) do
@@ -295,7 +295,6 @@ Então(/^eu devo ver a resposta com o mesmo número de votos$/) do
 end
 
 private
-
   def current_answer_div
     "div#answer_#{@resposta.id}"
   end
@@ -322,6 +321,14 @@ private
   
   def edit_link_id(tipo)
     tipo == ("pergunta") ? "editar_pergunta" : "editar_resposta_#{@resposta.id}"
+  end
+  
+  def vote_by_factor(fator)
+    if fator.eql?('positivo')
+      step('eu voto positivo na resposta')
+    else
+      step 'eu voto negativo na resposta'
+    end
   end
 
 
