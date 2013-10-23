@@ -4,9 +4,12 @@ ruby '1.9.3'
 
 gem 'rails', '3.2.14'
 gem 'bootstrap-sass'
-gem 'bcrypt-ruby','3.0.1'
+gem 'devise'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+
+gem 'omniauth'
+gem 'omniauth-facebook','1.4.0'
 
 gem 'sqlite3'
 
@@ -32,7 +35,7 @@ end
 group :development, :test do
 	gem 'database_cleaner', '1.0.1'
 	gem 'rspec-rails'
-	gem 'cucumber-rails', :require => false
+	gem 'cucumber-rails',  :require => false
 	gem 'factory_girl_rails'
 	gem "shoulda-matchers"
 	gem 'annotate'

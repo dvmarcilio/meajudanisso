@@ -1,46 +1,39 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id         :integer          not null, primary key
-#  nome       :string(255)
-#  email      :string(255)
-#  senha      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 class User < ActiveRecord::Base
-  attr_accessible :email, :nome, :password, :password_confirmation
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:facebook]
+         #:controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  has_secure_password
-  
-  before_save { self.email = email.downcase }
-  before_create :create_remember_token
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :uid, :provider
+  # attr_accessible :title, :body
+  validates_presence_of :name
 
-  validates :nome, presence: true, length: { maximum: 50 }
+  validates_uniqueness_of :email, :case_sensitive => false
 
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-
-  validates :email, presence: true, 
-  			format: { with: VALID_EMAIL_REGEX }, 
-  			uniqueness: { case_sensitive: false }
-
-  validates :password, length: { minimum: 6 }
-  validates :password_confirmation, presence: true
-  
-  def User.new_remember_token
-    SecureRandom.urlsafe_base64
-  end
-
-  def User.encrypt(token)
-    Digest::SHA1.hexdigest(token.to_s)
-  end
-
-  private
-
-    def create_remember_token
-      self.remember_token = User.encrypt(User.new_remember_token)
-    end
-
+def system_user?
+  provider == nil
 end
+
+def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    if user
+      return user
+    else
+      registered_user = User.where(:email => auth.info.email).first
+      if registered_user
+        return registered_user
+      else
+        user = User.create(name:auth.extra.raw_info.name,
+                            provider:auth.provider,
+                            uid:auth.uid,
+                            email:auth.info.email,
+                            password:Devise.friendly_token[0,20],
+                          )
+      end 
+    end
+  end
+end
+

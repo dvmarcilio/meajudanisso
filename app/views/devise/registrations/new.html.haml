@@ -1,0 +1,15 @@
+%h1 Cadastrar
+.row
+  .span6.offset3
+    = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+      = devise_error_messages!
+      = f.label :nome 
+      = f.text_field :name 
+      = f.label :email
+      = f.email_field :email
+      = f.label :senha 
+      = f.password_field :password
+      = f.label :confirmar_senha
+      = f.password_field :password_confirmation
+      = f.submit "Cadastrar" 
+    = render "devise/shared/links"

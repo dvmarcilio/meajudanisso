@@ -1,22 +1,19 @@
 MeAjudaNisso::Application.routes.draw do
+authenticated :user do
+	'current_user'
+end
+  root :to => 'home#index'
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  resources :users
 
  resources :questions do
- 	collection do
-	 	get :most_voted
+	collection do
+		get :most_voted
 	end
-	
 	resources :answers
-	
 	resource :votes, controller: "questions/votes", only: [] do
 	  put :positivo, :negativo, :on => :member
 	end
  end
- resources :users
- resources :sessions, only: [:new, :create, :destroy]
-
- root to: 'pages#home'
- match '/cadastrar',  to: 'users#new'
- match '/login',  to: 'sessions#new',         via: 'get'
- match '/logout', to: 'sessions#destroy',     via: 'delete'
- 
 end

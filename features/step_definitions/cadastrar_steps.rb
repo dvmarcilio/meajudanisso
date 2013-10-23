@@ -7,11 +7,11 @@ Dado(/^que estou na página principal$/) do
 end
 
 Então(/^eu devo estar na página de cadastro$/) do
-	current_path.should eq(new_user_path)
+	current_path.should eq(new_user_registration_path)
 end
 
 Dado(/^que estou na página de cadastro$/) do
-  visit new_user_path
+  visit new_user_registration_path
 end
 
 Quando(/^eu preencho o formulario com dados corretos$/) do
@@ -35,12 +35,4 @@ def attrs_to_fill_user
 		attrs_hash.update(attr_name => value) 
 	end
 	return attrs_hash
-end
-
-Quando(/^eu preencho o formulario com dados incorretos$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Então(/^ver as mensagens de erros$/) do
-  pending # express the regexp above with the code you wish you had
 end
