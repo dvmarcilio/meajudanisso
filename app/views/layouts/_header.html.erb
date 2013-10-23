@@ -14,7 +14,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li><%= link_to "Perfil", current_user %></li>
-                <% if current_user.system_user? %>
+                <% if current_user.local_system_user? %>
                   <li><%= link_to "Atualizar Peril", edit_user_registration_path %></li>
                 <% end %>
                 <li class="divider"></li>

@@ -11,20 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131022012936) do
+ActiveRecord::Schema.define(:version => 20131023200038) do
 
   create_table "answers", :force => true do |t|
     t.text    "conteudo"
     t.integer "question_id"
-  end
-
-  create_table "authentications", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "token"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "punches", :force => true do |t|
@@ -42,7 +33,6 @@ ActiveRecord::Schema.define(:version => 20131022012936) do
   create_table "questions", :force => true do |t|
     t.string   "titulo"
     t.text     "conteudo"
-    t.integer  "votos"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "tags"
@@ -59,9 +49,9 @@ ActiveRecord::Schema.define(:version => 20131022012936) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "name"
     t.string   "provider"
     t.string   "uid"
+    t.string   "name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
@@ -80,4 +70,5 @@ ActiveRecord::Schema.define(:version => 20131022012936) do
   add_index "votes", ["voteable_id", "voteable_type"], :name => "index_votes_on_voteable_id_and_voteable_type"
   add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], :name => "fk_one_vote_per_user_per_entity", :unique => true
   add_index "votes", ["voter_id", "voter_type"], :name => "index_votes_on_voter_id_and_voter_type"
+
 end

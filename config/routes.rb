@@ -15,8 +15,6 @@ MeAjudaNisso::Application.routes.draw do
       post :vote_up, :vote_down, :on => :member
     end
   end
-  
-  resources :users	
 
   authenticated :user do
 	'current_user'
@@ -24,5 +22,7 @@ MeAjudaNisso::Application.routes.draw do
   root :to => 'home#index'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+    
+  resources :users	
   
 end
