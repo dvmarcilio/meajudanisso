@@ -48,4 +48,17 @@ RSpec.configure do |config|
   config.after(:each) do
     ::Sunspot.session = ::Sunspot.session.original_session
   end
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+  
 end

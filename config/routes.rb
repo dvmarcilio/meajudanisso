@@ -16,12 +16,13 @@ MeAjudaNisso::Application.routes.draw do
     end
   end
   
-  resources :users
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :users	
 
-  root to: 'pages#home'
-  match '/cadastrar',  to: 'users#new'
-  match '/login',  to: 'sessions#new',         via: 'get'
-  match '/logout', to: 'sessions#destroy',     via: 'delete'
- 
+  authenticated :user do
+	'current_user'
+  end
+  root :to => 'home#index'
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  
 end

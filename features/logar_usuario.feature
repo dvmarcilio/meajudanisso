@@ -12,13 +12,6 @@ Funcionalidade: Logar no sistema
 	Cenário: Login realizado com sucesso
 		Dado que estou na página de login
 		Quando eu preencho o formulario de login com dados corretos
-		E clico no botão "Entrar"
-		Então devo estar na página profile
-		E ver a mensagem "Bem Vindo!"
-
-	Cenário: Login inválido
-		Dado que estou na página de login
-		Quando eu preencho o formulario com dados incorretos
-		E clico no botão "Entrar"
-		Então eu devo estar na página de login
-		E ver as mensagens de erros
+		E clico no botão "Sign in"
+		Então devo estar na página principal
+		E ver a mensagem "Autenticado com sucesso."
