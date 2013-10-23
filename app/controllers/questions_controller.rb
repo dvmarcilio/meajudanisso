@@ -1,3 +1,4 @@
+#encoding: utf-8
 require 'questions'
 
 class QuestionsController < ApplicationController
@@ -35,6 +36,28 @@ class QuestionsController < ApplicationController
 		@pergunta = Question.find(pergunta_id)
 		@pergunta.punch(request)
 	end
+	
+	def vote_up
+    @pergunta = Question.find_by_id(pergunta_id)
+    begin
+      current_user.vote_for(@pergunta)
+      redirect_to question_url(@pergunta), notice: "Voto positivo confirmado" 
+    rescue ActiveRecord::RecordInvalid
+      flash[:warning] = "Você já votou nessa pergunta"
+      redirect_to question_url(@pergunta)
+    end
+  end
+  
+  def vote_down
+    @pergunta = Question.find_by_id(pergunta_id)
+    begin
+      current_user.vote_against(@pergunta)
+      redirect_to question_url(@pergunta), notice: "Voto negativo confirmado"
+    rescue ActiveRecord::RecordInvalid
+      flash[:warning] = "Você já votou nessa pergunta"
+      redirect_to question_url(@pergunta)
+    end
+  end
 	
 	private
 		def pergunta_id

@@ -1,8 +1,8 @@
 %h1.pergunta#titulo #{@pergunta.titulo}
 
 #votar_pergunta
-  = button_to 'Votar +', up_question_vote_path(@pergunta)
-  = button_to 'Votar -', down_question_vote_path(@pergunta)
+  = button_to 'Votar +', vote_up_question_path(@pergunta)
+  = button_to 'Votar -', vote_down_question_path(@pergunta)
 
 %section.pergunta 
   .pergunta#conteudo!= @pergunta.conteudo
@@ -21,9 +21,9 @@
       .answer#conteudo!= answer.conteudo
       .answer#votos= "Votos: #{answer.plusminus}"
       %br
-      = link_to 'editar', edit_answer_path(answer.id), id: "editar_resposta_#{answer.id}"
-      = button_to 'UpVote', up_answer_vote_path(answer), id: "upvote_answer_#{answer.id}"
-      = button_to 'DownVote', down_answer_vote_path(answer), id: "downvote_answer_#{answer.id}"
+      = link_to 'editar', edit_answer_path(answer), id: "editar_resposta_#{answer.id}"
+      = button_to 'UpVote', vote_up_answer_path(answer), id: "upvote_answer_#{answer.id}"
+      = button_to 'DownVote', vote_down_answer_path(answer), id: "downvote_answer_#{answer.id}"
     %hr
   
 %section.post_answer

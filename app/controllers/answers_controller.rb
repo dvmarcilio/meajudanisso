@@ -40,7 +40,11 @@ class AnswersController < ApplicationController
   
   private
     def question
-      Question.find_by_id(params[:question_id])
+      if params[:question_id]
+        Question.find_by_id(params[:question_id])
+      else
+        @answer.question if @answer
+      end
     end
     
     def answer_id

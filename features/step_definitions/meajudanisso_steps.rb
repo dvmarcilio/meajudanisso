@@ -39,14 +39,11 @@ end
 
 Dado(/^que uma pergunta existe$/) do
   @pergunta = Question.create!(titulo: "Como escrever melhores cenarios no Cucumber")
+  @votos = @pergunta.plusminus
 end
 
 Dado(/^que estou na página de visualização dessa pergunta$/) do
   visit question_path(@pergunta)
-end
-
-Então(/^eu devo ver uma mensagem de confirmação$/) do
-  page.should have_content("Voto confirmado!")
 end
 
 Então(/^eu devo ver a pergunta com um voto a mais$/) do

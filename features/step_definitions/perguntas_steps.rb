@@ -262,7 +262,7 @@ Quando(/^eu voto (positivo|negativo) na resposta$/) do |tipo|
   end
 end
 
-Então(/^eu devo ver uma mensagem de confirmação do voto (positivo|negativo) na resposta$/) do |tipo|
+Então(/^eu devo ver uma mensagem de confirmação do voto (positivo|negativo) na (?:pergunta|resposta)$/) do |tipo|
   msg = "Voto #{tipo} confirmado"
   page_should_have_notice_msg(msg)
 end
