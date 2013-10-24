@@ -17,6 +17,8 @@ class Question < ActiveRecord::Base
   
   has_many :answers
   
+  belongs_to :user
+  
   acts_as_punchable
   acts_as_voteable
 

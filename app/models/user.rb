@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, :case_sensitive => false
   
   acts_as_voter
+  
+  has_many :questions
+  has_many :answers
 
   def local_system_user?
     provider == nil

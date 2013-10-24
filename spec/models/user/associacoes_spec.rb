@@ -1,11 +1,10 @@
 require 'spec_helper'
-require 'question'
 
 describe "Associacoes" do
-  
-  describe Question do
+
+  describe User do
+    it { should have_many(:questions) }
     it { should have_many(:answers) }
-    it { should belong_to(:user) }
   end
-  
-end
+
+end 
