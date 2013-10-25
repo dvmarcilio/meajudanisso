@@ -12,5 +12,5 @@ Funcionalidade: Negar acessos não autorizados
   Cenário: Responder uma pergunta
     Dado que eu estou na página de visualização de uma pergunta
     Então eu devo ver "Sua Resposta"
-    E ver uma mensagem que eu devo me registrar ou fazer login para responder uma pergunta
     E não ver um campo de texto para responder
+    E ver uma mensagem que eu devo me registrar ou fazer login para responder uma pergunta
