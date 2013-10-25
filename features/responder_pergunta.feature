@@ -4,6 +4,9 @@ Funcionalidade: Responder uma pergunta
   Para que eu possa solucionar uma dúvida
   Eu quero poder responder uma pergunta
   
+  Contexto:
+	  Dado que eu fiz login no sistema
+  
   Cenário: Visualizar o campo de texto para a resposta
     Dado que eu estou na página de visualização de uma pergunta
     Então eu devo ver "Sua Resposta"
