@@ -8,3 +8,9 @@ Funcionalidade: Negar acessos não autorizados
     Quando eu clico no link "Perguntar"
     Então eu devo estar na página de login
     E ver que eu devo me registrar ou fazer login para continuar
+    
+  Cenário: Responder uma pergunta
+    Dado que eu estou na página de visualização de uma pergunta
+    Então eu não devo ver "Sua Resposta"
+    E ver uma mensagem que eu devo me registrar ou fazer login para responder uma pergunta
+    
