@@ -4,6 +4,9 @@ Funcionalidade: Fazer uma pergunta
   Para que eu possa fazer uma pergunta
   Eu quero poder escrever minha pergunta
   
+  Contexto:
+    Dado que eu fiz login no sistema
+  
   Cenário: Criar uma pergunta válida
     Dado que eu estou na página de fazer uma pergunta
     Quando eu preencho os dados da pergunta corretamente
