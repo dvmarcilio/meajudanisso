@@ -28,8 +28,11 @@
   
 %section.post_answer
   %h2= label :answer, :conteudo, 'Sua Resposta'
-  = form_tag question_answers_path(@pergunta) do
-    .post_answer#text_area= text_area :answer, :conteudo, :class => "tinymce"
-    = tinymce
-    %br
-    = submit_tag 'Responder'
+  - if user_signed_in?
+    = form_tag question_answers_path(@pergunta) do
+      .post_answer#text_area= text_area :answer, :conteudo, :class => "tinymce"
+      = tinymce
+      %br
+      = submit_tag 'Responder'
+  - else
+    %strong Você precisa registrar-se ou fazer login para responder uma pergunta.

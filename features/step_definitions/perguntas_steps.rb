@@ -106,7 +106,11 @@ Então(/^eu devo ver "Sua Resposta"$/) do
 end
 
 Então(/^ver um campo de texto para responder$/) do
-  page.should have_css(".post_answer#text_area")
+  page.should have_css(answer_text_field_id)
+end
+
+Então(/^não ver um campo de texto para responder$/) do
+  page.should_not have_css(answer_text_field_id)
 end
 
 Então(/^ver um botão "(.*?)"$/) do |botao|
@@ -329,6 +333,10 @@ private
     else
       step 'eu voto negativo na resposta'
     end
+  end
+  
+  def answer_text_field_id
+    ".post_answer#text_area"
   end
 
 

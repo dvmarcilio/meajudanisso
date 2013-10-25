@@ -35,6 +35,10 @@ Então(/^ver que eu devo me registrar ou fazer login para continuar$/) do
   page_should_have_alert_msg('Você precisa registrar-se ou fazer login para continuar.')
 end
 
+Então(/^ver uma mensagem que eu devo me registrar ou fazer login para responder uma pergunta$/) do
+  page.should have_text('Você precisa registrar-se ou fazer login para responder uma pergunta.')
+end
+
 def page_should_have_alert_msg(msg)
   page.should have_css("#alert-message", text: msg)
 end
