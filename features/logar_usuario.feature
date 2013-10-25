@@ -1,7 +1,7 @@
 #language: pt
 Funcionalidade: Logar no sistema
-	Como usuário cadastrado
-	Para que eu possa pergutar e responder
+	Como um usuário cadastrado
+	Para que eu possa perguntar e responder
 	Eu devo efetuar login
 
 	Cenário: Acessar a página de login

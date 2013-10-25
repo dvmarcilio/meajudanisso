@@ -1,6 +1,6 @@
 #language: pt
-Funcionalidade: Logar no sistema
-	Como usuário cadastrado
+Funcionalidade: Logout no sistema
+	Como um usuário cadastrado
 	Para que eu possa sair do sistema
 	Eu devo efetuar logout
 
