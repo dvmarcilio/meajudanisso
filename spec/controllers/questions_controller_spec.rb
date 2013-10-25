@@ -29,16 +29,29 @@ describe QuestionsController do
 		end
 	end
  
-  describe "GET /new" do
-    before(:each) { get :new } 
+  describe "GET /new" do 
+    context "usuario logado" do
     
-    it "resposta HTTP sucesso (200)" do
-      expect(response).to be_success
-    end
-    
-    it "carrega a pagina de nova pergunta" do
-      expect(response).to render_template('new')
+      before(:each) do
+        test_sign_in(FactoryGirl.create(:user))
+        get :new
+      end 
+      
+      it "resposta HTTP sucesso (200)" do
+        expect(response.status).to eq(200)
+      end
+      
+      it "carrega a pagina de nova pergunta" do
+        expect(response).to render_template('new')
+      end
     end 
+    
+    context "usuario nao logado" do
+      it "resposta HTTP redirect (302)" do
+        get :new
+        expect(response.status).to eq(302) 
+      end
+    end
   end
   
   describe "POST /create" do

@@ -27,6 +27,18 @@ Quando(/^eu faço login com esse usuário$/) do
   step('clico no botão "Sign in"')
 end
 
+Dado(/^que eu não efetuei login no sistema$/) do
+  visit root_path
+end
+
+Então(/^ver que eu devo me registrar ou fazer login para continuar$/) do
+  page_should_have_alert_msg('Você precisa registrar-se ou fazer login para continuar.')
+end
+
+def page_should_have_alert_msg(msg)
+  page.should have_css("#alert-message", text: msg)
+end
+
 private
   def fill_login_form(user)
     fill_in("Email", with: user.email)
