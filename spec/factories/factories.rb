@@ -1,9 +1,19 @@
 # encoding: utf-8
 FactoryGirl.define do
-
+  
+  factory :user do
+    name 'Test User'
+    email 'example@example.com'
+    password 'changeme'
+    password_confirmation 'changeme'
+    # required if the Devise Confirmable module is used
+    # confirmed_at Time.now
+  end
+  
   factory :question do
     titulo 'Pergunta Teste'
-  
+    user
+    
     trait :with_id do
       id 5
     end
