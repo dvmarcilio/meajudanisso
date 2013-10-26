@@ -2,8 +2,7 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook]
-
+         :omniauthable, :omniauth_providers => [:facebook,:google_oauth2]
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :uid, :provider
   validates_presence_of :name
 
@@ -15,7 +14,7 @@ class User < ActiveRecord::Base
     provider == nil
   end
 
-def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     if user
       return user
@@ -32,6 +31,18 @@ def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
                           )
       end 
     end
+  end
+def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
+    data = access_token.info
+    user = User.where(:email => data["email"]).first
+
+    unless user
+        user = User.create(name: data["name"],
+             email: data["email"],
+             password: Devise.friendly_token[0,20]
+            )
+    end
+    user
   end
 end
 
