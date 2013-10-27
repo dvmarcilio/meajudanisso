@@ -55,25 +55,36 @@ describe QuestionsController do
   end
   
   describe "POST /create" do
-      it "redireciona no sucesso" do
-        post :create
-        expect(response).to be_redirect
-      end
-      
-      it "redireciona para a pagina de visualizacao da pergunta criada" do
-        post :create, question: FactoryGirl.attributes_for(:question)
-        response.should redirect_to question_url(Question.last)
-      end
-      
-      it "salva a nova pergunta no banco de dados" do
-        lambda do
+  
+      context "valores validos" do
+        let(:user) { FactoryGirl.create(:user) }
+        before(:each) { test_sign_in(user) }
+        it "redireciona no sucesso" do
           post :create
-        end.should change(Question, :count).by(1)
-      end
-      
-      it "adiciona uma mensagem no flash" do
-        post :create
-        expect(request.flash[:notice]).to_not be_empty
+          expect(response).to be_redirect
+        end
+        
+        it "redireciona para a pagina de visualizacao da pergunta criada" do
+          post :create, question: FactoryGirl.attributes_for(:question)
+          response.should redirect_to question_url(Question.last)
+        end
+        
+        it "salva a nova pergunta no banco de dados" do
+          lambda do
+            post :create
+          end.should change(Question, :count).by(1)
+        end
+        
+        it "adiciona uma mensagem no flash" do
+          post :create
+          expect(request.flash[:notice]).to_not be_empty
+        end
+        
+        it "atribui o usuario" do
+          post :create, question: FactoryGirl.attributes_for(:question)
+          pergunta = Question.last
+          expect(pergunta.user).to eq(user)
+        end
       end
   end
   

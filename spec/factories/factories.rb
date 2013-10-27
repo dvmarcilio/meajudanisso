@@ -12,7 +12,6 @@ FactoryGirl.define do
   
   factory :question do
     titulo 'Pergunta Teste'
-    user
     
     trait :with_id do
       id 5
@@ -30,14 +29,29 @@ FactoryGirl.define do
       tags 'Ruby'
     end
     
+    trait :with_user do
+      user
+    end
+    
+    trait :with_user_built do
+      user strategy: :build
+    end
+    
     factory :question_with_id, traits: [:with_id]
     factory :full_question, traits: [:with_html_content, :with_three_string_tags]
+    factory :question_with_user, traits: [:with_html_content, :with_three_string_tags, :with_user]
+    factory :question_with_user_built, traits: [:with_html_content, :with_three_string_tags, :with_user_built]
   end
   
-    factory :answer do
-      conteudo 'Resposta teste simples'
-      question
+  factory :answer do
+    conteudo 'Resposta teste simples'
+    
+    trait :with_question do
+      association :question, factory: :question_with_user
     end
+    
+    factory :answer_with_question, traits: [:with_question]
+  end
   
   trait :with_html_content do
     conteudo %Q{<p>Testando salvar <strong>HTML</strong>.</p> <ol> <li>um</li> <li>dois</li> <li>tres</li> </ol> }

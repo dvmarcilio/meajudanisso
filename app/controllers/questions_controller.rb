@@ -9,7 +9,9 @@ class QuestionsController < ApplicationController
 	end
 	
 	def create
-	  @pergunta = Question.create!(params[:question])
+	  @pergunta = Question.new(params[:question])
+	  @pergunta.user = current_user
+	  @pergunta.save
 	  redirect_to question_url(@pergunta.id), notice: "Pergunta criada!"	  
 	end
 	

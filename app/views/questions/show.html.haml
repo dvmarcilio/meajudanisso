@@ -13,6 +13,9 @@
   .pergunta#created_at= "Criada em: #{@pergunta.created_at}"
   .pergunta#updated_at= @pergunta.updated_at ? "Editada em: #{@pergunta.updated_at}" : ''
   .pergunta#visualizacoes= "Visualizações: #{@pergunta.hits}"
+  .nested_user#question_user
+    %h5 Perguntado por
+    #username= link_to "#{@pergunta.user.name}", user_path(@pergunta.user)
   
 %section.respostas
   %h2#qtde_respostas= @pergunta.answers.count > 0 ? pluralize(@pergunta.answers.count, 'Resposta', 'Respostas') : "Essa mensagem não foi respondida"

@@ -6,8 +6,7 @@ Funcionalidade: Votar em uma pergunta
 	
 	Contexto:
 	  Dado que eu fiz login no sistema
-    E que uma pergunta existe
-		E que estou na página de visualização dessa pergunta
+		E que eu estou na página de visualização de uma pergunta
 	
 	Cenário: Votar positivamente na pergunta
 		Quando eu voto positivo na pergunta

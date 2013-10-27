@@ -46,20 +46,12 @@ Dado(/^que estou na página de visualização dessa pergunta$/) do
   visit question_path(@pergunta)
 end
 
-Então(/^eu devo ver a pergunta com um voto a mais$/) do
-  page.should have_css(".pergunta#votos", text: @votos+1)
-end
-
 Quando(/^eu voto positivo na pergunta$/) do
   click_on "Votar +"
 end
 
 Quando(/^eu voto negativo na pergunta$/) do
   click_on "Votar -"
-end
-
-Então(/^eu devo ver a pergunta com um voto a menos$/) do
-  page.should have_css(".pergunta#votos", text: @votos-1)
 end
 
 Quando(/^(?:eu )?clico no botão "(.*?)"$/) do |botao|

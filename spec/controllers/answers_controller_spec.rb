@@ -1,10 +1,13 @@
 require 'spec_helper'
 
 describe AnswersController do
+
+  let(:user) { FactoryGirl.create(:user) }
+  let(:question) { FactoryGirl.create(:question, user: user) }
+  let(:answer) { FactoryGirl.create(:answer, question: question) }
   
   describe "POST /questions/:question_id/answers/create" do  
      
-    let(:question) { FactoryGirl.create(:question) }
     let(:post_create) { post :create, question_id: question.id }
     
     it "salva a resposta no banco de dados" do
@@ -26,7 +29,6 @@ describe AnswersController do
   
   describe "GET /questions/:question_id/answers/:id/edit" do
     it "deve expor @answer a partir do id passado" do
-      answer = FactoryGirl.create(:answer)
       get :edit, question_id: answer.question.id, id: answer.id
       expect(assigns(:answer)).to eq(answer) 
     end
@@ -36,12 +38,11 @@ describe AnswersController do
   
     describe "request/response" do
       before(:each) do
-        @answer = FactoryGirl.create(:answer)
-        put :update, id: @answer.id, question_id: @answer.question.id
+        put :update, id: answer.id, question_id: answer.question.id
       end
   
       it "redireciona para a pagina de visualizacao da pergunta" do
-        expect(response).to redirect_to question_url(@answer.question.id)
+        expect(response).to redirect_to question_url(answer.question.id)
       end
       
       it "adiciona uma mensagem :notice no flash" do
@@ -50,7 +51,6 @@ describe AnswersController do
     end 
     
     it "atualiza os atributos de resposta" do
-      answer = FactoryGirl.create(:answer)
       attrs = { :conteudo => "Novo Conteudo" }
       put :update, answer: attrs, id: answer.id, question_id: answer.question.id
       answer.reload
@@ -61,14 +61,13 @@ describe AnswersController do
   describe "POST /questions/:question_id/answer/:id/vote_up" do
    
     before(:each) do
-      @user = test_sign_in(FactoryGirl.create(:user))
-      @answer = FactoryGirl.create(:answer)
-      post :vote_up, id: @answer.id, question_id: @answer.question.id  
+      test_sign_in(user)
+      post :vote_up, id: answer.id, question_id: answer.question.id  
     end
     
     context "voto valido" do      
       it "redireciona para a pagina de visualizacao da pergunta" do
-        expect(response).to redirect_to question_url(@answer.question.id)
+        expect(response).to redirect_to question_url(answer.question.id)
       end
         
       it "adiciona uma mensagem :notice no flash" do
@@ -77,14 +76,15 @@ describe AnswersController do
       
       it "aumenta em um o voto da resposta" do
         original_votes = FactoryGirl.build(:answer).votes_count
-        expect(@answer.plusminus).to eq(original_votes + 1)
+        expect(answer.plusminus).to eq(original_votes + 1)
       end
     end
     
     context "voto invalido (votando novamente)" do
+      
+      let(:expected_votes) { answer.plusminus }
       before(:each) do
-        post :vote_up, id: @answer.id, question_id: @answer.question.id
-        @expected_votes = @answer.plusminus
+        post :vote_up, id: answer.id, question_id: answer.question.id
       end   
       
       it "adiciona uma mensagem :warning no flash" do 
@@ -92,7 +92,7 @@ describe AnswersController do
       end
       
       it "nao altera a quantidade de votos" do
-        expect(@answer.plusminus).to eq(@expected_votes)
+        expect(answer.plusminus).to eq(expected_votes)
       end       
     end
   end
@@ -100,19 +100,18 @@ describe AnswersController do
   describe "POST /questions/:question_id/answer/:id/vote_down" do
     
     before(:each) do
-      @user = test_sign_in(FactoryGirl.create(:user))
-      @answer = FactoryGirl.create(:answer)
-      post :vote_down, id: @answer.id, question_id: @answer.question.id  
+      test_sign_in(user)
+      post :vote_down, id: answer.id, question_id: answer.question.id  
     end
     
     context "voto valido" do
       it "redireciona para a pagina de visualizacao da pergunta" do
-        expect(response).to redirect_to question_url(@answer.question.id)
+        expect(response).to redirect_to question_url(answer.question.id)
       end
       
       it "diminui em um o voto da resposta" do
         original_votes = FactoryGirl.build(:answer).votes_count
-        expect(@answer.plusminus).to eq(original_votes -1)
+        expect(answer.plusminus).to eq(original_votes -1)
       end
       
       it "adiciona uma mensagem :notice no flash" do
@@ -121,9 +120,9 @@ describe AnswersController do
     end
     
     context "voto invalido" do
+      let(:expected_votes) { answer.plusminus }
       before(:each) do
-        post :vote_down, id: @answer.id, question_id: @answer.question.id
-        @expected_votes = @answer.plusminus
+        post :vote_down, id: answer.id, question_id: answer.question.id
       end   
       
       it "adiciona uma mensagem :warning no flash" do 
@@ -131,7 +130,7 @@ describe AnswersController do
       end
       
       it "nao altera a quantidade de votos" do
-        expect(@answer.plusminus).to eq(@expected_votes)
+        expect(answer.plusminus).to eq(expected_votes)
       end  
     end
   end

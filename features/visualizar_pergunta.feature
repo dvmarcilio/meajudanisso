@@ -7,7 +7,7 @@ Funcionalidade: Visualizar pergunta
   Cenário: Visualizar os dados da pergunta
     Dado que eu estou na página de visualização de uma pergunta
     Então eu devo ver os dados dessa pergunta
- 
+    
   Cenário: Mensagem diferente para pergunta sem resposta
     Uma pergunta sem resposta deve mostrar uma mensagem diferente.
     
@@ -27,9 +27,8 @@ Funcionalidade: Visualizar pergunta
       | 5           |
       | 10          |
       | 15          | 
-     
+      
   Cenário: Contagem de views da pergunta
     Dado que uma pergunta com visualizações existe
     Quando eu visito a página de visualização dessa pergunta
     Então eu devo ver a pergunta com uma visualização a mais
-

@@ -52,8 +52,23 @@ Então(/^visualizar as tags da pergunta$/) do
 end
 
 Dado(/^que eu estou na página de visualização de uma pergunta$/) do
-  @pergunta = FactoryGirl.create(:full_question)
+  @pergunta = create_question_with_user
   step "que eu estou na página de visualização dessa pergunta"
+end
+
+def create_question_with_user
+  pergunta = Question.new(FactoryGirl.attributes_for(:full_question))
+  pergunta.user = retrieve_user
+  pergunta.save
+  return pergunta
+end
+
+def retrieve_user
+  if User.any?
+    User.first
+  else
+    user = FactoryGirl.create(:user)
+  end
 end
 
 Então(/^eu devo ver os dados dessa pergunta$/) do
@@ -63,6 +78,7 @@ Então(/^eu devo ver os dados dessa pergunta$/) do
   step('as tags dessa pergunta')
   step('quando ela foi criada')
   step('quando ela foi editada')
+  step('o usuário que fez a pergunta')
 end
 
 Então(/^eu devo ver o título dessa pergunta$/) do
@@ -101,6 +117,14 @@ Então(/^quando ela foi editada$/) do
   end
 end
 
+Então(/^o usuário que fez a pergunta$/) do
+  within(:css, "section.pergunta") do
+    within("div#question_user") do
+      page.should have_css("div#username", text: @pergunta.user.name)
+    end
+  end
+end
+
 Então(/^eu devo ver "Sua Resposta"$/) do
   page.should have_css(".post_answer", text: "Sua Resposta")
 end
@@ -129,10 +153,8 @@ Então(/^ver minha resposta$/) do
 end
 
 Dado(/^que uma pergunta possui uma resposta com conteúdo HTML$/) do
-  @pergunta = FactoryGirl.create(:question)
-  @resposta = FactoryGirl.create(:answer, :with_html_content)
-  @pergunta.answers << @resposta
-  @pergunta.save!
+  @pergunta = create_question_with_user
+  @resposta = FactoryGirl.create(:answer, :with_html_content, question: @pergunta)
 end
 
 Então(/^eu devo ver a resposta sem as tags HTML$/) do
@@ -144,7 +166,7 @@ Dado(/^que eu estou na página de visualização dessa pergunta$/) do
 end
 
 Dado(/^que uma pergunta possui (\d+) respostas$/) do |quantidade|
-  @pergunta = FactoryGirl.create(:full_question)
+  @pergunta = create_question_with_user
   Integer(quantidade).times { @pergunta.answers.create }
 end
 
@@ -176,7 +198,7 @@ Então(/^os dados da pergunta estarem preenchidos$/) do
 end
 
 Dado(/^que eu estou na página de edição de uma pergunta$/) do
-  @pergunta = FactoryGirl.create(:full_question)
+  @pergunta = create_question_with_user
   visit edit_question_path(@pergunta)
 end
 
@@ -206,8 +228,8 @@ Dado(/^que uma pergunta com uma resposta existe$/) do
 end
 
 def create_answer_question
-  @resposta = FactoryGirl.create(:answer)
-  @pergunta = @resposta.question
+  @pergunta = create_question_with_user
+  @resposta = FactoryGirl.create(:answer, question: @pergunta)
 end
 
 Então(/^eu devo estar na página de edição da resposta$/) do
@@ -241,7 +263,7 @@ Então(/^a resposta atualizada$/) do
 end
 
 Dado(/^que uma pergunta com visualizações existe$/) do
-  @pergunta = FactoryGirl.create(:full_question)
+  @pergunta = create_question_with_user
   @visualizacoes = @pergunta.hits
 end
 
@@ -271,8 +293,13 @@ Então(/^eu devo ver uma mensagem de confirmação do voto (positivo|negativo) n
   page_should_have_notice_msg(msg)
 end
 
+Então(/^eu devo ver a pergunta com um voto a (mais|menos)$/) do |factor|
+  expected_votes = expected_votes(:question, factor)
+  check_question_votes(expected_votes)
+end
+
 Então(/^eu devo ver a resposta com um voto a (mais|menos)$/) do |factor|
-  expected_votes = expected_votes(factor)
+  expected_votes = expected_votes(:answer, factor)
   check_answer_votes(expected_votes)
 end
 
@@ -309,8 +336,12 @@ private
     end
   end
   
-  def expected_votes(factor)
-    FactoryGirl.build(:answer).plusminus + factor(factor)
+  def check_question_votes(expected_votes)
+    page.should have_css(".pergunta#votos", text: expected_votes)
+  end
+  
+  def expected_votes(type, factor)
+    FactoryGirl.build(type).plusminus + factor(factor)
   end
   
   def factor(factor)

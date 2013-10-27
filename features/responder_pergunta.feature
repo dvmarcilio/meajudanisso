@@ -20,7 +20,7 @@ Funcionalidade: Responder uma pergunta
     Então eu devo estar na página de visualização dessa pergunta
     E ver minha resposta
     
-  Cenário: Visualizar a pergunta sem as tags HTMl
+  Cenário: Visualizar a resposta sem as tags HTML
     Dado que uma pergunta possui uma resposta com conteúdo HTML 
     E que eu estou na página de visualização dessa pergunta
     Então eu devo ver a resposta sem as tags HTML
