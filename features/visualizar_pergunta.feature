@@ -5,9 +5,17 @@ Funcionalidade: Visualizar pergunta
   Eu quero visualizar a pergunta
   
   Cenário: Visualizar os dados da pergunta
+    título
+    conteúdo
+    votos
+    tags
+    data de criação
+    data de edição, se houver
+    usuário que perguntou
+      
     Dado que eu estou na página de visualização de uma pergunta
     Então eu devo ver os dados dessa pergunta
-    
+        
   Cenário: Mensagem diferente para pergunta sem resposta
     Uma pergunta sem resposta deve mostrar uma mensagem diferente.
     
