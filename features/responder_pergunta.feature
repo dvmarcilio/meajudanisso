@@ -14,6 +14,11 @@ Funcionalidade: Responder uma pergunta
     E ver um botão "Responder"
   
   Cenário: Criar uma resposta válida
+    Ver minha resposta consiste em ver:
+      Conteúdo da resposta
+      Votos da resposta, ZERO nesse caso pois a resposta foi recém criada
+      Usuário, o meu usuário pois eu que acabei de responder
+      
     Dado que eu estou na página de visualização de uma pergunta
     Quando eu preencho minha resposta no campo de texto
     E clico no botão "Responder"

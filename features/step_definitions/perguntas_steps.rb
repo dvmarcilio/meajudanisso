@@ -142,14 +142,30 @@ Então(/^ver um botão "(.*?)"$/) do |botao|
 end
 
 Quando(/^eu preencho minha resposta no campo de texto$/) do
-  @resposta = Answer.new(conteudo: 'Conteudo Simples')
-  fill_in('answer_conteudo', with: @resposta.conteudo)
+  fill_in('answer_conteudo', with: 'Conteudo Simples')
 end
 
 Então(/^ver minha resposta$/) do
+  @resposta = Answer.last #não sei se isso aqui é recomendável, mas funfa
   within(:css, "section.respostas") do
-    page.should have_text(strip_html_tags(@resposta.conteudo))
+    within(:css, current_answer_div) do
+      step 'ver o conteúdo da minha resposta'
+      step 'ver que eu postei a resposta'
+      step 'ver os votos da minha resposta'
+    end
   end
+end
+
+Então(/^ver o conteúdo da minha resposta$/) do
+  page.should have_text(strip_html_tags(@resposta.conteudo))
+end
+
+Então(/^ver que eu postei a resposta$/) do
+  
+end
+
+Então(/^ver os votos da minha resposta$/) do
+  check_answer_votes_within_div(@resposta.plusminus)
 end
 
 Dado(/^que uma pergunta possui uma resposta com conteúdo HTML$/) do
@@ -332,8 +348,12 @@ private
   
   def check_answer_votes(expected_votes)
     within(current_answer_div) do
-      page.should have_css(".answer#votos", text: "Votos: #{expected_votes}")
+      check_answer_votes_within_div(expected_votes)
     end
+  end
+  
+  def check_answer_votes_within_div(expected_votes)
+    page.should have_css(".answer#votos", text: "Votos: #{expected_votes}")
   end
   
   def check_question_votes(expected_votes)
