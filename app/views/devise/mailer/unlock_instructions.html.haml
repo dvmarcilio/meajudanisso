@@ -1,0 +1,5 @@
+%p
+  Olá #{@resource.email}!
+%p Sua conta foi bloqueada devido a um número excessivo de sinal de sucesso nas tentativas.
+%p Clique no link abaixo para desbloquear:
+%p= link_to 'Desbloquear minha conta', unlock_url(@resource, :unlock_token => @token)

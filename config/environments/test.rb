@@ -39,5 +39,9 @@ MeAjudaNisso::Application.configure do
   require 'bcrypt'
   silence_warnings do
     BCrypt::Engine::DEFAULR_COST = BCrypt::Engine::MIN_COST
+
+
   end
+    # ActionMailer Config
+    config.action_mailer.default_url_options = { :host => 'example.com' }
 end
