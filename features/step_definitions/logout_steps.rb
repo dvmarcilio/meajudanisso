@@ -32,7 +32,7 @@ def sign_up
   fill_in "user_email", :with => @visitor[:email]
   fill_in "user_password", :with => @visitor[:password]
   fill_in "user_password_confirmation", :with => @visitor[:password_confirmation]
-  click_button "Sign up"
+  click_button "Logout"
   find_user
 end
 
@@ -40,14 +40,14 @@ def sign_in
   visit '/users/sign_in'
   fill_in "user_email", :with => @visitor[:email]
   fill_in "user_password", :with => @visitor[:password]
-  click_button "Sign in"
+  click_button "Login"
 end
 
 def sign_in
   visit '/users/sign_in'
   fill_in "user_email", :with => @visitor[:email]
   fill_in "user_password", :with => @visitor[:password]
-  click_button "Sign in"
+  click_button "Login"
 end
 
 def create_user
@@ -56,10 +56,6 @@ def create_user
   @user = FactoryGirl.create(:user, @visitor)
 end
 
-Dado(/^que estou logado$/) do
-  create_user
-  sign_in
-end
 
 Quando(/^eu efetuar o logout$/) do
   visit '/users/sign_out'

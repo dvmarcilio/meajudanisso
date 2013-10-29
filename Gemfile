@@ -10,6 +10,7 @@ gem 'bootstrap-will_paginate'
 
 gem 'omniauth'
 gem 'omniauth-facebook','1.4.0'
+gem 'omniauth-google-oauth2'
 
 gem 'sqlite3'
 
