@@ -48,7 +48,7 @@ Dado(/^que eu não efetuei login no sistema$/) do
 end
 
 Então(/^ver que eu devo me registrar ou fazer login para continuar$/) do
-  page_should_have_alert_msg('Você precisa registrar-se ou fazer login para continuar.')
+  page_should_have_warning_msg('Você precisa registrar-se ou fazer login para continuar.')
 end
 
 Então(/^ver uma mensagem que eu devo me registrar ou fazer login para responder uma pergunta$/) do
