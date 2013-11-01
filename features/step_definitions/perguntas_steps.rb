@@ -161,7 +161,9 @@ Então(/^ver o conteúdo da minha resposta$/) do
 end
 
 Então(/^ver que eu postei a resposta$/) do
-  
+  within("div#answer_user") do
+    page.should have_css("div#username",  text: @resposta.user.name)
+  end
 end
 
 Então(/^ver os votos da minha resposta$/) do
@@ -170,7 +172,7 @@ end
 
 Dado(/^que uma pergunta possui uma resposta com conteúdo HTML$/) do
   @pergunta = create_question_with_user
-  @resposta = FactoryGirl.create(:answer, :with_html_content, question: @pergunta)
+  @resposta = FactoryGirl.create(:answer, :with_html_content, question: @pergunta, user: retrieve_user)
 end
 
 Então(/^eu devo ver a resposta sem as tags HTML$/) do
@@ -183,7 +185,8 @@ end
 
 Dado(/^que uma pergunta possui (\d+) respostas$/) do |quantidade|
   @pergunta = create_question_with_user
-  Integer(quantidade).times { @pergunta.answers.create }
+  resposta = FactoryGirl.attributes_for(:answer, user: retrieve_user)
+  Integer(quantidade).times { @pergunta.answers.create(resposta) }
 end
 
 Então(/^eu devo ver que ela tem (\d+) respostas$/) do |quantidade|
@@ -245,7 +248,7 @@ end
 
 def create_answer_question
   @pergunta = create_question_with_user
-  @resposta = FactoryGirl.create(:answer, question: @pergunta)
+  @resposta = FactoryGirl.create(:answer, question: @pergunta, user: retrieve_user)
 end
 
 Então(/^eu devo estar na página de edição da resposta$/) do

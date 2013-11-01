@@ -10,21 +10,32 @@ describe AnswersController do
      
     let(:post_create) { post :create, question_id: question.id }
     
-    it "salva a resposta no banco de dados" do
-      lambda do
+    context "valores validos" do
+    
+      before(:each) { test_sign_in(user) }
+    
+      it "salva a resposta no banco de dados" do
+        lambda do
+          post_create
+        end.should change(Answer, :count).by(1)
+      end
+      
+      it "redireciona no sucesso" do
         post_create
-      end.should change(Answer, :count).by(1)
-    end
-    
-    it "redireciona no sucesso" do
-      post_create
-      expect(response).to be_redirect
-    end
-    
-    it "redireciona para a pagina de visualizacao da pergunta" do
-      post_create
-      response.should redirect_to question_url(question.id)
-    end
+        expect(response).to be_redirect
+      end
+      
+      it "redireciona para a pagina de visualizacao da pergunta" do
+        post_create
+        response.should redirect_to question_url(question.id)
+      end
+      
+      it "atribui o usuario" do
+        post :create, answer: FactoryGirl.attributes_for(:answer), question_id: question.id
+        resposta = Answer.last
+        expect(resposta.user).to eq(user)
+      end
+    end   
   end
   
   describe "GET /questions/:question_id/answers/:id/edit" do

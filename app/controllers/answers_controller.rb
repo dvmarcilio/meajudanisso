@@ -2,7 +2,10 @@
 class AnswersController < ApplicationController
 
   def create
-    question.answers.create(params[:answer])
+    @resposta = Answer.new(params[:answer])
+    @resposta.question = question
+    @resposta.user = current_user
+    @resposta.save
     redirect_to question_url(question.id)
   end
   
