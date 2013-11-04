@@ -5,7 +5,9 @@ MeAjudaNisso::Application.routes.draw do
   	 	get :most_voted
   	end
 	
-  	resources :answers
+  	resources :answers  do
+      post :accept, :on => :member
+    end
   end
   
   resources :answers

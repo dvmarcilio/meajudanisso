@@ -1,21 +1,10 @@
-# == Schema Information
-#
-# Table name: questions
-#
-#  id         :integer          not null, primary key
-#  titulo     :string(255)
-#  conteudo   :text
-#  votos      :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  tags       :string(255)
-#
-
 class Question < ActiveRecord::Base
   attr_accessible :titulo, :conteudo, :tags, :tags_string
   serialize :tags, Array
   
-  has_many :answers
+  has_many :answers, inverse_of: :question
+  
+  has_one :accepted_answer, class_name: 'Answer', inverse_of: :question
   
   belongs_to :user
   

@@ -1,5 +1,5 @@
 class Answer < ActiveRecord::Base
-  belongs_to :question
+  belongs_to :question, inverse_of: :answers
   attr_protected :question_id
   
   belongs_to :user

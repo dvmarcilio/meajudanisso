@@ -344,9 +344,37 @@ Então(/^eu devo ver a resposta com o mesmo número de votos$/) do
   check_answer_votes(expected_votes)
 end
 
+Dado(/^que minha pergunta possui respostas$/) do
+  @user = retrieve_user
+  step 'que uma pergunta possui 5 respostas'
+end
+
+Dado(/^a pergunta não possui uma resposta aceita$/) do
+  @pergunta.accepted_answer.present?
+end
+
+Quando(/^eu estou na página de visualização dessa pergunta$/) do
+  visit question_url(@pergunta)
+end
+
+Então(/^eu devo ver a opção de aceitar resposta em todas as respostas$/) do
+  @pergunta.answers.each do |resposta|
+    id = resposta.id
+    within(answer_div(id)) { find_button accept_answer_button(id) }
+  end
+end
+
 private
   def current_answer_div
-    "div#answer_#{@resposta.id}"
+    answer_div(@resposta.id)
+  end
+  
+  def answer_div(answer_id)
+    "div#answer_#{answer_id}"
+  end
+  
+  def accept_answer_button(answer_id)
+    "accept_answer_#{answer_id}"
   end
   
   def check_answer_votes(expected_votes)
