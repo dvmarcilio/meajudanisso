@@ -14,3 +14,10 @@ Funcionalidade: Aceitar uma resposta
     Dado que eu estou visualizando uma pergunta com respostas de outro usuário
     E a pergunta não possui uma resposta aceita
     Então eu não devo a ver opção de aceitar resposta em nenhuma resposta
+    
+  Cenário: Aceitar resposta
+    Dado que eu estou visualizando uma pergunta, que eu fiz, com respostas
+    E a pergunta não possui uma resposta aceita
+    Quando eu aceito a primeira resposta
+    Então eu devo ver uma mensagem de confirmação de que a resposta foi aceita
+    E uma imagem indicando que a resposta é a aceita
