@@ -27,6 +27,15 @@ Quando(/^eu faço login com esse usuário$/) do
   step('clico no botão "Entrar"')
 end
 
+Dado(/^que eu fiz login no sistema como outro usuário$/) do
+  step('que existe um outro usuário cadastrado')
+  step('eu faço login com esse usuário')
+end
+
+Dado(/^que existe um outro usuário cadastrado$/) do
+  @user = FactoryGirl.create(:user2)
+end
+
 Dado(/^que eu estou na página de login$/) do
   visit login_path
 end

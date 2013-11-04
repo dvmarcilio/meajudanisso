@@ -4,7 +4,7 @@ Funcionalidade: Aceitar uma resposta
   Para que eu possa mostrar que uma resposta solucionou minha dúvida
   Eu quero poder aceitar uma resposta
   
-  Cenário: Usuário (perguntador) visualizando uma pergunta sem resposta aceita 
+  Cenário: Usuário, que fez a pergunta, visualizando uma pergunta sem resposta aceita 
     Dado que minha pergunta possui respostas
     Mas a pergunta não possui uma resposta aceita
     Quando eu estou na página de visualização dessa pergunta

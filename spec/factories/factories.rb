@@ -10,6 +10,13 @@ FactoryGirl.define do
     # confirmed_at Time.now
   end
   
+  factory :user2, class: User do  
+    name 'User 2'
+    email 'user2@example.com'
+    password 'changeme'
+    password_confirmation 'changeme'
+  end
+  
   factory :question do
     titulo 'Pergunta Teste'
     

@@ -345,7 +345,7 @@ Então(/^eu devo ver a resposta com o mesmo número de votos$/) do
 end
 
 Dado(/^que minha pergunta possui respostas$/) do
-  @user = retrieve_user
+  step 'que eu fiz login no sistema'
   step 'que uma pergunta possui 5 respostas'
 end
 
@@ -361,6 +361,19 @@ Então(/^eu devo ver a opção de aceitar resposta em todas as respostas$/) do
   @pergunta.answers.each do |resposta|
     id = resposta.id
     within(answer_div(id)) { find_button accept_answer_button(id) }
+  end
+end
+
+Dado(/^que eu estou visualizando uma pergunta com respostas de outro usuário$/) do
+  step 'que uma pergunta possui 5 respostas'
+  step 'que eu fiz login no sistema como outro usuário'
+  step 'que eu estou na página de visualização dessa pergunta' 
+end
+
+Então(/^eu não devo a ver opção de aceitar resposta em nenhuma resposta$/) do
+  @pergunta.answers.each do |resposta|
+    id = resposta.id
+    find(answer_div(id)).should_not have_button(accept_answer_button(id))
   end
 end
 
