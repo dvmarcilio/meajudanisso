@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131024194148) do
+ActiveRecord::Schema.define(:version => 20131105184612) do
 
   create_table "answers", :force => true do |t|
     t.text     "conteudo"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20131024194148) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "accepted",    :default => false
   end
 
   create_table "punches", :force => true do |t|
@@ -36,10 +37,11 @@ ActiveRecord::Schema.define(:version => 20131024194148) do
   create_table "questions", :force => true do |t|
     t.string   "titulo"
     t.text     "conteudo"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "tags"
     t.integer  "user_id"
+    t.boolean  "solved",     :default => false
   end
 
   create_table "users", :force => true do |t|

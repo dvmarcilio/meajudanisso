@@ -377,6 +377,31 @@ Então(/^eu não devo a ver opção de aceitar resposta em nenhuma resposta$/) d
   end
 end
 
+Dado(/^que eu estou visualizando uma pergunta, que eu fiz, com respostas$/) do
+  step 'que minha pergunta possui respostas'
+  step 'que eu estou na página de visualização dessa pergunta' 
+end
+
+Quando(/^eu aceito a primeira resposta$/) do
+  @resposta = @pergunta.answers.first
+  answer_id = @resposta.id
+  within answer_div(answer_id) do
+    click_on accept_answer_button(answer_id)
+  end
+end
+
+Então(/^eu devo ver uma mensagem de confirmação de que a resposta foi aceita$/) do
+  page_should_have_notice_msg("Você aceitou a resposta")
+end
+
+Então(/^uma imagem indicando que a resposta é a aceita$/) do
+  within(current_answer_div) do
+    id = "accepted-icon-answer_#{@resposta.id}"
+    image = 'accept-icon.png'
+    page.should have_xpath("//img[@src=\"/assets/#{image}\"]")
+  end
+end
+
 private
   def current_answer_div
     answer_div(@resposta.id)

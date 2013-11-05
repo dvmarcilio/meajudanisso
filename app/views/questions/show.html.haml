@@ -16,7 +16,8 @@
   .nested_user#question_user
     %h5 Perguntado por
     #username= link_to "#{@pergunta.user.name}", user_path(@pergunta.user)
-  
+
+%hr  
 %section.respostas
   %h2#qtde_respostas= @pergunta.answers.count > 0 ? pluralize(@pergunta.answers.count, 'Resposta', 'Respostas') : "Essa mensagem não foi respondida"
   - @pergunta.answers.each do |answer|
@@ -28,7 +29,9 @@
       = button_to 'UpVote', vote_up_answer_path(answer), id: "upvote_answer_#{answer.id}"
       = button_to 'DownVote', vote_down_answer_path(answer), id: "downvote_answer_#{answer.id}"
       - if @pergunta.user.eql?(current_user)
-        = button_to 'Aceitar', accept_question_answer_path(answer), id: "accept_answer_#{answer.id}"
+        = button_to 'Aceitar', solve_question_path(answer_id: answer), id: "accept_answer_#{answer.id}"
+      - if answer.accepted?
+        = image_tag 'accept-icon.png' , id: "accepted-icon-answer_#{answer.id}"
       .nested_user#answer_user
         %h5 Respondido por
         #username= link_to "#{answer.user.name}", user_path(answer.user)

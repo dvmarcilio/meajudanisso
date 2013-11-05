@@ -61,6 +61,14 @@ class QuestionsController < ApplicationController
       redirect_to question_url(@pergunta)
     end
   end
+  
+  def solve
+    @pergunta = Question.find(pergunta_id)
+    @pergunta.update_attribute(:solved, true)
+    @resposta = Answer.find_by_id(params[:answer_id])
+    @resposta.accept
+    redirect_to question_url(@pergunta), notice: "Você aceitou a resposta"
+  end
 	
 	private
 		def pergunta_id

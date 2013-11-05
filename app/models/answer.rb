@@ -6,4 +6,8 @@ class Answer < ActiveRecord::Base
   
   acts_as_voteable
   
+  def accept
+    update_attribute(:accepted, true)
+  end
+  
 end

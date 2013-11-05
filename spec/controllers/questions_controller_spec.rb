@@ -160,20 +160,20 @@ describe QuestionsController do
   
   describe "POST /questions/:question_id/answer/:id/vote_down" do
     
+    let(:pergunta) { FactoryGirl.create(:question) }
     before(:each) do
-      @user = test_sign_in(FactoryGirl.create(:user))
-      @pergunta = FactoryGirl.create(:question)
-      post :vote_down, id: @pergunta 
+      test_sign_in(FactoryGirl.create(:user))
+      post :vote_down, id: pergunta
     end
     
     context "voto valido" do
       it "redireciona para a pagina de visualizacao da pergunta" do
-        expect(response).to redirect_to question_url(@pergunta)
+        expect(response).to redirect_to question_url(pergunta)
       end
       
       it "diminui em um o voto da resposta" do
         original_votes = FactoryGirl.build(:question).votes_count
-        expect(@pergunta.plusminus).to eq(original_votes -1)
+        expect(pergunta.plusminus).to eq(original_votes -1)
       end
       
       it "adiciona uma mensagem :notice no flash" do
@@ -182,19 +182,52 @@ describe QuestionsController do
     end
     
     context "voto invalido" do
-      before(:each) do
-        post :vote_down, id: @pergunta
-        @expected_votes = @pergunta.plusminus
-      end   
-      
+      before(:each) { post :vote_down, id: pergunta }
+      let(:expected_votes) { pergunta.plusminus }
+            
       it "adiciona uma mensagem :warning no flash" do 
         expect(request.flash[:warning]).to_not be_empty
       end
       
       it "nao altera a quantidade de votos" do
-        expect(@pergunta.plusminus).to eq(@expected_votes)
+        expect(pergunta.plusminus).to eq(expected_votes)
       end  
     end
   end
   
+  describe "/questions/:id/solve" do
+    
+    let(:pergunta) { FactoryGirl.create(:question) }
+    let(:resposta) { FactoryGirl.create(:answer, question: pergunta) }
+  
+    context "pergunta sem resposta aceita" do
+      before(:each) { post :solve, id: pergunta, answer_id: resposta.id }
+      
+      it "marca a pergunta como resolvida" do
+        # passar pra model. igual ao Answer.accept
+        pergunta.reload
+        expect(pergunta.solved?).to be_true
+      end
+      it "redireciona para a pagina de visualizacao da pergunta" do
+        expect(response).to redirect_to question_url(pergunta)
+      end
+      it "recebe o id resposta via params[:answer_id]" do
+        expect(controller.params[:answer_id]).to_not be_nil
+        expect(controller.params[:answer_id]).to eq(resposta.id.to_s)
+      end
+      it "atribui a resposta correta" do
+        assigns(:resposta).should == resposta
+      end
+      it "chama o metodo de marcar a resposta como aceita" do
+        # unica forma que eu encontrei de codificar esse teste
+        resp = mock_model(Answer)
+        Answer.stub(:find_by_id).and_return(resp)
+        resp.should_receive(:accept)
+        post :solve, id: pergunta, answer_id: resp.id
+      end
+      it "adiciona uma mensagem :notice no flash" do
+        expect(request.flash[:notice]).to_not be_empty
+      end
+    end
+  end
 end

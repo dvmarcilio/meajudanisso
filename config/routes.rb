@@ -4,10 +4,10 @@ MeAjudaNisso::Application.routes.draw do
    	collection do
   	 	get :most_voted
   	end
+  	 
+  	post :solve, :on => :member  
 	
-  	resources :answers  do
-      post :accept, :on => :member
-    end
+  	resources :answers
   end
   
   resources :answers
