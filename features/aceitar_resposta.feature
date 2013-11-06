@@ -21,3 +21,9 @@ Funcionalidade: Aceitar uma resposta
     Quando eu aceito a primeira resposta
     Então eu devo ver uma mensagem de confirmação de que a resposta foi aceita
     E uma imagem indicando que a resposta é a aceita
+    
+  Cenário: Usuário, que fez a pergunta, visualizando uma pergunta com resposta aceita
+    Dado que eu estou visualizando minha pergunta com resposta aceita
+    Então eu não devo a ver opção de aceitar resposta em nenhuma resposta
+    E ver a opção de cancelar a aceitação na resposta aceita 
+    
