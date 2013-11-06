@@ -11,7 +11,7 @@ Funcionalidade: Aceitar uma resposta
     Então eu devo ver a opção de aceitar resposta em todas as respostas
   
   Cenário: Usuário, que não fez a pergunta, visualizando uma pergunta sem resposta aceita
-    Dado que eu estou visualizando uma pergunta com respostas de outro usuário
+    Dado que eu estou visualizando uma pergunta, feita por outro usuário, com respostas
     E a pergunta não possui uma resposta aceita
     Então eu não devo a ver opção de aceitar resposta em nenhuma resposta
     
