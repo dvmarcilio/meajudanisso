@@ -364,7 +364,7 @@ Então(/^eu devo ver a opção de aceitar resposta em todas as respostas$/) do
   end
 end
 
-Dado(/^que eu estou visualizando uma pergunta com respostas de outro usuário$/) do
+Dado(/^que eu estou visualizando uma pergunta, feita por outro usuário, com respostas$/) do
   step 'que uma pergunta possui 5 respostas'
   step 'que eu fiz login no sistema como outro usuário'
   step 'que eu estou na página de visualização dessa pergunta' 
