@@ -25,5 +25,6 @@ Funcionalidade: Aceitar uma resposta
   Cenário: Usuário, que fez a pergunta, visualizando uma pergunta com resposta aceita
     Dado que eu estou visualizando minha pergunta com resposta aceita
     Então eu não devo a ver opção de aceitar resposta em nenhuma resposta
-    E ver a opção de cancelar a aceitação na resposta aceita 
+    E ver a opção de cancelar a aceitação na resposta aceita
+    E não ver ver a opção de cancelar a aceitação nas outras respostas  
     

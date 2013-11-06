@@ -28,7 +28,7 @@
       = link_to 'editar', edit_answer_path(answer), id: "editar_resposta_#{answer.id}"
       = button_to 'UpVote', vote_up_answer_path(answer), id: "upvote_answer_#{answer.id}"
       = button_to 'DownVote', vote_down_answer_path(answer), id: "downvote_answer_#{answer.id}"
-      - if @pergunta.user.eql?(current_user)
+      - if @pergunta.user.eql?(current_user) && !@pergunta.solved?
         = button_to 'Aceitar', solve_question_path(answer_id: answer), id: "accept_answer_#{answer.id}"
       - if answer.accepted?
         = image_tag 'accept-icon.png' , id: "accepted-icon-answer_#{answer.id}"

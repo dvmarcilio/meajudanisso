@@ -400,6 +400,21 @@ Então(/^uma imagem indicando que a resposta é a aceita$/) do
   end
 end
 
+Dado(/^que eu estou visualizando minha pergunta com resposta aceita$/) do
+  step 'que eu fiz login no sistema'
+  create_solved_question
+  create_accepted_question_answer
+  step 'que eu estou na página de visualização dessa pergunta' 
+end
+
+Então(/^ver a opção de cancelar a aceitação na resposta aceita$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Então(/^não ver ver a opção de cancelar a aceitação nas outras respostas$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
 private
   def current_answer_div
     answer_div(@resposta.id)
@@ -455,6 +470,14 @@ private
   
   def answer_text_field_id
     ".post_answer#text_area"
+  end
+  
+  def create_solved_question
+    @pergunta = FactoryGirl.create(:question, solved: true, user: retrieve_user)
+  end
+  
+  def create_accepted_question_answer
+    @resposta = FactoryGirl.create(:answer, question: @pergunta, accepted: true, user: retrieve_user)
   end
 
 
