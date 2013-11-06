@@ -396,9 +396,7 @@ end
 
 Então(/^uma imagem indicando que a resposta é a aceita$/) do
   within(current_answer_div) do
-    id = "accepted-icon-answer_#{@resposta.id}"
-    image = 'accept-icon.png'
-    page.should have_xpath("//img[@src=\"/assets/#{image}\"]")
+    page.should have_image 'accept-icon.png'
   end
 end
 
