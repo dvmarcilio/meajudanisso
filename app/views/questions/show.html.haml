@@ -62,7 +62,7 @@
             %td#resposta_editar
               = link_to 'Editar', edit_answer_path(answer), id: "editar_resposta_#{answer.id}"
     %hr
-  %h2= label :answer, :conteudo, 'Sua Resposta'
+  %h2#sua_resposta_label= 'Sua Resposta'
   - if user_signed_in?
     = form_tag question_answers_path(@pergunta) do
       = text_area :answer, :conteudo, :class => "tinymce"

@@ -126,7 +126,7 @@ Então(/^o usuário que fez a pergunta$/) do
 end
 
 Então(/^eu devo ver "Sua Resposta"$/) do
-  page.should have_css(".post_answer", text: "Sua Resposta")
+  page.should have_css("#sua_resposta_label", text: "Sua Resposta")
 end
 
 Então(/^ver um campo de texto para responder$/) do
