@@ -45,7 +45,7 @@
             %br
             = answer.plusminus
             %br
-            = link_to image_tag('menosVoto.png'), vote_down_answer_path(answer), id: "downvote_answer_#{answer.id}", :method => :post
+            = link_to image_tag('menosVoto.png'), vote_down_answer_path(answer), id: "resposta_#{answer.id}_downvote", :method => :post
             %br
             - if @pergunta.user.eql?(current_user) && !@pergunta.solved?
               = link_to image_tag('naoAceito.png'), solve_question_path(answer_id: answer), :method => :post, hint: "Melhor Resposta", id: "accept_answer_#{answer.id}"
