@@ -297,8 +297,8 @@ end
 
 Quando(/^eu voto (positivo|negativo) na resposta$/) do |tipo|
   within(current_answer_div) do
-    id = vote_button_id(tipo)
-    click_button(id)
+    id = resposta_vote_id(tipo)
+    click_on(id)
   end
 end
 
@@ -452,16 +452,20 @@ private
     factor.eql?('mais') ? +1 : -1
   end
   
-  def vote_button_id(tipo)
-    suffix = "_answer_#{@resposta.id}"
-    prefix = tipo.eql?('positivo') ? 'upvote' : 'downvote'
+  def resposta_vote_id(tipo)
+    prefix = "resposta_#{@resposta.id}_"
+    suffix = vote_suffix(tipo)
     prefix + suffix
   end
   
   def pergunta_vote_id(tipo)
     prefix = 'pergunta_'
-    suffix = tipo.eql?('positivo') ? 'upvote' : 'downvote'
+    suffix = vote_suffix(tipo)
     prefix + suffix
+  end
+  
+  def vote_suffix(tipo)
+    tipo.eql?('positivo') ? 'upvote' : 'downvote'
   end
   
   def edit_link_id(tipo)
