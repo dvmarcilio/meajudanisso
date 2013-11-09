@@ -13,7 +13,7 @@
         %br
       %td.conteudo#pergunta_conteudo
         != @pergunta.conteudo
-      %td{:colspan => 3}
+      %td#pergunta_visualizacoes{:colspan => 3}
         %h5= "Visualizações: #{@pergunta.hits}"
     %table
       %tr

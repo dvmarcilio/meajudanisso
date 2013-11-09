@@ -113,15 +113,13 @@ end
 
 Então(/^quando ela foi editada$/) do
   if @pergunta.updated_at
-    page.should have_css(pergunta.editada, text: @pergunta.updated_at)
+    page.should have_css(pergunta_editada, text: @pergunta.updated_at)
   end
 end
 
 Então(/^o usuário que fez a pergunta$/) do
-  within(:css, "section.pergunta") do
-    within("div#question_user") do
-      page.should have_css("div#username", text: @pergunta.user.name)
-    end
+  within(pergunta_usuario) do
+    page.should have_text(@pergunta.user.name)
   end
 end
 
@@ -289,7 +287,7 @@ end
 
 Então(/^eu devo ver a pergunta com uma visualização a mais$/) do
   expected_views = @visualizacoes + 1
-  page.should have_css(".pergunta#visualizacoes", text: "Visualizações: #{expected_views}" )
+  page.should have_css(pergunta_visualizacoes, text: "Visualizações: #{expected_views}" )
 end
 
 Dado(/^que eu estou na página de visualização de uma pergunta com uma resposta$/) do
@@ -507,6 +505,10 @@ private
   
   def pergunta_usuario
     'td#pergunta_usuario'
+  end
+  
+  def pergunta_visualizacoes
+    'td#pergunta_visualizacoes'
   end
   
   def resposta_conteudo
