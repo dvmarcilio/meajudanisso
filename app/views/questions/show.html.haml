@@ -40,13 +40,13 @@
     .answer[answer]
       %table
         %tr
-          %td.voto
+          %td.voto#resposta_votos
             = link_to image_tag('maisVoto.png'), vote_up_answer_path(answer), id: "upvote_answer_#{answer.id}", :method =>:post
             %br
             = answer.plusminus
             %br
             = link_to image_tag('menosVoto.png'), vote_down_answer_path(answer), id: "downvote_answer_#{answer.id}", :method => :post
-          %td.resposta#resposta_conteudo{:border => 1}
+          %td#resposta_conteudo{:border => 1}
             != answer.conteudo
         %table
           %tr
@@ -65,7 +65,7 @@
   %h2#sua_resposta_label= 'Sua Resposta'
   - if user_signed_in?
     = form_tag question_answers_path(@pergunta) do
-      = text_area :answer, :conteudo, :class => "tinymce"
+      = text_area :answer, :conteudo, :class => "tinymce", id: 'responder_text_field'
       = tinymce
       %br
       = submit_tag 'Responder'

@@ -142,17 +142,16 @@ Então(/^ver um botão "(.*?)"$/) do |botao|
 end
 
 Quando(/^eu preencho minha resposta no campo de texto$/) do
-  fill_in('answer_conteudo', with: 'Conteudo Simples')
+  responder_field_id = answer_text_field_id.gsub('#', '')
+  fill_in(responder_field_id, with: 'Conteudo Simples')
 end
 
 Então(/^ver minha resposta$/) do
   @resposta = Answer.last #não sei se isso aqui é recomendável, mas funfa
-  within(:css, "section.respostas") do
-    within(:css, current_answer_div) do
-      step 'ver o conteúdo da minha resposta'
-      step 'ver que eu postei a resposta'
-      step 'ver os votos da minha resposta'
-    end
+  within(:css, current_answer_div) do
+    step 'ver o conteúdo da minha resposta'
+    step 'ver que eu postei a resposta'
+    step 'ver os votos da minha resposta'
   end
 end
 
@@ -161,9 +160,7 @@ Então(/^ver o conteúdo da minha resposta$/) do
 end
 
 Então(/^ver que eu postei a resposta$/) do
-  within("div#answer_user") do
-    page.should have_css("div#username",  text: @resposta.user.name)
-  end
+  page.should have_css(resposta_usuario,  text: @resposta.user.name)
 end
 
 Então(/^ver os votos da minha resposta$/) do
@@ -435,7 +432,7 @@ private
   end
   
   def check_answer_votes_within_div(expected_votes)
-    page.should have_css(".answer#votos", text: "Votos: #{expected_votes}")
+    page.should have_css(resposta_votos, text: "#{expected_votes}")
   end
   
   def check_question_votes(expected_votes)
@@ -469,7 +466,7 @@ private
   end
   
   def answer_text_field_id
-    ".post_answer#text_area"
+    "#responder_text_field"
   end
   
   def create_solved_question
@@ -526,6 +523,10 @@ private
 
   def resposta_editar
     'td#resposta_editar'
+  end
+  
+  def resposta_votos
+    'td#resposta_votos'
   end
 
 
