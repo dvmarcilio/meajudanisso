@@ -277,7 +277,7 @@ end
 
 Então(/^a resposta atualizada$/) do
   within(current_answer_div) do
-    page.should have_css(".answer#conteudo", text: @edit_attrs[:answer_conteudo])
+    page.should have_css(resposta_conteudo, text: @edit_attrs[:answer_conteudo])
   end
 end
 
@@ -511,9 +511,22 @@ private
   def pergunta_usuario
     'td#pergunta_usuario'
   end
+  
+  def resposta_conteudo
+    'td#resposta_conteudo'
+  end
 
+  def resposta_usuario
+    'td#resposta_usuario'
+  end
+  
+  def resposta_aceitar
+    'td#resposta_aceitar'
+  end
 
-
+  def resposta_editar
+    'td#resposta_editar'
+  end
 
 
 

@@ -46,20 +46,20 @@
             = answer.plusminus
             %br
             = link_to image_tag('menosVoto.png'), vote_down_answer_path(answer), id: "downvote_answer_#{answer.id}", :method => :post
-          %td.resposta{:border => 1}
+          %td.resposta#resposta_conteudo{:border => 1}
             != answer.conteudo
         %table
           %tr
-            %td
+            %td#resposta_usuario
               Respondido por:
               = link_to "#{answer.user.name}", user_path(answer.user)
-            %td
+            %td#resposta_aceitar
               - if @pergunta.user.eql?(current_user) && !@pergunta.solved?
                 = button_to 'Aceitar', solve_question_path(answer_id: answer), id: "accept_answer_#{answer.id}"
               - if answer.accepted?
                 = image_tag 'accept-icon.png' , id: "accepted-icon-answer_#{answer.id}"
             %td{:colspan => 2}
-            %td
+            %td#resposta_editar
               = link_to 'Editar', edit_answer_path(answer), id: "editar_resposta_#{answer.id}"
     %hr
   %h2= label :answer, :conteudo, 'Sua Resposta'
