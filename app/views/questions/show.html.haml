@@ -1,33 +1,33 @@
 
-%h1= @pergunta.titulo
+%h1.pergunta#titulo= @pergunta.titulo
 %hr
 .pergunta
   %table
     %tr
-      %td.voto
+      %td.voto#pergunta_votos
         = link_to image_tag('maisVoto.png'), vote_up_question_path(@pergunta), :method => :post
         %br
         = @pergunta.plusminus
         %br
         = link_to image_tag('menosVoto.png'), vote_down_question_path(@pergunta), :method => :post
         %br
-      %td.conteudo
+      %td.conteudo#pergunta_conteudo
         != @pergunta.conteudo
       %td{:colspan => 3}
         %h5= "Visualizações: #{@pergunta.hits}"
     %table
       %tr
-        %td.criada
+        %td.criada#pergunta_criada
           Criada em: "#{@pergunta.created_at}"
-        %td.editada
+        %td.editada#pergunta_editada
           = @pergunta.updated_at ? "Editada em: #{@pergunta.updated_at}" : '  '
-        %td
+        %td#pergunta_editar
           = link_to 'Editar', edit_question_path(@pergunta), id: 'editar_pergunta'
       %tr
-        %td
+        %td#pergunta_tags
           = "Tags: #{@pergunta.tags_string}"
       %tr
-        %td
+        %td#pergunta_usuario
           Perguntado por:
           = link_to "#{@pergunta.user.name}", user_path(@pergunta.user)
   %hr

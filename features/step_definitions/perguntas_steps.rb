@@ -99,21 +99,21 @@ def strip_html_tags(conteudo)
 end
 
 Então(/^os votos dessa pergunta$/) do
-  page.should have_css(".pergunta#votos", text: @pergunta.plusminus)
+  page.should have_css(pergunta_votos, text: @pergunta.plusminus)
 end
 
 Então(/^as tags dessa pergunta$/) do
-  page.should have_css(".pergunta#tags", text: @pergunta.tags_string)
+  page.should have_css(pergunta_tags, text: @pergunta.tags_string)
 end
 
 #TODO formatar essas datas.
 Então(/^quando ela foi criada$/) do
-  page.should have_css(".pergunta#created_at", text: @pergunta.created_at)
+  page.should have_css(pergunta_criada, text: @pergunta.created_at)
 end
 
 Então(/^quando ela foi editada$/) do
   if @pergunta.updated_at
-    page.should have_css(".pergunta#updated_at", text: @pergunta.updated_at)
+    page.should have_css(pergunta.editada, text: @pergunta.updated_at)
   end
 end
 
@@ -237,9 +237,9 @@ def page_should_have_notice_msg(msg)
 end
 
 Então(/^a pergunta atualizada$/) do
-  page.should have_css(".pergunta#titulo", text: @edit_attrs[:pergunta_titulo])
-  page.should have_css(".pergunta#tags", text: @edit_attrs[:pergunta_tags])
-  page.should have_css(".pergunta#conteudo", text: @edit_attrs[:pergunta_conteudo])
+  page.should have_css(pergunta_titulo, text: @edit_attrs[:pergunta_titulo])
+  page.should have_css(pergunta_tags, text: @edit_attrs[:pergunta_tags])
+  page.should have_css(pergunta_conteudo, text: @edit_attrs[:pergunta_conteudo])
 end
 
 Dado(/^que uma pergunta com uma resposta existe$/) do
@@ -479,7 +479,38 @@ private
   def create_accepted_question_answer
     @resposta = FactoryGirl.create(:answer, question: @pergunta, accepted: true, user: retrieve_user)
   end
+  
+  def pergunta_titulo
+    '.pergunta#titulo'
+  end
+  
+  def pergunta_tags
+    'td#pergunta_tags'
+  end
+  
+  def pergunta_votos
+    'td#pergunta_votos'
+  end
 
+  def pergunta_conteudo
+    'td#pergunta_conteudo'
+  end
+  
+  def pergunta_criada
+    'td#pergunta_criada'
+  end
+  
+  def pergunta_editada
+    'td#pergunta_editada'
+  end
+  
+  def pergunta_editar
+    'td#pergunta_editar'
+  end
+  
+  def pergunta_usuario
+    'td#pergunta_usuario'
+  end
 
 
 
