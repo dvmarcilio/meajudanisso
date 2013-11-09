@@ -1,3 +1,47 @@
-// Place all the styles related to the perguntas controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.voto{
+  font-weight: inset;
+  text-align: center;
+  font-size: 25px;
+  line-height: 120%;
+  width: 5%;
+}
+
+.conteudo{
+	text-align: justify;
+	font-size: 20px;
+	padding: 20px;
+	width: 80%;
+	border-top: 0;
+	border-bottom: 0; 
+	border-right: 3px solid white;
+	border-left: 0;
+}
+
+.resposta{
+	text-align: justify;
+	font-size: 12px;
+	padding: 20px;
+	width: 80%;
+	border-top: 0;
+	border-bottom: 0; 
+	border-right: 3px solid white;
+	border-left: 0;
+}
+
+.criada{
+	width: 400px;
+}
+
+.editada{
+	width: 400px;
+}
+
+
+/*table{
+    border: 1px solid black;
+}
+
+th, td {
+    border: 1px solid black;
+}*/
+

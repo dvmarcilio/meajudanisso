@@ -1,50 +1,74 @@
-%h1.pergunta#titulo #{@pergunta.titulo}
 
-#votar_pergunta
-  = button_to 'Votar +', vote_up_question_path(@pergunta)
-  = button_to 'Votar -', vote_down_question_path(@pergunta)
-
-%section.pergunta 
-  .pergunta#conteudo!= @pergunta.conteudo
-  .pergunta#votos= "Votos: #{@pergunta.plusminus}"
-  .pergunta#tags= "Tags: #{@pergunta.tags_string}"
-  %br
-  = link_to 'editar', edit_question_path(@pergunta), id: 'editar_pergunta'
-  .pergunta#created_at= "Criada em: #{@pergunta.created_at}"
-  .pergunta#updated_at= @pergunta.updated_at ? "Editada em: #{@pergunta.updated_at}" : ''
-  .pergunta#visualizacoes= "Visualizações: #{@pergunta.hits}"
-  .nested_user#question_user
-    %h5 Perguntado por
-    #username= link_to "#{@pergunta.user.name}", user_path(@pergunta.user)
-
-%hr  
-%section.respostas
-  %h2#qtde_respostas= @pergunta.answers.count > 0 ? pluralize(@pergunta.answers.count, 'Resposta', 'Respostas') : "Essa mensagem não foi respondida"
-  - @pergunta.answers.each do |answer|
-    .answer[answer]
-      .answer#conteudo!= answer.conteudo
-      .answer#votos= "Votos: #{answer.plusminus}"
-      %br
-      = link_to 'editar', edit_answer_path(answer), id: "editar_resposta_#{answer.id}"
-      = button_to 'UpVote', vote_up_answer_path(answer), id: "upvote_answer_#{answer.id}"
-      = button_to 'DownVote', vote_down_answer_path(answer), id: "downvote_answer_#{answer.id}"
-      - if @pergunta.user.eql?(current_user) && !@pergunta.solved?
-        = button_to 'Aceitar', solve_question_path(answer_id: answer), id: "accept_answer_#{answer.id}"
-      - if answer.accepted?
-        = image_tag 'accept-icon.png' , id: "accepted-icon-answer_#{answer.id}"
-      .nested_user#answer_user
-        %h5 Respondido por
-        #username= link_to "#{answer.user.name}", user_path(answer.user)
-        
-    %hr
+%h1= @pergunta.titulo
+%hr
+.pergunta
+  %table
+    %tr
+      %td.voto
+        = link_to image_tag('maisVoto.png'), vote_up_question_path(@pergunta), :method => :post
+        %br
+        = @pergunta.plusminus
+        %br
+        = link_to image_tag('menosVoto.png'), vote_down_question_path(@pergunta), :method => :post
+        %br
+      %td.conteudo
+        != @pergunta.conteudo
+      %td{:colspan => 3}
+        %h5= "Visualizações: #{@pergunta.hits}"
+    %table
+      %tr
+        %td.criada
+          Criada em: "#{@pergunta.created_at}"
+        %td.editada
+          = @pergunta.updated_at ? "Editada em: #{@pergunta.updated_at}" : '  '
+        %td
+          = link_to 'Editar', edit_question_path(@pergunta), id: 'editar_pergunta'
+      %tr
+        %td
+          = "Tags: #{@pergunta.tags_string}"
+      %tr
+        %td
+          Perguntado por:
+          = link_to "#{@pergunta.user.name}", user_path(@pergunta.user)
+  %hr
+%br
   
-%section.post_answer
+.resposta
+  %h2#qtde_respostas= @pergunta.answers.count > 0 ? pluralize(@pergunta.answers.count, 'Resposta', 'Respostas') : "Essa mensagem não foi respondida"
+  %hr
+  - @pergunta.answers.each do |answer|
+    %table
+      %tr
+        %td.voto
+          = link_to image_tag('maisVoto.png'), vote_up_answer_path(answer), id: "upvote_answer_#{answer.id}", :method =>:post
+          %br
+          = answer.plusminus
+          %br
+          = link_to image_tag('menosVoto.png'), vote_down_answer_path(answer), id: "downvote_answer_#{answer.id}", :method => :post
+        %td.resposta{:border => 1}
+          != answer.conteudo
+      %table
+        %tr
+          %td
+            Respondido por:
+            = link_to "#{answer.user.name}", user_path(answer.user)
+          %td
+            - if @pergunta.user.eql?(current_user) && !@pergunta.solved?
+              = button_to 'Aceitar', solve_question_path(answer_id: answer), id: "accept_answer_#{answer.id}"
+            - if answer.accepted?
+              = image_tag 'accept-icon.png' , id: "accepted-icon-answer_#{answer.id}"
+          %td{:colspan => 2}
+          %td
+            = link_to 'Editar', edit_answer_path(answer), id: "editar_resposta_#{answer.id}"
+    %hr
   %h2= label :answer, :conteudo, 'Sua Resposta'
   - if user_signed_in?
     = form_tag question_answers_path(@pergunta) do
-      .post_answer#text_area= text_area :answer, :conteudo, :class => "tinymce"
+      = text_area :answer, :conteudo, :class => "tinymce"
       = tinymce
       %br
       = submit_tag 'Responder'
   - else
     %strong Você precisa registrar-se ou fazer login para responder uma pergunta.
+
+  
