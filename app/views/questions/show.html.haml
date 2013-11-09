@@ -51,7 +51,7 @@
               = link_to image_tag('naoAceito.png'), solve_question_path(answer_id: answer), :method => :post, hint: "Melhor Resposta", id: "accept_answer_#{answer.id}"
             - if answer.accepted?
               = image_tag 'aceitar.png', id: "accepted-icon-answer_#{answer.id}"
-          %td.resposta{:border => 1}
+          %td.resposta#resposta_conteudo{:border => 1}
             != answer.conteudo
         %table
           %tr
