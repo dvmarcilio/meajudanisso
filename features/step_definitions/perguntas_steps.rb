@@ -362,7 +362,7 @@ end
 Então(/^eu devo ver a opção de aceitar resposta em todas as respostas$/) do
   @pergunta.answers.each do |resposta|
     id = resposta.id
-    within(answer_div(id)) { find_button accept_answer_button(id) }
+    within(answer_div(id)) { page.should have_image 'naoAceito.png' }
   end
 end
 
@@ -398,7 +398,7 @@ end
 
 Então(/^uma imagem indicando que a resposta é a aceita$/) do
   within(current_answer_div) do
-    page.should have_image 'accept-icon.png'
+    page.should have_image 'aceitar.png'
   end
 end
 
