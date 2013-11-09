@@ -37,29 +37,30 @@
   %h2#qtde_respostas= @pergunta.answers.count > 0 ? pluralize(@pergunta.answers.count, 'Resposta', 'Respostas') : "Essa mensagem não foi respondida"
   %hr
   - @pergunta.answers.each do |answer|
-    %table
-      %tr
-        %td.voto
-          = link_to image_tag('maisVoto.png'), vote_up_answer_path(answer), id: "upvote_answer_#{answer.id}", :method =>:post
-          %br
-          = answer.plusminus
-          %br
-          = link_to image_tag('menosVoto.png'), vote_down_answer_path(answer), id: "downvote_answer_#{answer.id}", :method => :post
-        %td.resposta{:border => 1}
-          != answer.conteudo
+    .answer[answer]
       %table
         %tr
-          %td
-            Respondido por:
-            = link_to "#{answer.user.name}", user_path(answer.user)
-          %td
-            - if @pergunta.user.eql?(current_user) && !@pergunta.solved?
-              = button_to 'Aceitar', solve_question_path(answer_id: answer), id: "accept_answer_#{answer.id}"
-            - if answer.accepted?
-              = image_tag 'accept-icon.png' , id: "accepted-icon-answer_#{answer.id}"
-          %td{:colspan => 2}
-          %td
-            = link_to 'Editar', edit_answer_path(answer), id: "editar_resposta_#{answer.id}"
+          %td.voto
+            = link_to image_tag('maisVoto.png'), vote_up_answer_path(answer), id: "upvote_answer_#{answer.id}", :method =>:post
+            %br
+            = answer.plusminus
+            %br
+            = link_to image_tag('menosVoto.png'), vote_down_answer_path(answer), id: "downvote_answer_#{answer.id}", :method => :post
+          %td.resposta{:border => 1}
+            != answer.conteudo
+        %table
+          %tr
+            %td
+              Respondido por:
+              = link_to "#{answer.user.name}", user_path(answer.user)
+            %td
+              - if @pergunta.user.eql?(current_user) && !@pergunta.solved?
+                = button_to 'Aceitar', solve_question_path(answer_id: answer), id: "accept_answer_#{answer.id}"
+              - if answer.accepted?
+                = image_tag 'accept-icon.png' , id: "accepted-icon-answer_#{answer.id}"
+            %td{:colspan => 2}
+            %td
+              = link_to 'Editar', edit_answer_path(answer), id: "editar_resposta_#{answer.id}"
     %hr
   %h2= label :answer, :conteudo, 'Sua Resposta'
   - if user_signed_in?
