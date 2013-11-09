@@ -48,7 +48,7 @@ Quando(/^clico em criar pergunta$/) do
 end
 
 Então(/^visualizar as tags da pergunta$/) do
-  page.should have_css(".pergunta#tags", text: @tags)
+  page.should have_css(pergunta_tags, text: @tags)
 end
 
 Dado(/^que eu estou na página de visualização de uma pergunta$/) do
