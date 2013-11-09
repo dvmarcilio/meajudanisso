@@ -302,6 +302,13 @@ Quando(/^eu voto (positivo|negativo) na resposta$/) do |tipo|
   end
 end
 
+Quando(/^eu voto (positivo|negativo) na pergunta$/) do |tipo|
+  within(pergunta_votos) do
+    id = pergunta_vote_id(tipo)
+    click_on(id)
+  end
+end
+
 Então(/^eu devo ver uma mensagem de confirmação do voto (positivo|negativo) na (?:pergunta|resposta)$/) do |tipo|
   msg = "Voto #{tipo} confirmado"
   page_should_have_notice_msg(msg)
@@ -434,7 +441,7 @@ private
   end
   
   def check_question_votes(expected_votes)
-    page.should have_css(".pergunta#votos", text: expected_votes)
+    page.should have_css(pergunta_votos, text: expected_votes)
   end
   
   def expected_votes(type, factor)
@@ -448,6 +455,12 @@ private
   def vote_button_id(tipo)
     suffix = "_answer_#{@resposta.id}"
     prefix = tipo.eql?('positivo') ? 'upvote' : 'downvote'
+    prefix + suffix
+  end
+  
+  def pergunta_vote_id(tipo)
+    prefix = 'pergunta_'
+    suffix = tipo.eql?('positivo') ? 'upvote' : 'downvote'
     prefix + suffix
   end
   

@@ -46,14 +46,6 @@ Dado(/^que estou na página de visualização dessa pergunta$/) do
   visit question_path(@pergunta)
 end
 
-Quando(/^eu voto positivo na pergunta$/) do
-  click_on "Votar +"
-end
-
-Quando(/^eu voto negativo na pergunta$/) do
-  click_on "Votar -"
-end
-
 Quando(/^(?:eu )?clico no botão "(.*?)"$/) do |botao|
   click_on botao
 end

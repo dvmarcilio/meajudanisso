@@ -5,11 +5,11 @@
   %table
     %tr
       %td.voto#pergunta_votos
-        = link_to image_tag('maisVoto.png'), vote_up_question_path(@pergunta), :method => :post
+        = link_to image_tag('maisVoto.png'), vote_up_question_path(@pergunta), id: 'pergunta_upvote', :method => :post
         %br
         = @pergunta.plusminus
         %br
-        = link_to image_tag('menosVoto.png'), vote_down_question_path(@pergunta), :method => :post
+        = link_to image_tag('menosVoto.png'), vote_down_question_path(@pergunta), id: 'pergunta_downvote', :method => :post
         %br
       %td.conteudo#pergunta_conteudo
         != @pergunta.conteudo
