@@ -28,6 +28,8 @@ gem 'thumbs_up'
 
 gem 'jquery-rails'
 
+gem 'metric_fu'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -41,5 +43,9 @@ group :development, :test do
 	gem 'factory_girl_rails'
 	gem "shoulda-matchers"
 	gem 'annotate'
+end
+
+group :development do
+  gem "rails-erd"
 end
 
