@@ -1,0 +1,171 @@
+
+Validacoes
+  Question
+    example at ./spec/models/question/validacoes_spec.rb:16 (PENDING: No reason given)
+    Titulo
+      example at ./spec/models/question/validacoes_spec.rb:7 (PENDING: No reason given)
+      example at ./spec/models/question/validacoes_spec.rb:8 (PENDING: No reason given)
+    Conteudo
+      example at ./spec/models/question/validacoes_spec.rb:12 (PENDING: No reason given)
+      example at ./spec/models/question/validacoes_spec.rb:13 (PENDING: No reason given)
+
+Validacoes
+  Answer
+    example at ./spec/models/answer/validacoes_spec.rb:11 (PENDING: No reason given)
+    Conteudo
+      example at ./spec/models/answer/validacoes_spec.rb:7 (PENDING: No reason given)
+      example at ./spec/models/answer/validacoes_spec.rb:8 (PENDING: No reason given)
+
+AnswersController
+  GET /questions/:question_id/answers/:id/edit
+    deve expor @answer a partir do id passado
+  PUT /questions/:question_id/answers/:id (#update)
+    atualiza os atributos de resposta
+    request/response
+      redireciona para a pagina de visualizacao da pergunta
+      adiciona uma mensagem :notice no flash
+  POST /questions/:question_id/answer/:id/vote_down
+    voto valido
+      redireciona para a pagina de visualizacao da pergunta
+      diminui em um o voto da resposta
+      adiciona uma mensagem :notice no flash
+    voto invalido
+      adiciona uma mensagem :warning no flash
+      nao altera a quantidade de votos
+  POST /questions/:question_id/answer/:id/vote_up
+    voto valido
+      redireciona para a pagina de visualizacao da pergunta
+      adiciona uma mensagem :notice no flash
+      aumenta em um o voto da resposta
+    voto invalido (votando novamente)
+      adiciona uma mensagem :warning no flash
+      nao altera a quantidade de votos
+  POST /questions/:question_id/answers/create
+    valores validos
+      salva a resposta no banco de dados
+      atribui o usuario
+      redireciona no sucesso
+      redireciona para a pagina de visualizacao da pergunta
+
+Aceitar resposta
+  resposta inicializada como nao aceita
+  marca resposta como aceita
+
+Associacoes
+  Answer
+    should belong to question
+    should belong to user
+
+Associacoes
+  User
+    should have many questions
+    should have many answers
+
+QuestionsController
+  /questions/:id/solve
+    pergunta sem resposta aceita
+      redireciona para a pagina de visualizacao da pergunta
+      recebe o id resposta via params[:answer_id]
+      adiciona uma mensagem :notice no flash
+      atribui a resposta correta
+      marca a pergunta como resolvida
+      chama o metodo de marcar a resposta como aceita
+  PUT /:id (#update)
+    redireciona para a pagina de visualizacao
+    atualiza os atributos de pergunta
+    adiciona uma mensagem no flash
+  POST /create
+    valores validos
+      redireciona para a pagina de visualizacao da pergunta criada
+      salva a nova pergunta no banco de dados
+      atribui o usuario
+      adiciona uma mensagem no flash
+      redireciona no sucesso
+  GET /most_voted
+    obtem as 3 perguntas mais votadas
+  GET /:id/edit/
+    deve expor @question a partir do id passado
+  GET /show
+    atribui a pergunta
+    aumenta a contagem de visualizacao da pergunta
+  POST /questions/:question_id/answer/:id/vote_down
+    voto valido
+      redireciona para a pagina de visualizacao da pergunta
+      diminui em um o voto da resposta
+      adiciona uma mensagem :notice no flash
+    voto invalido
+      adiciona uma mensagem :warning no flash
+      nao altera a quantidade de votos
+  POST /questions/:question_id/vote_up
+    voto valido
+      redireciona para a pagina de visualizacao da pergunta
+      adiciona uma mensagem :notice no flash
+      aumenta em um o voto da resposta
+    voto invalido (votando novamente)
+      adiciona uma mensagem :warning no flash
+      nao altera a quantidade de votos
+  GET /new
+    usuario logado
+      resposta HTTP sucesso (200)
+      carrega a pagina de nova pergunta
+    usuario nao logado
+      resposta HTTP redirect (302)
+
+Inicializando Hits
+  hits deve ser 0 quando pergunta for criada
+
+Associacoes
+  Question
+    should have many answers
+    should belong to user
+
+MeAjudaNisso::Questions::Presenters::Collection
+  pegando as perguntas mais bem votadas
+    expõe as 3 perguntas com mais votos
+
+MeAjudaNisso::Questions
+  .bem_votadas
+    empacota as perguntas bem votadas em um presenter
+
+Relacionando tags
+  tags_string pode ser mass assigned
+  faz o join do array em uma string dividida por virgula
+  converte tag como String para Array
+  recebe um Array como tag
+  deve retornar um array vazio ao instanciar a pergunta
+  recebe uma String como tag
+  atribui valor a tags atraves de chamada a tags_string=
+  responde a tags_string=
+  salva um Array como tag
+
+Pending:
+  Validacoes Question
+    # No reason given
+    # ./spec/models/question/validacoes_spec.rb:16
+  Validacoes Question Titulo
+    # No reason given
+    # ./spec/models/question/validacoes_spec.rb:7
+  Validacoes Question Titulo
+    # No reason given
+    # ./spec/models/question/validacoes_spec.rb:8
+  Validacoes Question Conteudo
+    # No reason given
+    # ./spec/models/question/validacoes_spec.rb:12
+  Validacoes Question Conteudo
+    # No reason given
+    # ./spec/models/question/validacoes_spec.rb:13
+  Validacoes Answer
+    # No reason given
+    # ./spec/models/answer/validacoes_spec.rb:11
+  Validacoes Answer Conteudo
+    # No reason given
+    # ./spec/models/answer/validacoes_spec.rb:7
+  Validacoes Answer Conteudo
+    # No reason given
+    # ./spec/models/answer/validacoes_spec.rb:8
+
+Finished in 10.7 seconds
+77 examples, 0 failures, 8 pending
+
+Randomized with seed 21396
+

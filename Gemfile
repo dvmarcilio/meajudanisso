@@ -29,6 +29,7 @@ gem 'thumbs_up'
 gem 'jquery-rails'
 
 gem 'metric_fu'
+gem 'simplecov', :require => false, :group => :test
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

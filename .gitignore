@@ -22,3 +22,4 @@ pickle-email-*.html
 solr/data
 solr/development
 solr/test
+coverage

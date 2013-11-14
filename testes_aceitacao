@@ -1,0 +1,326 @@
+Using the default profile...
+#language: pt
+Funcionalidade: Aceitar uma resposta
+  Como um usuário cadastrado e que fez uma pergunta
+  Para que eu possa mostrar que uma resposta solucionou minha dúvida
+  Eu quero poder aceitar uma resposta
+
+  Cenário: Usuário, que fez a pergunta, visualizando uma pergunta sem resposta aceita[90m # features/aceitar_resposta.feature:7[0m
+    [32mDado que minha pergunta possui respostas[90m                                          # features/step_definitions/perguntas_steps.rb:349[0m[0m
+    [32mMas a pergunta não possui uma resposta aceita[90m                                     # features/step_definitions/perguntas_steps.rb:354[0m[0m
+    [32mQuando eu estou na página de visualização dessa pergunta[90m                          # features/step_definitions/perguntas_steps.rb:358[0m[0m
+    [32mEntão eu devo ver a opção de aceitar resposta em todas as respostas[90m               # features/step_definitions/perguntas_steps.rb:362[0m[0m
+
+  Cenário: Usuário, que não fez a pergunta, visualizando uma pergunta sem resposta aceita[90m # features/aceitar_resposta.feature:13[0m
+    [32mDado que eu estou visualizando uma pergunta, feita por outro usuário, com respostas[90m   # features/step_definitions/perguntas_steps.rb:369[0m[0m
+    [32mE a pergunta não possui uma resposta aceita[90m                                           # features/step_definitions/perguntas_steps.rb:354[0m[0m
+    [32mEntão eu não devo a ver opção de aceitar resposta em nenhuma resposta[90m                 # features/step_definitions/perguntas_steps.rb:375[0m[0m
+
+  Cenário: Aceitar resposta[90m                                                    # features/aceitar_resposta.feature:18[0m
+    [32mDado que eu estou visualizando uma pergunta, que eu fiz, com respostas[90m     # features/step_definitions/perguntas_steps.rb:382[0m[0m
+    [32mE a pergunta não possui uma resposta aceita[90m                                # features/step_definitions/perguntas_steps.rb:354[0m[0m
+    [32mQuando eu aceito a primeira resposta[90m                                       # features/step_definitions/perguntas_steps.rb:387[0m[0m
+    [32mEntão eu devo ver uma mensagem de confirmação de que a resposta foi aceita[90m # features/step_definitions/perguntas_steps.rb:395[0m[0m
+    [32mE uma imagem indicando que a resposta é a aceita[90m                           # features/step_definitions/perguntas_steps.rb:399[0m[0m
+
+  Cenário: Usuário, que fez a pergunta, visualizando uma pergunta com resposta aceita[90m # features/aceitar_resposta.feature:25[0m
+    [32mDado que eu estou visualizando minha pergunta com resposta aceita[90m                 # features/step_definitions/perguntas_steps.rb:405[0m[0m
+    [32mEntão eu não devo a ver opção de aceitar resposta em nenhuma resposta[90m             # features/step_definitions/perguntas_steps.rb:375[0m[0m
+    [33mE ver a opção de cancelar a aceitação na resposta aceita[90m                          # features/step_definitions/perguntas_steps.rb:412[0m[0m
+[33m      TODO (Cucumber::Pending)[0m
+[33m      ./features/step_definitions/perguntas_steps.rb:413:in `/^ver a opção de cancelar a aceitação na resposta aceita$/'[0m
+[33m      features/aceitar_resposta.feature:28:in `E ver a opção de cancelar a aceitação na resposta aceita'[0m
+    [36mE não ver ver a opção de cancelar a aceitação nas outras respostas[90m                # features/step_definitions/perguntas_steps.rb:416[0m[0m
+
+#language: pt
+Funcionalidade: Cadastrar Usuário
+  Como usuário sem cadastro
+  Para que eu possa pergutar e responder
+  Eu devo me cadastrar no sistema
+
+  Cenário: Acessar a página de cadastro[90m       # features/cadastrar_usuario.feature:7[0m
+    [32mDado que estou na página principal[90m        # features/step_definitions/cadastrar_steps.rb:5[0m[0m
+    [32mQuando clico no link "[32m[1mCadastrar[0m[0m[32m"[90m          # features/step_definitions/meajudanisso_steps.rb:53[0m[0m
+    [32mEntão eu devo estar na página de cadastro[90m # features/step_definitions/cadastrar_steps.rb:9[0m[0m
+
+  Cenário: Cadastro realizado com sucesso[90m                        # features/cadastrar_usuario.feature:12[0m
+    [32mDado que estou na página de cadastro[90m                         # features/step_definitions/cadastrar_steps.rb:13[0m[0m
+    [32mQuando eu preencho o formulario com dados corretos[90m           # features/step_definitions/cadastrar_steps.rb:17[0m[0m
+    [32mE clico no botão "[32m[1mCadastrar[0m[0m[32m"[90m                                 # features/step_definitions/meajudanisso_steps.rb:49[0m[0m
+    [32mEntão devo estar na página principal[90m                         # features/step_definitions/cadastrar_steps.rb:23[0m[0m
+    [32mE ver a mensagem "[32m[1mBem-vindo! Você se registrou com sucesso.[0m[0m[32m"[90m # features/step_definitions/cadastrar_steps.rb:27[0m[0m
+
+#language: pt
+Funcionalidade: Editar uma pergunta
+  Como um usuário cadastrado
+  Para que eu possa melhorar o entendimento de uma pergunta
+  Eu quero poder editar uma pergunta
+
+  Cenário: Entrar na página de edição[90m                           # features/editar_pergunta.feature:7[0m
+    [32mDado que eu estou na página de visualização de uma pergunta[90m # features/step_definitions/perguntas_steps.rb:54[0m[0m
+    [32mQuando eu clico no link "editar" da [32m[1mpergunta[0m[0m[32m[90m                # features/step_definitions/perguntas_steps.rb:199[0m[0m
+    [32mEntão eu devo estar na página de edição da pergunta[90m         # features/step_definitions/perguntas_steps.rb:204[0m[0m
+    [32mE os dados da pergunta estarem preenchidos[90m                  # features/step_definitions/perguntas_steps.rb:208[0m[0m
+
+  Cenário: Editar uma pergunta[90m                                   # features/editar_pergunta.feature:13[0m
+    [32mDado que eu estou na página de edição de uma pergunta[90m        # features/step_definitions/perguntas_steps.rb:214[0m[0m
+    [32mQuando eu edito a pergunta[90m                                   # features/step_definitions/perguntas_steps.rb:219[0m[0m
+    [32mEntão eu devo estar na página de visualização dessa pergunta[90m # features/step_definitions/perguntas_steps.rb:24[0m[0m
+    [32mE ver uma mensagem de confirmação da edição da [32m[1mpergunta[0m[0m[32m[90m      # features/step_definitions/perguntas_steps.rb:225[0m[0m
+    [32mE a pergunta atualizada[90m                                      # features/step_definitions/perguntas_steps.rb:234[0m[0m
+
+#language: pt
+Funcionalidade: Editar uma resposta
+  Como um usuário cadastrado
+  Para que eu possa melhorar o entendimento de uma resposta
+  Eu quero poder editar uma resposta
+
+  Cenário: Entrar na página de edição de resposta[90m           # features/editar_resposta.feature:7[0m
+    [32mDado que uma pergunta com uma resposta existe[90m           # features/step_definitions/perguntas_steps.rb:240[0m[0m
+    [32mE que eu estou na página de visualização dessa pergunta[90m # features/step_definitions/perguntas_steps.rb:177[0m[0m
+    [32mQuando eu clico no link "editar" da [32m[1mresposta[0m[0m[32m[90m            # features/step_definitions/perguntas_steps.rb:199[0m[0m
+    [32mEntão eu devo estar na página de edição da resposta[90m     # features/step_definitions/perguntas_steps.rb:249[0m[0m
+
+  Cenário: Página de edição mostra os dados corretamente[90m  # features/editar_resposta.feature:13[0m
+    [32mDado que eu estou na página de edição de uma resposta[90m # features/step_definitions/perguntas_steps.rb:253[0m[0m
+    [32mEntão eu devo ver os dados da pergunta[90m                # features/step_definitions/perguntas_steps.rb:258[0m[0m
+    [32mE os dados da resposta devem estar preenchidos[90m        # features/step_definitions/perguntas_steps.rb:263[0m[0m
+
+  Cenário: Editar resposta[90m                                       # features/editar_resposta.feature:18[0m
+    [32mDado que eu estou na página de edição de uma resposta[90m        # features/step_definitions/perguntas_steps.rb:253[0m[0m
+    [32mE eu edito o conteúdo da resposta[90m                            # features/step_definitions/perguntas_steps.rb:267[0m[0m
+    [32mEntão eu devo estar na página de visualização dessa pergunta[90m # features/step_definitions/perguntas_steps.rb:24[0m[0m
+    [32mE ver uma mensagem de confirmação da edição da [32m[1mresposta[0m[0m[32m[90m      # features/step_definitions/perguntas_steps.rb:225[0m[0m
+    [32mE a resposta atualizada[90m                                      # features/step_definitions/perguntas_steps.rb:273[0m[0m
+
+#language: pt
+Funcionalidade: Fazer uma pergunta
+  Como um usuário cadastrado
+  Para que eu possa fazer uma pergunta
+  Eu quero poder escrever minha pergunta
+
+  Contexto: [90m                         # features/fazer_pergunta.feature:7[0m
+    [32mDado que eu fiz login no sistema[90m # features/step_definitions/logar_steps.rb:15[0m[0m
+
+  Cenário: Criar uma pergunta válida[90m                             # features/fazer_pergunta.feature:10[0m
+    [32mDado que eu estou na página de fazer uma pergunta[90m            # features/step_definitions/perguntas_steps.rb:3[0m[0m
+    [32mQuando eu preencho os dados da pergunta corretamente[90m         # features/step_definitions/perguntas_steps.rb:7[0m[0m
+    [32mE clico no botão "[32m[1mCriar Pergunta[0m[0m[32m"[90m                            # features/step_definitions/meajudanisso_steps.rb:49[0m[0m
+    [32mEntão eu devo estar na página de visualização dessa pergunta[90m # features/step_definitions/perguntas_steps.rb:24[0m[0m
+    [32mE devo ver "[32m[1mPergunta criada![0m[0m[32m"[90m                                # features/step_definitions/perguntas_steps.rb:32[0m[0m
+
+#language: pt
+Funcionalidade: Logar no sistema
+  Como um usuário cadastrado
+  Para que eu possa perguntar e responder
+  Eu devo efetuar login
+
+  Cenário: Acessar a página de login[90m       # features/logar_usuario.feature:7[0m
+    [32mDado que estou na página principal[90m     # features/step_definitions/cadastrar_steps.rb:5[0m[0m
+    [32mQuando clico no link "[32m[1mLogin[0m[0m[32m"[90m           # features/step_definitions/meajudanisso_steps.rb:53[0m[0m
+    [32mEntão eu devo estar na página de login[90m # features/step_definitions/logar_steps.rb:2[0m[0m
+
+  Cenário: Acessar a página de login interno[90m       # features/logar_usuario.feature:12[0m
+    [32mDado que eu estou na página de login[90m           # features/step_definitions/logar_steps.rb:39[0m[0m
+    [32mQuando eu clico na imagem meajudanisso[90m         # features/step_definitions/logar_steps.rb:43[0m[0m
+    [32mEntão eu devo estar na página de login interno[90m # features/step_definitions/logar_steps.rb:47[0m[0m
+
+  Cenário: Login realizado com sucesso[90m                          # features/logar_usuario.feature:17[0m
+    [32mDado que estou na página de login interno[90m                   # features/step_definitions/logar_steps.rb:51[0m[0m
+    [32mQuando eu preencho o formulario de login com dados corretos[90m # features/step_definitions/logar_steps.rb:10[0m[0m
+    [32mE clico no botão "[32m[1mEntrar[0m[0m[32m"[90m                                   # features/step_definitions/meajudanisso_steps.rb:49[0m[0m
+    [32mEntão devo estar na página principal[90m                        # features/step_definitions/cadastrar_steps.rb:23[0m[0m
+    [32mE ver a mensagem "[32m[1mAutenticado com sucesso.[0m[0m[32m"[90m                 # features/step_definitions/cadastrar_steps.rb:27[0m[0m
+
+#language: pt
+Funcionalidade: Logout no sistema
+  Como um usuário cadastrado
+  Para que eu possa sair do sistema
+  Eu devo efetuar logout
+
+  Cenário: Logout realizado com sucesso[90m          # features/logout_usuario.feature:7[0m
+    [32mDado que eu fiz login no sistema[90m             # features/step_definitions/logar_steps.rb:15[0m[0m
+    [32mQuando eu efetuar o logout[90m                   # features/step_definitions/logout_steps.rb:60[0m[0m
+    [32mEntão devo estar na página principal[90m         # features/step_definitions/cadastrar_steps.rb:23[0m[0m
+    [32mE ver a mensagem "[32m[1mLogout feito com sucesso.[0m[0m[32m"[90m # features/step_definitions/cadastrar_steps.rb:27[0m[0m
+
+#language: pt
+Funcionalidade: Negar acessos não autorizados
+
+  Contexto: [90m                                 # features/negar_acessos_nao_autorizados.feature:4[0m
+    [32mDado que eu não efetuei login no sistema[90m # features/step_definitions/logar_steps.rb:55[0m[0m
+
+  Cenário: Fazer uma pergunta[90m                                    # features/negar_acessos_nao_autorizados.feature:7[0m
+    [32mQuando eu clico no link "[32m[1mPerguntar[0m[0m[32m"[90m                          # features/step_definitions/meajudanisso_steps.rb:53[0m[0m
+    [32mEntão eu devo estar na página de login[90m                       # features/step_definitions/logar_steps.rb:2[0m[0m
+    [32mE ver que eu devo me registrar ou fazer login para continuar[90m # features/step_definitions/logar_steps.rb:59[0m[0m
+
+  Cenário: Responder uma pergunta[90m                                                          # features/negar_acessos_nao_autorizados.feature:12[0m
+    [32mDado que eu estou na página de visualização de uma pergunta[90m                            # features/step_definitions/perguntas_steps.rb:54[0m[0m
+    [32mEntão eu devo ver "Sua Resposta"[90m                                                       # features/step_definitions/perguntas_steps.rb:126[0m[0m
+    [32mE não ver um campo de texto para responder[90m                                             # features/step_definitions/perguntas_steps.rb:134[0m[0m
+    [32mE ver uma mensagem que eu devo me registrar ou fazer login para responder uma pergunta[90m # features/step_definitions/logar_steps.rb:63[0m[0m
+
+#language: pt
+Funcionalidade: Relacionar tags a uma pergunta
+  US-08
+  Como um usuário cadastrado
+  Para que minha pergunta seja identificada mais facilmente
+  Eu quero poder relacionar tags a minha pergunta
+
+  Contexto: [90m                         # features/relacionar_tags_a_pergunta.feature:8[0m
+    [32mDado que eu fiz login no sistema[90m # features/step_definitions/logar_steps.rb:15[0m[0m
+
+  Esquema do Cenário: Relacionar tags a uma nova pergunta[90m        # features/relacionar_tags_a_pergunta.feature:11[0m
+    [36mDado que eu estou na página de fazer uma pergunta[90m            # features/step_definitions/perguntas_steps.rb:3[0m[0m
+    [36mE eu preencho os dados da pergunta corretamente[90m              # features/step_definitions/perguntas_steps.rb:7[0m[0m
+    [36mQuando eu relaciono a(s) tag(s) <tags> à pergunta[90m            # features/step_definitions/perguntas_steps.rb:41[0m[0m
+    [36mE clico em criar pergunta[90m                                    # features/step_definitions/perguntas_steps.rb:46[0m[0m
+    [36mEntão eu devo estar na página de visualização dessa pergunta[90m # features/step_definitions/perguntas_steps.rb:24[0m[0m
+    [36mE visualizar as tags da pergunta[90m                             # features/step_definitions/perguntas_steps.rb:50[0m[0m
+
+    Exemplos: 
+      | [36m[1mtags                       [0m[0m[36m[0m |[0m
+      | [32m"Java"                     [0m[0m |[0m
+      | [32m"Java, JEE"                [0m[0m |[0m
+      | [32m"Java, JEE, JSF"           [0m[0m |[0m
+      | [32m"Java, JEE, JSF, Hibernate"[0m[0m |[0m
+
+#language: pt
+Funcionalidade: Responder uma pergunta
+  Como um usuário cadastrado
+  Para que eu possa solucionar uma dúvida
+  Eu quero poder responder uma pergunta
+
+  Contexto: [90m                         # features/responder_pergunta.feature:7[0m
+    [32mDado que eu fiz login no sistema[90m # features/step_definitions/logar_steps.rb:15[0m[0m
+
+  Cenário: Visualizar o campo de texto para a resposta[90m          # features/responder_pergunta.feature:10[0m
+    [32mDado que eu estou na página de visualização de uma pergunta[90m # features/step_definitions/perguntas_steps.rb:54[0m[0m
+    [32mEntão eu devo ver "Sua Resposta"[90m                            # features/step_definitions/perguntas_steps.rb:126[0m[0m
+    [32mE ver um campo de texto para responder[90m                      # features/step_definitions/perguntas_steps.rb:130[0m[0m
+    [32mE ver um botão "[32m[1mResponder[0m[0m[32m"[90m                                  # features/step_definitions/perguntas_steps.rb:138[0m[0m
+
+  Cenário: Criar uma resposta válida[90m                                      # features/responder_pergunta.feature:16[0m
+    Ver minha resposta consiste em ver:
+      Conteúdo da resposta
+      Votos da resposta, ZERO nesse caso pois a resposta foi recém criada
+      Usuário, o meu usuário pois eu que acabei de responder
+    [32mDado que eu estou na página de visualização de uma pergunta[90m           # features/step_definitions/perguntas_steps.rb:54[0m[0m
+    [32mQuando eu preencho minha resposta no campo de texto[90m                   # features/step_definitions/perguntas_steps.rb:142[0m[0m
+    [32mE clico no botão "[32m[1mResponder[0m[0m[32m"[90m                                          # features/step_definitions/meajudanisso_steps.rb:49[0m[0m
+    [32mEntão eu devo estar na página de visualização dessa pergunta[90m          # features/step_definitions/perguntas_steps.rb:24[0m[0m
+    [32mE ver minha resposta[90m                                                  # features/step_definitions/perguntas_steps.rb:147[0m[0m
+
+  Cenário: Visualizar a resposta sem as tags HTML[90m               # features/responder_pergunta.feature:28[0m
+    [32mDado que uma pergunta possui uma resposta com conteúdo HTML[90m # features/step_definitions/perguntas_steps.rb:168[0m[0m
+    [32mE que eu estou na página de visualização dessa pergunta[90m     # features/step_definitions/perguntas_steps.rb:177[0m[0m
+    [32mEntão eu devo ver a resposta sem as tags HTML[90m               # features/step_definitions/perguntas_steps.rb:173[0m[0m
+
+#language: pt
+Funcionalidade: Visualizar perfil do usuário
+
+  Cenário: Usuário sem nenhuma pergunta feita[90m                          # features/visualizar_perfil_usuario.feature:4[0m
+    [33mDado que um usuário cadastrado existe[90m                              # features/step_definitions/perfil_steps.rb:2[0m[0m
+[33m      TODO (Cucumber::Pending)[0m
+[33m      ./features/step_definitions/perfil_steps.rb:3:in `/^que um usuário cadastrado existe$/'[0m
+[33m      features/visualizar_perfil_usuario.feature:5:in `Dado que um usuário cadastrado existe'[0m
+    [36mE que ele não fez nenhuma pergunta[90m                                 # features/step_definitions/perfil_steps.rb:6[0m[0m
+    [36mQuando eu visito a página do seu perfil[90m                            # features/step_definitions/perfil_steps.rb:10[0m[0m
+    [36mEntão eu devo ver uma mensagem de que ele não fez nenhuma pergunta[90m # features/step_definitions/perfil_steps.rb:14[0m[0m
+
+#language: pt
+Funcionalidade: Visualizar pergunta
+  Como um usuário
+  Para confirmar se a pergunta está de acordo com o que eu quero 
+  Eu quero visualizar a pergunta
+
+  Cenário: Visualizar os dados da pergunta[90m                      # features/visualizar_pergunta.feature:7[0m
+    título
+    conteúdo
+    votos
+    tags
+    data de criação
+    data de edição, se houver
+    usuário que perguntou
+    [32mDado que eu estou na página de visualização de uma pergunta[90m # features/step_definitions/perguntas_steps.rb:54[0m[0m
+    [32mEntão eu devo ver os dados dessa pergunta[90m                   # features/step_definitions/perguntas_steps.rb:74[0m[0m
+
+  Cenário: Mensagem diferente para pergunta sem resposta[90m                     # features/visualizar_pergunta.feature:19[0m
+    Uma pergunta sem resposta deve mostrar uma mensagem diferente.
+    [32mDado que eu estou na página de visualização de uma pergunta sem resposta[90m # features/step_definitions/perguntas_steps.rb:191[0m[0m
+    [32mEntão eu devo ver que essa mensagem não foi respondida[90m                   # features/step_definitions/perguntas_steps.rb:195[0m[0m
+
+  Esquema do Cenário: Visualizar a quantidade de respostas da pergunta[90m # features/visualizar_pergunta.feature:25[0m
+    [36mDado que uma pergunta possui <quantidade> respostas[90m                # features/step_definitions/perguntas_steps.rb:181[0m[0m
+    [36mE que eu estou na página de visualização dessa pergunta[90m            # features/step_definitions/perguntas_steps.rb:177[0m[0m
+    [36mEntão eu devo ver que ela tem <quantidade> respostas[90m               # features/step_definitions/perguntas_steps.rb:187[0m[0m
+
+    Exemplos: 
+      | [36m[1mquantidade[0m[0m[36m[0m |[0m
+      | [32m2         [0m[0m |[0m
+      | [32m3         [0m[0m |[0m
+      | [32m4         [0m[0m |[0m
+      | [32m5         [0m[0m |[0m
+      | [32m10        [0m[0m |[0m
+      | [32m15        [0m[0m |[0m
+
+  Cenário: Contagem de views da pergunta[90m                     # features/visualizar_pergunta.feature:39[0m
+    [32mDado que uma pergunta com visualizações existe[90m           # features/step_definitions/perguntas_steps.rb:279[0m[0m
+    [32mQuando eu visito a página de visualização dessa pergunta[90m # features/step_definitions/perguntas_steps.rb:284[0m[0m
+    [32mEntão eu devo ver a pergunta com uma visualização a mais[90m # features/step_definitions/perguntas_steps.rb:288[0m[0m
+
+#language: pt
+Funcionalidade: Votar em uma pergunta
+  Como um usuário cadastrado
+  Para que eu possa indicar que a pergunta foi relevante para mim
+  Eu quero poder votar na pergunta
+
+  Contexto: [90m                                                 # features/votar_na_pergunta.feature:7[0m
+    [32mDado que eu fiz login no sistema[90m                         # features/step_definitions/logar_steps.rb:15[0m[0m
+    [32mE que eu estou na página de visualização de uma pergunta[90m # features/step_definitions/perguntas_steps.rb:54[0m[0m
+
+  Cenário: Votar positivamente na pergunta[90m                                     # features/votar_na_pergunta.feature:11[0m
+    [32mQuando eu voto [32m[1mpositivo[0m[0m[32m na pergunta[90m                                        # features/step_definitions/perguntas_steps.rb:305[0m[0m
+    [32mEntão eu devo ver uma mensagem de confirmação do voto [32m[1mpositivo[0m[0m[32m na pergunta[90m # features/step_definitions/perguntas_steps.rb:312[0m[0m
+    [32mE eu devo ver a pergunta com um voto a [32m[1mmais[0m[0m[32m[90m                                # features/step_definitions/perguntas_steps.rb:317[0m[0m
+
+  Cenário: Votar negativamente na pergunta[90m                                     # features/votar_na_pergunta.feature:16[0m
+    [32mQuando eu voto [32m[1mnegativo[0m[0m[32m na pergunta[90m                                        # features/step_definitions/perguntas_steps.rb:305[0m[0m
+    [32mEntão eu devo ver uma mensagem de confirmação do voto [32m[1mnegativo[0m[0m[32m na pergunta[90m # features/step_definitions/perguntas_steps.rb:312[0m[0m
+    [32mE eu devo ver a pergunta com um voto a [32m[1mmenos[0m[0m[32m[90m                               # features/step_definitions/perguntas_steps.rb:317[0m[0m
+
+#language: pt
+Funcionalidade: Votar em uma resposta
+
+  #TODO Completar
+  Contexto: [90m                                                                  # features/votar_na_resposta.feature:5[0m
+    [32mDado que eu fiz login no sistema[90m                                          # features/step_definitions/logar_steps.rb:15[0m[0m
+    [32mE que eu estou na página de visualização de uma pergunta com uma resposta[90m # features/step_definitions/perguntas_steps.rb:293[0m[0m
+
+  Cenário: Votar positivo na resposta[90m                                          # features/votar_na_resposta.feature:9[0m
+    [32mQuando eu voto [32m[1mpositivo[0m[0m[32m na resposta[90m                                        # features/step_definitions/perguntas_steps.rb:298[0m[0m
+    [32mEntão eu devo ver uma mensagem de confirmação do voto [32m[1mpositivo[0m[0m[32m na resposta[90m # features/step_definitions/perguntas_steps.rb:312[0m[0m
+    [32mE eu devo ver a resposta com um voto a [32m[1mmais[0m[0m[32m[90m                                # features/step_definitions/perguntas_steps.rb:322[0m[0m
+
+  Cenário: Votar negativo na resposta[90m                                          # features/votar_na_resposta.feature:14[0m
+    [32mQuando eu voto [32m[1mnegativo[0m[0m[32m na resposta[90m                                        # features/step_definitions/perguntas_steps.rb:298[0m[0m
+    [32mEntão eu devo ver uma mensagem de confirmação do voto [32m[1mnegativo[0m[0m[32m na resposta[90m # features/step_definitions/perguntas_steps.rb:312[0m[0m
+    [32mE eu devo ver a resposta com um voto a [32m[1mmenos[0m[0m[32m[90m                               # features/step_definitions/perguntas_steps.rb:322[0m[0m
+
+  #TODO considerar todas as combinações ?
+  # tá longe do ideal esse teste
+  Esquema do Cenário: Votar novamente na resposta[90m          # features/votar_na_resposta.feature:21[0m
+    [36mDado que eu já votei <fator> na resposta[90m               # features/step_definitions/perguntas_steps.rb:327[0m[0m
+    [36mQuando eu voto novamente <fator> na resposta[90m           # features/step_definitions/perguntas_steps.rb:331[0m[0m
+    [36mEntão eu devo uma mensagem que eu já votei na resposta[90m # features/step_definitions/perguntas_steps.rb:335[0m[0m
+    [36mE eu devo ver a resposta com o mesmo número de votos[90m   # features/step_definitions/perguntas_steps.rb:344[0m[0m
+
+    Exemplos: 
+      | [36m[1mfator   [0m[0m[36m[0m |[0m
+      | [32mpositivo[0m[0m |[0m
+      | [32mnegativo[0m[0m |[0m
+
+41 scenarios ([33m2 pending[0m, [32m39 passed[0m)
+179 steps ([36m4 skipped[0m, [33m2 pending[0m, [32m173 passed[0m)
+0m5.335s
