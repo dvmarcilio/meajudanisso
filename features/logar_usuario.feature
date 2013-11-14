@@ -40,3 +40,4 @@ Funcionalidade: Logar no sistema
     Quando eu faço o login com a minha conta Facebook
     Então eu devo estar na página principal
     E ver a mensagem "Autorizado com sucesso pela conta Facebook."
+  

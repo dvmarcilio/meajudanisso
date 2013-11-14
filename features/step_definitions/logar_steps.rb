@@ -73,10 +73,11 @@ Então(/^(?:eu devo )?ver a imagem para login no (MeAjudaNisso|Google|Facebook)$
   page.should have_image(image_id)
 end
 
-Quando(/^eu faço o login com a minha conta Google$/) do
-	provider = 'google_oauth2'
-	mock_external_auth(provider)
-	click_link 'logo_google'
+Provider = Struct.new(:name, :logo_id)
+Quando(/^eu faço o login com a minha conta (Google|Facebook)$/) do |provider_name|
+	provider = provider(provider_name)
+	mock_external_auth(provider.name)
+	click_link provider.logo_id
 end
 
 private
@@ -108,6 +109,14 @@ private
   			:email => user.email,
 				:name => user.name }
 		})	
+  end
+  
+  def provider(name) 
+    if name.eql? 'Google'
+      Provider.new('google_oauth2', 'logo_google')
+    elsif name.eql? 'Facebook'
+      Provider.new('facebook', 'logo_facebook')
+    end
   end
 
 
