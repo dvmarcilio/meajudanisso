@@ -228,7 +228,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  annotate
+  annotate (= 2.5.0)
   bootstrap-sass
   bootstrap-will_paginate
   coffee-rails (~> 3.2.1)
