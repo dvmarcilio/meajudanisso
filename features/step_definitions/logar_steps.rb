@@ -68,10 +68,25 @@ def page_should_have_alert_msg(msg)
   page.should have_css("#alert-message", text: msg)
 end
 
+Então(/^(?:eu devo )?ver a imagem para login no (MeAjudaNisso|Google|Facebook)$/) do |sistema|
+  image_id = system_login_image_id(sistema)
+  page.should have_image(image_id)
+end
+
 private
   def fill_login_form(user)
     fill_in("Email", with: user.email)
     fill_in("Senha", with: user.password)
+  end
+  
+  def system_login_image_id(system)
+    if system.eql?('MeAjudaNisso')
+      'meajudanisso.png'
+    elsif system.eql?('Google')
+      'google.png'
+    elsif system.eql?('Facebook')
+      'facebook.png'
+    end
   end
 
 

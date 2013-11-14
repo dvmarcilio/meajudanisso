@@ -8,6 +8,12 @@ Funcionalidade: Logar no sistema
 		Dado que estou na página principal
 		Quando clico no link "Login"
 		Então eu devo estar na página de login
+		
+  Cenário: Visualizar opções na página de login
+    Dado que eu estou na página de login
+    Então eu devo ver a imagem para login no MeAjudaNisso
+    E ver a imagem para login no Facebook
+    E ver a imagem para login no Google
 
 	Cenário: Acessar a página de login interno
 		Dado que eu estou na página de login
