@@ -73,6 +73,12 @@ Então(/^(?:eu devo )?ver a imagem para login no (MeAjudaNisso|Google|Facebook)$
   page.should have_image(image_id)
 end
 
+Quando(/^eu faço o login com a minha conta Google$/) do
+	provider = 'google_oauth2'
+	mock_external_auth(provider)
+	click_link 'logo_google'
+end
+
 private
   def fill_login_form(user)
     fill_in("Email", with: user.email)
@@ -87,6 +93,21 @@ private
     elsif system.eql?('Facebook')
       'facebook.png'
     end
+  end
+  
+  def mock_external_auth(provider)
+  	user = FactoryGirl.create(:user, provider: provider, uid: '123')
+		mock_omniauth_provider(provider, user)
+  end
+  
+  def mock_omniauth_provider(provider, user) 
+  	OmniAuth.config.add_mock(provider.to_sym, {
+  		:provider => user.provider,
+  		:uid => user.uid,
+  		:info => {
+  			:email => user.email,
+				:name => user.name }
+		})	
   end
 
 
