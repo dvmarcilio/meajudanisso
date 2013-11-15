@@ -93,6 +93,18 @@ Então(/^eu devo ver, abaixo de Conta, a opção (.*)$/) do |option|
   account_dropdown_should_have(option)
 end
 
+Quando(/^eu clico, abaixo de conta, em (Perfil|Atualizar Perfil)$/) do |link|
+  within(@dropdown_id) { click_on link } 
+end
+
+Então(/^eu devo estar na página do meu perfil$/) do
+  current_path.should eq(user_path(@user))
+end
+
+Então(/^eu devo estar na página de atualizar perfil$/) do
+  current_path.should eq(edit_user_registration_path)
+end
+
 private
   def fill_login_form(user)
     fill_in("Email", with: user.email)
