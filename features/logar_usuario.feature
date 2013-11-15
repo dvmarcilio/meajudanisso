@@ -27,6 +27,16 @@ Funcionalidade: Logar no sistema
 		Então devo estar na página principal
 		E ver a mensagem "Autenticado com sucesso."
 		E ver o menu Conta no cabeçalho
+	
+	@javascript	
+  Cenário: Ver as opções do menu Conta
+    Menu Conta só aparece quando o usuário fez login
+    
+    Dado que eu fiz login no sistema
+    Quando eu clico no menu Conta
+    Então eu devo ver a opção Perfil
+    E eu devo ver a opção Atualizar Perfil
+    E eu devo ver a opção Logout
   
   @omniauth_test
   Esquema do Cenário: Login com Sistema Externo realizado com sucesso
