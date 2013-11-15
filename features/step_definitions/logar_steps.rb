@@ -93,16 +93,12 @@ Então(/^eu devo ver, abaixo de Conta, a opção (.*)$/) do |option|
   account_dropdown_should_have(option)
 end
 
-Quando(/^eu clico, abaixo de conta, em Perfil$/) do
-  within(@dropdown_id) { click_on 'Perfil' } 
+Quando(/^eu clico, abaixo de conta, em (Perfil|Atualizar Perfil)$/) do |link|
+  within(@dropdown_id) { click_on link } 
 end
 
 Então(/^eu devo estar na página do meu perfil$/) do
   current_path.should eq(user_path(@user))
-end
-
-Quando(/^eu clico, abaixo de conta, em Atualizar Perfil$/) do
-  within(@dropdown_id) { click_on 'Atualizar Perfil' } 
 end
 
 Então(/^eu devo estar na página de atualizar perfil$/) do
