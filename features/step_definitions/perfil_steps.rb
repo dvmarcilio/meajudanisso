@@ -1,17 +1,22 @@
 # encoding: utf-8
 Dado(/^que um usuário cadastrado existe$/) do
-  pending # express the regexp above with the code you wish you had
+  @user = FactoryGirl.create(:user)
 end
 
 Dado(/^que ele não fez nenhuma pergunta$/) do
-  pending # express the regexp above with the code you wish you had
+  @user.questions.count.should eq 0
 end
 
 Quando(/^eu visito a página do seu perfil$/) do
-  pending # express the regexp above with the code you wish you had
+  visit user_path(@user)
 end
 
 Então(/^eu devo ver uma mensagem de que ele não fez nenhuma pergunta$/) do
-  pending # express the regexp above with the code you wish you had
+  within(div_perguntas) { page.should have_text 'O usuário ainda não fez uma pergunta.' }
 end
+
+private
+  def div_perguntas
+    '#perguntas'
+  end
 
