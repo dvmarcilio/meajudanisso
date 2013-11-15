@@ -6,5 +6,5 @@ Email:
 = @user.email
 %br
 #perguntas.perguntas
-  %h4 Perguntas
-  O usuário ainda não fez uma pergunta.
+  %h4#qtde_perguntas= @user.questions.any? ? pluralize(@user.questions.count, 'Pergunta', 'Perguntas') : 'O usuário ainda não fez uma pergunta.'
+  
