@@ -20,7 +20,7 @@ Quando(/^eu preencho o formulario com dados corretos$/) do
   end
 end
 
-Então(/^devo estar na página principal$/) do
+Então(/^(?:eu )?devo estar na página principal$/) do
   current_path.should eq(root_path)
 end
 

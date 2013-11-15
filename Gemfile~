@@ -21,8 +21,8 @@ gem "therubyracer", :require => 'v8'
 
 gem 'tinymce-rails'
 
-gem 'sunspot_rails'
-gem 'sunspot_solr'
+gem 'sunspot_rails', github: 'sunspot/sunspot', branch: 'master'
+gem 'sunspot_solr', github: 'sunspot/sunspot', branch: 'master'
 gem 'punching_bag'
 gem 'thumbs_up'
 

@@ -68,10 +68,84 @@ def page_should_have_alert_msg(msg)
   page.should have_css("#alert-message", text: msg)
 end
 
+Então(/^(?:eu devo )?ver a imagem para login no (MeAjudaNisso|Google|Facebook)$/) do |sistema|
+  image_id = system_login_image_id(sistema)
+  page.should have_image(image_id)
+end
+
+Provider = Struct.new(:name, :logo_id)
+Quando(/^eu faço o login com a minha conta (Google|Facebook)$/) do |provider_name|
+	provider = provider(provider_name)
+	mock_external_auth(provider.name)
+	click_link provider.logo_id
+end
+
+Então(/^ver o menu Conta no cabeçalho$/) do
+  within('#fat-menu') { page.should have_text 'Conta' }
+end
+
+Quando(/^eu clico no menu Conta$/) do
+  click_link 'Conta'
+  @dropdown_id = '#logged_in_menu'
+end
+
+Então(/^eu devo ver, abaixo de Conta, a opção (.*)$/) do |option|
+  account_dropdown_should_have(option)
+end
+
+Quando(/^eu clico, abaixo de conta, em (Perfil|Atualizar Perfil)$/) do |link|
+  within(@dropdown_id) { click_on link } 
+end
+
+Então(/^eu devo estar na página do meu perfil$/) do
+  current_path.should eq(user_path(@user))
+end
+
+Então(/^eu devo estar na página de atualizar perfil$/) do
+  current_path.should eq(edit_user_registration_path)
+end
+
 private
   def fill_login_form(user)
     fill_in("Email", with: user.email)
     fill_in("Senha", with: user.password)
+  end
+  
+  def system_login_image_id(system)
+    if system.eql?('MeAjudaNisso')
+      'meajudanisso.png'
+    elsif system.eql?('Google')
+      'google.png'
+    elsif system.eql?('Facebook')
+      'facebook.png'
+    end
+  end
+  
+  def mock_external_auth(provider)
+  	user = FactoryGirl.create(:user, provider: provider, uid: '123')
+		mock_omniauth_provider(provider, user)
+  end
+  
+  def mock_omniauth_provider(provider, user) 
+  	OmniAuth.config.add_mock(provider.to_sym, {
+  		:provider => user.provider,
+  		:uid => user.uid,
+  		:info => {
+  			:email => user.email,
+				:name => user.name }
+		})	
+  end
+  
+  def provider(name) 
+    if name.eql? 'Google'
+      Provider.new('google_oauth2', 'logo_google')
+    elsif name.eql? 'Facebook'
+      Provider.new('facebook', 'logo_facebook')
+    end
+  end
+  
+  def account_dropdown_should_have(option)
+    within(@dropdown_id) { page.should have_text(option) }
   end
 
 
