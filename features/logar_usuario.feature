@@ -26,18 +26,19 @@ Funcionalidade: Logar no sistema
 		E clico no botão "Entrar"
 		Então devo estar na página principal
 		E ver a mensagem "Autenticado com sucesso."
-		
-	@omniauth_test
-  Cenário: Login com Google realizado com sucesso
-    Dado que eu estou na página de login
-    Quando eu faço o login com a minha conta Google
-    Então eu devo estar na página principal
-    E ver a mensagem "Autorizado com sucesso pela conta Google."
   
   @omniauth_test
-  Cenário: Login com Google realizado com sucesso
+  Esquema do Cenário: Login com Sistema Externo realizado com sucesso
     Dado que eu estou na página de login
-    Quando eu faço o login com a minha conta Facebook
+    Quando eu faço o login com a minha conta <sistema_externo>
     Então eu devo estar na página principal
-    E ver a mensagem "Autorizado com sucesso pela conta Facebook."
+    E ver a mensagem <mensagem>
+    
+    Exemplos:
+      | sistema_externo | mensagem                                      |
+      | Google          | "Autorizado com sucesso pela conta Google."   |                                   
+      | Facebook        | "Autorizado com sucesso pela conta Facebook." |
+    
+    
+    
   
