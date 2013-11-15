@@ -24,6 +24,15 @@ Então(/^eu devo ver que ele fez (\d+) perguntas$/) do |count|
   within(div_perguntas) { page.should have_css qtde_perguntas, text: (helper.pluralize(count, 'Pergunta', 'Perguntas')) }
 end
 
+Dado(/^que um usuário cadastrado, com (\d+) perguntas feitas, existe$/) do |quantidade|
+  step 'que um usuário cadastrado existe'
+  step "que ele fez #{quantidade} perguntas" 
+end
+
+Então(/^eu devo ver as (\d+) perguntas listadas$/) do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
 
 private
   def div_perguntas
