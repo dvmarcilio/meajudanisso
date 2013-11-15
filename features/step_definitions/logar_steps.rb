@@ -84,6 +84,15 @@ Então(/^ver o menu Conta no cabeçalho$/) do
   within('#fat-menu') { page.should have_text 'Conta' }
 end
 
+Quando(/^eu clico no menu Conta$/) do
+  click_link 'Conta'
+  @dropdown_id = '#logged_in_menu'
+end
+
+Então(/^eu devo ver, abaixo de Conta, a opção (.*)$/) do |option|
+  account_dropdown_should_have(option)
+end
+
 private
   def fill_login_form(user)
     fill_in("Email", with: user.email)
@@ -121,6 +130,10 @@ private
     elsif name.eql? 'Facebook'
       Provider.new('facebook', 'logo_facebook')
     end
+  end
+  
+  def account_dropdown_should_have(option)
+    within(@dropdown_id) { page.should have_text(option) }
   end
 
 

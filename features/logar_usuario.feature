@@ -34,9 +34,9 @@ Funcionalidade: Logar no sistema
     
     Dado que eu fiz login no sistema
     Quando eu clico no menu Conta
-    Então eu devo ver a opção Perfil
-    E eu devo ver a opção Atualizar Perfil
-    E eu devo ver a opção Logout
+    Então eu devo ver, abaixo de Conta, a opção Perfil
+    E eu devo ver, abaixo de Conta, a opção Atualizar Perfil
+    E eu devo ver, abaixo de Conta, a opção Logout
   
   @omniauth_test
   Esquema do Cenário: Login com Sistema Externo realizado com sucesso

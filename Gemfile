@@ -27,6 +27,7 @@ gem 'punching_bag'
 gem 'thumbs_up'
 
 gem 'jquery-rails'
+gem 'selenium-webdriver'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

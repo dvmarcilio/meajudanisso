@@ -9,7 +9,7 @@
           - if user_signed_in?
             %li= link_to "Usuários", users_path
             %li#fat-menu.dropdown
-              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              %a#account_dropdown_menu.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                 Conta
                 %b.caret
               %ul#logged_in_menu.dropdown-menu
