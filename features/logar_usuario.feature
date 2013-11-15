@@ -26,6 +26,7 @@ Funcionalidade: Logar no sistema
 		E clico no botão "Entrar"
 		Então devo estar na página principal
 		E ver a mensagem "Autenticado com sucesso."
+		E ver o menu Conta no cabeçalho
   
   @omniauth_test
   Esquema do Cenário: Login com Sistema Externo realizado com sucesso
@@ -33,6 +34,7 @@ Funcionalidade: Logar no sistema
     Quando eu faço o login com a minha conta <sistema_externo>
     Então eu devo estar na página principal
     E ver a mensagem <mensagem>
+    E ver o menu Conta no cabeçalho
     
     Exemplos:
       | sistema_externo | mensagem                                      |

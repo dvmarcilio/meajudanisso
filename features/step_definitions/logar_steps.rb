@@ -80,6 +80,10 @@ Quando(/^eu faço o login com a minha conta (Google|Facebook)$/) do |provider_na
 	click_link provider.logo_id
 end
 
+Então(/^ver o menu Conta no cabeçalho$/) do
+  within('#fat-menu') { page.should have_text 'Conta' }
+end
+
 private
   def fill_login_form(user)
     fill_in("Email", with: user.email)
