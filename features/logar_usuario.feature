@@ -37,6 +37,20 @@ Funcionalidade: Logar no sistema
     Então eu devo ver, abaixo de Conta, a opção Perfil
     E eu devo ver, abaixo de Conta, a opção Atualizar Perfil
     E eu devo ver, abaixo de Conta, a opção Logout
+    
+  @javascript
+  Esquema do Cenário: Opções do menu Conta redirecionam para locais corretos
+    Não testa o Logout pois está contemplado em outra funcionalidade
+    
+    Dado que eu fiz login no sistema
+    Quando eu clico no menu Conta
+    E eu clico, abaixo de conta, em <opção>
+    Então eu devo estar na página <página>
+    
+    Exemplos:
+      | opção               | página              |
+      | Perfil              | do meu perfil       |
+      | Atualizar Perfil    | de atualizar perfil |
   
   @omniauth_test
   Esquema do Cenário: Login com Sistema Externo realizado com sucesso
