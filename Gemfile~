@@ -27,6 +27,7 @@ gem 'punching_bag'
 gem 'thumbs_up'
 
 gem 'jquery-rails'
+gem 'selenium-webdriver'
 
 gem 'metric_fu'
 gem 'simplecov', :require => false, :group => :test
