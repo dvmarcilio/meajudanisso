@@ -32,13 +32,29 @@ Então(/^eu devo ver as (\d+) perguntas listadas$/) do |count|
   within(div_perguntas) { check_user_questions }
 end
 
+Dado(/^que ele não respondeu nenhuma pergunta$/) do
+  @user.answers.count.should eq 0
+end
+
+Então(/^eu devo ver que ele não respondeu nenhuma pergunta$/) do
+  within(div_respostas) { page.should have_css qtde_respostas, 'O usuário ainda não respondeu nenhuma pergunta.' }
+end
+
 private
   def div_perguntas
-    '#perguntas'
+    'div#perguntas'
   end
   
   def qtde_perguntas
     '#qtde_perguntas'
+  end
+  
+  def div_respostas
+    'div#respostas'
+  end
+  
+  def qtde_respostas
+    '#qtde_respostas'
   end
   
   def helper
