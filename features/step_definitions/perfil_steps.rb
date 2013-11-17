@@ -20,19 +20,17 @@ Dado(/^que ele fez (\d+) perguntas$/) do |count|
 end
 
 Então(/^eu devo ver que ele fez (\d+) perguntas$/) do |count|
-  helper = Aview.new
   within(div_perguntas) { page.should have_css qtde_perguntas, text: (helper.pluralize(count, 'Pergunta', 'Perguntas')) }
 end
 
-Dado(/^que um usuário cadastrado, com (\d+) perguntas feitas, existe$/) do |quantidade|
+Dado(/^que um usuário cadastrado, com (\d+) perguntas feitas, existe$/) do |count|
   step 'que um usuário cadastrado existe'
-  step "que ele fez #{quantidade} perguntas" 
+  step "que ele fez #{count} perguntas" 
 end
 
-Então(/^eu devo ver as (\d+) perguntas listadas$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Então(/^eu devo ver as (\d+) perguntas listadas$/) do |count|
+  within(div_perguntas) { check_user_questions }
 end
-
 
 private
   def div_perguntas
@@ -41,6 +39,25 @@ private
   
   def qtde_perguntas
     '#qtde_perguntas'
+  end
+  
+  def helper
+    Aview.new
+  end
+  
+  def check_user_questions 
+    @user.questions.each { |question| check_question_within_div(question) }
+  end
+  
+  def check_question_within_div(question)
+    within(question_div(question)) do
+      page.should have_text(question.plusminus)
+      page.should have_selector(:link, question.titulo)
+    end
+  end
+  
+  def question_div(question)
+    "div#question_#{question.id}"
   end
   
   

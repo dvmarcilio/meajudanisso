@@ -7,4 +7,10 @@ Email:
 %br
 #perguntas.perguntas
   %h4#qtde_perguntas= @user.questions.any? ? pluralize(@user.questions.count, 'Pergunta', 'Perguntas') : 'O usuário ainda não fez uma pergunta.'
-  
+  - @user.questions.each do |question|
+    .question[question]
+      %table
+        %td
+          = question.plusminus
+        %td
+          = link_to question.titulo, question_path(question)
