@@ -23,5 +23,17 @@ Funcionalidade: Visualizar perfil do usuário
     Dado que um usuário cadastrado existe
     E que ele não respondeu nenhuma pergunta
     Quando eu visito a página do seu perfil
-    Então eu devo ver que ele não respondeu nenhuma pergunta 
+    Então eu devo ver que ele não respondeu nenhuma pergunta
+    
+  Esquema do Cenário: Mostra a quantidade e as respostas feitas pelo usuário
+    Dado que um usuário cadastrado, com <quantidade> respostas feitas, existe
+    Quando eu visito a página do seu perfil
+    Então eu devo ver que ele fez <quantidade> respostas
+    E eu devo ver as <quantidade> respostas listadas
+    
+    Exemplos:
+      | quantidade |
+      | 1          |
+      | 5          |
+      | 10         | 
 

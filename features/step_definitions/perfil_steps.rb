@@ -16,11 +16,14 @@ Então(/^eu devo ver que ele não fez nenhuma pergunta$/) do
 end
 
 Dado(/^que ele fez (\d+) perguntas$/) do |count|
-  Integer(count).times { FactoryGirl.create(:question, user: @user) } 
+  Integer(count).times { FactoryGirl.create(:question, user: @user) }
+  expect(@user.questions.count).to eq Integer(count) 
 end
 
 Então(/^eu devo ver que ele fez (\d+) perguntas$/) do |count|
-  within(div_perguntas) { page.should have_css qtde_perguntas, text: (helper.pluralize(count, 'Pergunta', 'Perguntas')) }
+  within(div_perguntas) do 
+  	page.should have_css qtde_perguntas, text: (helper.pluralize(count, 'Pergunta', 'Perguntas'))
+  end
 end
 
 Dado(/^que um usuário cadastrado, com (\d+) perguntas feitas, existe$/) do |count|
@@ -38,6 +41,27 @@ end
 
 Então(/^eu devo ver que ele não respondeu nenhuma pergunta$/) do
   within(div_respostas) { page.should have_css qtde_respostas, 'O usuário ainda não respondeu nenhuma pergunta.' }
+end
+
+Dado(/^que um usuário cadastrado, com (\d+) respostas feitas, existe$/) do |count|
+  step 'que um usuário cadastrado existe'
+  step "que ele fez #{count} respostas"
+end
+
+Dado(/^que ele fez (\d+) respostas$/) do |count|
+	question = FactoryGirl.create(:question)
+  Integer(count).times { FactoryGirl.create(:answer, user: @user, question: question) }
+  expect(@user.answers.count).to eq Integer(count)
+end
+
+Então(/^eu devo ver que ele fez (\d+) respostas$/) do |count|
+  within(div_respostas) do 
+  	page.should have_css qtde_respostas, text: (helper.pluralize(count, 'Resposta', 'Respostas'))
+  end
+end
+
+Então(/^eu devo ver as (\d+) respostas listadas$/) do |count|
+  within(div_respostas) { check_user_answers }
 end
 
 private
@@ -74,6 +98,21 @@ private
   
   def question_div(question)
     "div#question_#{question.id}"
+  end
+  
+  def check_user_answers
+  	@user.answers.each { |answer| check_answer_within_div(answer) }
+  end
+  
+  def curr_answer_div(answer)
+  	"div#answer_#{answer.id}"
+  end
+  
+  def check_answer_within_div(answer)
+  	within(curr_answer_div(answer)) do
+  		page.should have_text(answer.plusminus)
+  		page.should have_selector(:link, answer.question.titulo)
+  	end
   end
   
   
