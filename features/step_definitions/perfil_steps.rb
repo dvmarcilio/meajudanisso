@@ -11,7 +11,7 @@ Quando(/^eu visito a página do seu perfil$/) do
   visit user_path(@user)
 end
 
-Então(/^eu devo ver uma mensagem de que ele não fez nenhuma pergunta$/) do
+Então(/^eu devo ver que ele não fez nenhuma pergunta$/) do
   within(div_perguntas) { page.should have_css qtde_perguntas, 'O usuário ainda não fez uma pergunta.' }
 end
 
