@@ -51,7 +51,7 @@
               = link_to image_tag('naoAceito.png'), solve_question_path(answer_id: answer), :method => :post, hint: "Melhor Resposta", id: "accept_answer_#{answer.id}"
             - if answer.accepted?
               = image_tag 'aceitar.png', id: "accepted-icon-answer_#{answer.id}"
-          %td.resposta#resposta_conteudo{:border => 1}
+          %td.conteudo#resposta_conteudo{:border => 1}
             != answer.conteudo
         %table
           %tr
@@ -63,13 +63,14 @@
               = link_to 'Editar', edit_answer_path(answer), id: "editar_resposta_#{answer.id}"
     %hr
   %h2#sua_resposta_label= 'Sua Resposta'
-  - if user_signed_in?
-    = form_tag question_answers_path(@pergunta) do
-      = text_area :answer, :conteudo, :class => "tinymce", id: 'responder_text_field'
-      = tinymce
-      %br
-      = submit_tag 'Responder'
-  - else
-    %strong Você precisa registrar-se ou fazer login para responder uma pergunta.
+  .sua_resposta
+    - if user_signed_in?
+      = form_tag question_answers_path(@pergunta) do
+        = text_area :answer, :conteudo, :class => "tinymce", id: 'responder_text_field'
+        = tinymce
+        %br
+        = submit_tag 'Responder'
+    - else
+      %strong Você precisa registrar-se ou fazer login para responder uma pergunta.
 
   

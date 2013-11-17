@@ -1,17 +1,27 @@
 = form_tag questions_path, method: :get do
-  = text_field_tag :search, params[:search]
+  = text_field_tag :search, params[:search] 
   = submit_tag "Pesquisar"
   
-%table
-  %thead
-    %tr
-      %th Votos
-      %th Titulo
-      %th Tags
-  %tbody
+.perguntas
+  %table
     - @questions.each do |question|
       %tr
-        %td= question.plusminus
-        %td= question.titulo
-        %td= question.tags_string
-  
+        %td
+          = question.plusminus
+          %br
+          .descricao
+            = "Votos"
+        %td
+          = question.answers.count
+          %br
+          .descricao
+            = "Respostas"
+        %td
+          = question.hits
+          %br
+          .descricao
+            = "Visualizações"
+        %td
+          = link_to question.titulo,question
+          %br
+          = "Tags: " + question.tags_string
