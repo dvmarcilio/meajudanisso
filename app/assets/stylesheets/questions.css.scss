@@ -41,7 +41,7 @@
 	margin-right: 50%;	
 }
 
-.perguntas{
+.listas{
 	text-align: center;	
 	tr{
 		border-bottom: 2px solid #000000;
@@ -56,6 +56,13 @@
 	.descricao{
 		font-size: 11px;
 		color: #999
+	}
+	.tamanho{
+		width: 300px;
+		text-align: left;
+	}
+	h2{
+		text-align: left;	
 	}
 
 }
