@@ -1,3 +1,4 @@
+# encoding: utf-8
 # == Schema Information
 #
 # Table name: questions
@@ -24,6 +25,12 @@ class Question < ActiveRecord::Base
   
   acts_as_punchable
   acts_as_voteable
+  
+  validates :titulo, :presence => true
+  validates :conteudo, :presence => true
+  validates :tags, :presence => true
+  
+  validates :user, :presence => true
 
   searchable do
     text :titulo, :boost => 5
