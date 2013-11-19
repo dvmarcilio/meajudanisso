@@ -1,4 +1,4 @@
-pt:
+pt-BR:
   devise:
     confirmations:
       confirmed: "Sua conta foi confirmada com sucesso. Realize seu login por favor."
@@ -53,8 +53,9 @@ pt:
       not_found: "não encontrado"
       not_locked: "não estava bloqueado"
       not_saved:
-        one: "1 erro impediu que %{resource} fosse salvo:"
-        other: "%{count} erros impediram que %{resource} fosse salvo:"
+        one: "Os seguintes erros impediram o %{resource} de ser criado:"
+        #other: "%{count} erros impediram que %{resource} fosse salvo:"
+        other: "Os seguintes erros impediram o %{resource} de ser criado"
   activerecord:
     attributes:
       user:

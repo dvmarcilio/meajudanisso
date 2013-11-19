@@ -44,7 +44,7 @@ group :development, :test do
 	gem 'cucumber-rails',  :require => false
 	gem 'factory_girl_rails'
 	gem "shoulda-matchers"
-	gem 'annotate'
+	gem 'annotate', '2.5.0'
 end
 
 group :development do

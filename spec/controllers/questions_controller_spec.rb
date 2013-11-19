@@ -14,7 +14,7 @@ describe QuestionsController do
 	end
 		
 	describe "GET /show" do
-	  before(:each) { @pergunta = FactoryGirl.create(:question) }  
+	  before(:each) { @pergunta = FactoryGirl.create(:full_question) }  
 	
 		it "atribui a pergunta" do
 			get :show, id: @pergunta.id
@@ -56,66 +56,104 @@ describe QuestionsController do
   
   describe "POST /create" do
   
+      let(:user) { FactoryGirl.create(:user) }
+      before(:each) { test_sign_in(user) }
+      
       context "valores validos" do
-        let(:user) { FactoryGirl.create(:user) }
-        before(:each) { test_sign_in(user) }
+        let(:post_create) { post :create, question: FactoryGirl.attributes_for(:full_question) }
+
         it "redireciona no sucesso" do
-          post :create
+          post :create, question: FactoryGirl.attributes_for(:full_question)
           expect(response).to be_redirect
         end
         
         it "redireciona para a pagina de visualizacao da pergunta criada" do
-          post :create, question: FactoryGirl.attributes_for(:question)
+          post_create
           response.should redirect_to question_url(Question.last)
         end
         
         it "salva a nova pergunta no banco de dados" do
           lambda do
-            post :create
+            post_create
           end.should change(Question, :count).by(1)
         end
         
         it "adiciona uma mensagem no flash" do
-          post :create
+          post_create
           expect(request.flash[:notice]).to_not be_empty
         end
         
         it "atribui o usuario" do
-          post :create, question: FactoryGirl.attributes_for(:question)
+          post_create
           pergunta = Question.last
           expect(pergunta.user).to eq(user)
+        end
+      end
+      
+      context "valores invalidos" do
+        let(:attrs) { { :titulo => "", :conteudo => "", :tags => ""} } 
+        let(:post_create) { post :create, question: attrs }
+        
+        it "nao cria uma nova pergunta" do
+          lambda do
+            post_create
+          end.should_not change(Question, :count)
+        end
+        
+        it "renderiza a pagina new" do
+          post_create
+          response.should render_template('new')
         end
       end
   end
   
   describe "GET /:id/edit/" do   
     it "deve expor @question a partir do id passado" do
-      pergunta = FactoryGirl.create(:question)
+      pergunta = FactoryGirl.create(:full_question)
       get :edit, id: pergunta.id
       expect(assigns(:question)).to eq(pergunta)
     end
   end
   
   describe "PUT /:id (#update)" do
-    before(:each) { @pergunta = FactoryGirl.create(:question) }
+  
+    let(:pergunta) { FactoryGirl.create(:full_question) }
     
-    it "redireciona para a pagina de visualizacao" do
-      put :update, id: @pergunta.id
-      expect(response).to redirect_to question_url(@pergunta)
+    context "dados validos" do
+      it "redireciona para a pagina de visualizacao" do
+        put :update, id: pergunta.id
+        expect(response).to redirect_to question_url(pergunta)
+      end
+      
+      it "atualiza os atributos de pergunta" do
+        attrs = { :titulo => "Novo titulo", :conteudo => "Novo conteudo", :tags => "Ruby" }
+        put :update, id: pergunta, question: attrs
+        pergunta.reload
+        expect(pergunta.titulo).to eq(attrs[:titulo])
+        expect(pergunta.conteudo).to eq(attrs[:conteudo])
+        expect(pergunta.tags_string).to eq(attrs[:tags])
+      end
+      
+      it "adiciona uma mensagem no flash" do
+        put :update, id: pergunta.id
+        expect(request.flash[:notice]).to_not be_empty
+      end
     end
     
-    it "atualiza os atributos de pergunta" do
-      attrs = { :titulo => "Novo titulo", :conteudo => "Novo conteudo", :tags => "Ruby" }
-      put :update, id: @pergunta, question: attrs
-      @pergunta.reload
-      expect(@pergunta.titulo).to eq(attrs[:titulo])
-      expect(@pergunta.conteudo).to eq(attrs[:conteudo])
-      expect(@pergunta.tags_string).to eq(attrs[:tags])
-    end
-    
-    it "adiciona uma mensagem no flash" do
-      put :update, id: @pergunta.id
-      expect(request.flash[:notice]).to_not be_empty
+    context "dados invalidos" do
+      let(:attrs) { { :titulo => "", :conteudo => "", :tags => ""} } 
+      let(:put_update) { put :update, id: pergunta, question: attrs } 
+      
+      it "nao altera a pergunta" do
+        pergunta_pre = pergunta
+        put_update
+        expect(pergunta).to eq(pergunta_pre)
+      end
+      
+      it "renderiza a pagina de edicao" do
+        put_update
+        response.should render_template('edit')
+      end
     end
   end
   
@@ -123,7 +161,7 @@ describe QuestionsController do
    
     before(:each) do
       @user = test_sign_in(FactoryGirl.create(:user))
-      @pergunta = FactoryGirl.create(:question)
+      @pergunta = FactoryGirl.create(:full_question)
       post :vote_up, id: @pergunta.id  
     end
     
@@ -137,7 +175,7 @@ describe QuestionsController do
       end
       
       it "aumenta em um o voto da resposta" do
-        original_votes = FactoryGirl.build(:question).votes_count
+        original_votes = FactoryGirl.build(:full_question).votes_count
         expect(@pergunta.plusminus).to eq(original_votes + 1)
       end
     end
@@ -160,7 +198,7 @@ describe QuestionsController do
   
   describe "POST /questions/:question_id/answer/:id/vote_down" do
     
-    let(:pergunta) { FactoryGirl.create(:question) }
+    let(:pergunta) { FactoryGirl.create(:full_question) }
     before(:each) do
       test_sign_in(FactoryGirl.create(:user))
       post :vote_down, id: pergunta
@@ -172,7 +210,7 @@ describe QuestionsController do
       end
       
       it "diminui em um o voto da resposta" do
-        original_votes = FactoryGirl.build(:question).votes_count
+        original_votes = FactoryGirl.build(:full_question).votes_count
         expect(pergunta.plusminus).to eq(original_votes -1)
       end
       
@@ -197,7 +235,7 @@ describe QuestionsController do
   
   describe "/questions/:id/solve" do
     
-    let(:pergunta) { FactoryGirl.create(:question) }
+    let(:pergunta) { FactoryGirl.create(:full_question) }
     let(:resposta) { FactoryGirl.create(:answer, question: pergunta) }
   
     context "pergunta sem resposta aceita" do

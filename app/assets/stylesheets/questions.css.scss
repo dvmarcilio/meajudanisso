@@ -8,7 +8,7 @@
 
 .conteudo{
 	text-align: justify;
-	font-size: 20px;
+	font-size: 15px;
 	padding: 20px;
 	width: 80%;
 	border-top: 0;
@@ -17,16 +17,16 @@
 	border-left: 0;
 }
 
-.resposta{
+/*.resposta{
 	text-align: justify;
-	font-size: 12px;
+	font-size: 15px;
 	padding: 20px;
 	width: 80%;
 	border-top: 0;
 	border-bottom: 0; 
 	border-right: 3px solid white;
 	border-left: 0;
-}
+}*/
 
 .criada{
 	width: 400px;
@@ -36,12 +36,45 @@
 	width: 400px;
 }
 
-
-/*table{
-    border: 1px solid black;
+.sua_resposta{
+	margin-left: 20%;
+	margin-right: 50%;	
 }
 
-th, td {
-    border: 1px solid black;
-}*/
+.listas{
+	text-align: center;	
+	tr{
+		border-bottom: 2px solid #000000;
+		padding: 10px;
+	}
+	td{
+		padding-right: 30px;
+	}
+	tr:hover{
+		background: #000;
+		color: #ccc;
+	}
+	.descricao{
+		font-size: 11px;
+		color: #999
+	}
+	.tamanho{
+		width: 300px;
+		text-align: left;
 
+	}
+	h2{
+		text-align: left;	
+	}
+
+	.tamanho_usuario{
+		width: 950px;
+		padding: 10px;
+		text-align: left;
+	}
+
+}
+
+.campo_busca{
+	width: 700px;
+}

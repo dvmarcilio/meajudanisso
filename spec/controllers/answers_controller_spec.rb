@@ -3,17 +3,13 @@ require 'spec_helper'
 describe AnswersController do
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:question) { FactoryGirl.create(:question, user: user) }
+  let(:question) { FactoryGirl.create(:full_question, user: user) }
   let(:answer) { FactoryGirl.create(:answer, question: question) }
   
   describe "POST /questions/:question_id/answers/create" do  
-     
-    let(:post_create) { post :create, question_id: question.id }
-    
     context "valores validos" do
-    
       before(:each) { test_sign_in(user) }
-    
+      let(:post_create) { post :create, answer: FactoryGirl.attributes_for(:answer), question_id: question.id }
       it "salva a resposta no banco de dados" do
         lambda do
           post_create
@@ -31,10 +27,37 @@ describe AnswersController do
       end
       
       it "atribui o usuario" do
-        post :create, answer: FactoryGirl.attributes_for(:answer), question_id: question.id
+        post_create
         resposta = Answer.last
         expect(resposta.user).to eq(user)
       end
+      
+      it "adiciona uma mensagem :notice no flash" do
+        post_create
+        expect(request.flash[:notice]).to_not be_empty
+      end
+    end
+    
+    context "valores invalidos" do
+      
+      let(:post_create) { post :create, question_id: question.id } 
+    
+      it "nao cria uma nova resposta" do
+        lambda do
+          post_create
+        end.should_not change(Answer, :count)
+      end
+      
+      it "redireciona para a pagina de visualizacao da pergunta" do
+        post_create
+        response.should redirect_to question_url(question.id)
+      end
+      
+      it "adiciona uma mensagem :warning no flash" do
+        post_create
+        expect(request.flash[:warning]).to_not be_empty
+      end
+        
     end   
   end
   
@@ -46,26 +69,41 @@ describe AnswersController do
   end
   
   describe "PUT /questions/:question_id/answers/:id (#update)" do
+    
+    let(:put_update) { put :update, answer: attrs, id: answer.id, question_id: answer.question.id }
   
-    describe "request/response" do
-      before(:each) do
-        put :update, id: answer.id, question_id: answer.question.id
-      end
-  
+    context "dados validos" do
+      let(:attrs) { FactoryGirl.attributes_for(:answer) } 
+      before(:each) { put_update }
+     
       it "redireciona para a pagina de visualizacao da pergunta" do
         expect(response).to redirect_to question_url(answer.question.id)
       end
-      
+        
       it "adiciona uma mensagem :notice no flash" do
         expect(request.flash[:notice]).to_not be_empty
       end
-    end 
+      
+      it "atualiza os atributos de resposta" do
+        put_update
+        answer.reload
+        expect(answer.conteudo).to eq(attrs[:conteudo])
+      end
+    end
     
-    it "atualiza os atributos de resposta" do
-      attrs = { :conteudo => "Novo Conteudo" }
-      put :update, answer: attrs, id: answer.id, question_id: answer.question.id
-      answer.reload
-      expect(answer.conteudo).to eq(attrs[:conteudo])
+    context "dados invalidos" do
+      let(:attrs) { { :conteudo => "" } }
+      
+      it "nao altera a resposta" do
+        resposta_pre = answer
+        put_update
+        expect(answer).to eq(resposta_pre)
+      end
+      
+      it "renderiza a pagina de edicao" do
+        put_update
+        response.should render_template('edit')
+      end
     end
   end
   

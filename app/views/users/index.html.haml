@@ -1,6 +1,7 @@
 %h1 Lista de Usuários
 %ul
-  .users
+  .listas
     - @users.each do |user|
-      %li
-        = link_to user.name,user
+      %table
+        %td.tamanho_usuario
+          = link_to user.name,user

@@ -1,5 +1,12 @@
 %h2.pergunta#titulo #{@answer.question.titulo}
 
+- unless @answer.errors.empty?
+  #validation
+    %h2= 'Os seguintes erros impediram a resposta de ser criada:'
+    %ul
+      - @answer.errors.full_messages.each do |erro|
+        %li#warning-message= erro
+
 %section.pergunta
   .pergunta#conteudo!= @answer.question.conteudo  
 

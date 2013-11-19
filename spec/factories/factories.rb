@@ -29,11 +29,11 @@ FactoryGirl.define do
     end
     
     trait :with_three_string_tags do
-      tags 'Java, JEE, JSF'
+      tags_string 'Java, JEE, JSF'
     end
     
     trait :with_one_string_tag do
-      tags 'Ruby'
+      tags_string 'Ruby'
     end
     
     trait :with_user do

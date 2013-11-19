@@ -5,14 +5,17 @@ class QuestionsController < ApplicationController
   before_filter :auth_user, only: [:new]
 	
 	def new
-	  @pergunta = Question.new
+	  @question = Question.new
 	end
 	
 	def create
-	  @pergunta = Question.new(params[:question])
-	  @pergunta.user = current_user
-	  @pergunta.save
-	  redirect_to question_url(@pergunta.id), notice: "Pergunta criada!"	  
+	  @question = Question.new(params[:question])
+	  @question.user = current_user
+	  if @question.save
+	    redirect_to question_url(@question.id), notice: "Pergunta criada!"
+	  else
+	    render 'new'
+	  end    
 	end
 	
 	def edit
@@ -20,10 +23,12 @@ class QuestionsController < ApplicationController
 	end
 	
 	def update
-	  @pergunta = Question.find(pergunta_id)
-	  @pergunta.update_attributes!(params[:question])
-	  flash[:notice] = "Pergunta editada"
-	  redirect_to question_url(@pergunta)
+	  @question = Question.find(pergunta_id)
+	  if @question.update_attributes(params[:question])
+	    redirect_to question_url(@question), notice: "Pergunta editada"
+	  else
+	    render 'edit'
+	  end
 	end
 	
 	def index
