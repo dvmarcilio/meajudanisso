@@ -6,8 +6,8 @@
         %ul.nav.pull-right
           %li= link_to "Home", root_path
           %li= link_to "Perguntar", new_question_path
-          - if user_signed_in?
-            %li= link_to "Usuários", users_path
+          %li= link_to "Usuários", users_path
+          - if user_signed_in? 
             %li#fat-menu.dropdown
               %a#account_dropdown_menu.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                 Conta

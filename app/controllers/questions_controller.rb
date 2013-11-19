@@ -5,14 +5,17 @@ class QuestionsController < ApplicationController
   before_filter :auth_user, only: [:new]
 	
 	def new
-	  @pergunta = Question.new
+	  @question = Question.new
 	end
 	
 	def create
-	  @pergunta = Question.new(params[:question])
-	  @pergunta.user = current_user
-	  @pergunta.save
-	  redirect_to question_url(@pergunta.id), notice: "Pergunta criada!"	  
+	  @question = Question.new(params[:question])
+	  @question.user = current_user
+	  if @question.save
+	    redirect_to question_url(@question.id), notice: "Pergunta criada!"
+	  else
+	    render 'new'
+	  end    
 	end
 	
 	def edit

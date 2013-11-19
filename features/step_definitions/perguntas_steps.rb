@@ -14,7 +14,7 @@ end
 
 def attrs_to_fill
   attrs_hash = {}
-  FactoryGirl.attributes_for(:question, :with_content).each do |attribute, value|
+  FactoryGirl.attributes_for(:full_question, :with_content).each do |attribute, value|
     attr_name = 'question_' + attribute.to_s
     attrs_hash.update(attr_name => value) 
   end
@@ -417,6 +417,14 @@ Então(/^não ver ver a opção de cancelar a aceitação nas outras respostas$/
   pending # express the regexp above with the code you wish you had
 end
 
+Quando(/^eu deixo o campo "(.*?)" em branco$/) do |field|
+  fill_in(field, with: "")
+end
+
+Então(/^eu devo ver a mensagem de aviso "(.*?)"$/) do |msg|
+  page_should_have_warning_msg(msg)
+end
+
 private
   def current_answer_div
     answer_div(@resposta.id)
@@ -485,7 +493,7 @@ private
   end
   
   def create_solved_question
-    @pergunta = FactoryGirl.create(:question, solved: true, user: retrieve_user)
+    @pergunta = FactoryGirl.create(:full_question, solved: true, user: retrieve_user)
   end
   
   def create_accepted_question_answer

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe AnswersController do
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:question) { FactoryGirl.create(:question, user: user) }
+  let(:question) { FactoryGirl.create(:full_question, user: user) }
   let(:answer) { FactoryGirl.create(:answer, question: question) }
   
   describe "POST /questions/:question_id/answers/create" do  

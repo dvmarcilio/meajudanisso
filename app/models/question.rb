@@ -1,3 +1,4 @@
+# encoding: utf-8
 # == Schema Information
 #
 # Table name: questions
@@ -24,6 +25,10 @@ class Question < ActiveRecord::Base
   
   acts_as_punchable
   acts_as_voteable
+  
+  validates :titulo, :presence => true
+  validates :conteudo, :presence => true
+  validates :tags, :presence => true
 
   searchable do
     text :titulo, :boost => 5
@@ -37,6 +42,8 @@ class Question < ActiveRecord::Base
   def tags=(tags)
     if tags.is_a?(String)
       self[:tags] = tags.split(',').collect(&:strip)
+    elsif tags.is_a?(Array)
+      self[:tags] = tags
     end
   end
   
