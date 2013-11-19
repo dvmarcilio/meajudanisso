@@ -20,8 +20,10 @@ class AnswersController < ApplicationController
   
   def update
     @answer = Answer.find_by_id(answer_id)
-    @answer.update_attributes(params[:answer])
-    redirect_to question_url(question), notice: "Resposta editada"
+    if @answer.update_attributes(params[:answer])
+      redirect_to question_url(question), notice: "Resposta editada"
+    else
+      render 'edit'
   end
   
   def vote_up
