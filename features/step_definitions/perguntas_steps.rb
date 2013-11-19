@@ -417,6 +417,14 @@ Então(/^não ver ver a opção de cancelar a aceitação nas outras respostas$/
   pending # express the regexp above with the code you wish you had
 end
 
+Quando(/^eu deixo o campo "(.*?)" em branco$/) do |field|
+  fill_in(field, with: "")
+end
+
+Então(/^eu devo ver a mensagem de aviso "(.*?)"$/) do |msg|
+  page_should_have_warning_msg(msg)
+end
+
 private
   def current_answer_div
     answer_div(@resposta.id)

@@ -56,10 +56,12 @@ describe QuestionsController do
   
   describe "POST /create" do
   
+      let(:user) { FactoryGirl.create(:user) }
+      before(:each) { test_sign_in(user) }
+      
       context "valores validos" do
-        let(:user) { FactoryGirl.create(:user) }
         let(:post_create) { post :create, question: FactoryGirl.attributes_for(:full_question) }
-        before(:each) { test_sign_in(user) }
+
         it "redireciona no sucesso" do
           post :create, question: FactoryGirl.attributes_for(:full_question)
           expect(response).to be_redirect
@@ -85,6 +87,22 @@ describe QuestionsController do
           post_create
           pergunta = Question.last
           expect(pergunta.user).to eq(user)
+        end
+      end
+      
+      context "valores invalidos" do
+        let(:attrs) { { :titulo => "", :conteudo => "", :tags => ""} } 
+        let(:post_create) { post :create, question: attrs }
+        
+        it "nao cria uma nova pergunta" do
+          lambda do
+            post_create
+          end.should_not change(Question, :count)
+        end
+        
+        it "renderiza a pagina new" do
+          post_create
+          response.should render_template('new')
         end
       end
   end
