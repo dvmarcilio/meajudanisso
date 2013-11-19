@@ -42,6 +42,8 @@ class Question < ActiveRecord::Base
   def tags=(tags)
     if tags.is_a?(String)
       self[:tags] = tags.split(',').collect(&:strip)
+    elsif tags.is_a?(Array)
+      self[:tags] = tags
     end
   end
   

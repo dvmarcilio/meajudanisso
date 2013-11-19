@@ -15,7 +15,7 @@ describe "Relacionando tags" do
   end
   
   it "salva um Array como tag" do
-    pergunta = Question.create!(tags: tags_array)
+    p = FactoryGirl.create(:full_question, tags: tags_array)
   end
   
   it "converte tag como String para Array" do
@@ -29,7 +29,7 @@ describe "Relacionando tags" do
   end
   
   it "faz o join do array em uma string dividida por virgula" do
-    pergunta = Question.create!(tags: tags_string)
+    pergunta = FactoryGirl.create(:full_question, tags: tags_string)
     expect(pergunta.tags_string).to eq(tags_string)
   end
   
