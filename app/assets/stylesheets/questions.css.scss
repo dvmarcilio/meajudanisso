@@ -45,6 +45,7 @@
 	text-align: center;	
 	tr{
 		border-bottom: 2px solid #000000;
+		padding: 10px;
 	}
 	td{
 		padding-right: 30px;
@@ -60,9 +61,20 @@
 	.tamanho{
 		width: 300px;
 		text-align: left;
+
 	}
 	h2{
 		text-align: left;	
 	}
 
+	.tamanho_usuario{
+		width: 950px;
+		padding: 10px;
+		text-align: left;
+	}
+
+}
+
+.campo_busca{
+	width: 700px;
 }

@@ -18,7 +18,7 @@
     %table
       %tr
         %td.criada#pergunta_criada
-          Criada em: "#{@pergunta.created_at}"
+          Criada em: #{@pergunta.created_at}
         %td.editada#pergunta_editada
           = @pergunta.updated_at ? "Editada em: #{@pergunta.updated_at}" : '  '
         %td#pergunta_editar
@@ -55,12 +55,17 @@
             != answer.conteudo
         %table
           %tr
+            %td.criada#resposta_criada
+              Criada em: #{answer.created_at}
+            %td.editada#resposta_editada
+              = answer.updated_at ? "Editada em: #{answer.updated_at}" : ' '
+            %td#resposta_editar
+              = link_to 'Editar', edit_answer_path(answer), id: "editar_resposta_#{answer.id}"
+          %tr
             %td#resposta_usuario
               Respondido por:
               = link_to "#{answer.user.name}", user_path(answer.user)
-            %td{:colspan => 2}
-            %td#resposta_editar
-              = link_to 'Editar', edit_answer_path(answer), id: "editar_resposta_#{answer.id}"
+
     %hr
   %h2#sua_resposta_label= 'Sua Resposta'
   .sua_resposta
