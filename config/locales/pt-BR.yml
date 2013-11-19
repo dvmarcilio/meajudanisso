@@ -210,4 +210,6 @@ pt-BR:
     errors:
       messages:
         record_invalid: "Validação falhou: %{errors}"
+    models:
+      user: o Usuário
       <<: *errors

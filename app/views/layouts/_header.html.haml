@@ -4,10 +4,9 @@
       = link_to "Me Ajuda Nisso", root_path, id: "logo"
       %nav
         %ul.nav.pull-right
-          %li= link_to "Home", root_path
-          %li= link_to "Perguntar", new_question_path
-          - if user_signed_in?
-            %li= link_to "Usuários", users_path
+          %li= link_to "Perguntas",questions_path
+          %li= link_to "Usuários", users_path
+          - if user_signed_in? 
             %li#fat-menu.dropdown
               %a#account_dropdown_menu.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                 Conta
@@ -21,5 +20,5 @@
                   = link_to "Logout", destroy_user_session_path, method: "delete"
           - else
             %li= link_to "Login", login_path
-
+          %li= link_to "Fazer Pergunta", new_question_path
               

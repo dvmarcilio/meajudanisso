@@ -13,3 +13,15 @@ Funcionalidade: Fazer uma pergunta
     E clico no botão "Criar Pergunta"
     Então eu devo estar na página de visualização dessa pergunta
     E devo ver "Pergunta criada!"
+    
+  Esquema do Cenário: Criar pergunta com dados inválidos
+    Dado que eu estou na página de fazer uma pergunta
+    Quando eu deixo o campo <campo> em branco
+    E clico no botão "Criar Pergunta"
+    Então eu devo ver a mensagem de aviso <mensagem>
+    
+    Exemplos:
+      | campo       | mensagem                            |
+      | "Título"    | "Titulo não pode ficar em branco"   |
+      | "Conteúdo"  | "Conteudo não pode ficar em branco" |
+      | "Tags"      | "Tags não pode ficar em branco"     |

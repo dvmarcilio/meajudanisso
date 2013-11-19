@@ -2,11 +2,16 @@
 class AnswersController < ApplicationController
 
   def create
-    @resposta = Answer.new(params[:answer])
-    @resposta.question = question
-    @resposta.user = current_user
-    @resposta.save
-    redirect_to question_url(question.id)
+    @answer = Answer.new(params[:answer])
+    @answer.question = question
+    @answer.user = current_user
+    #TODO refactor
+    if @answer.save
+      redirect_to question_url(question.id), notice: 'Resposta criada!'
+    else
+      flash[:warning] = 'Sua resposta não foi criada.\n Conteudo não pode ficar em branco'
+      redirect_to question_url(question.id)
+    end
   end
   
   def edit 
@@ -15,8 +20,11 @@ class AnswersController < ApplicationController
   
   def update
     @answer = Answer.find_by_id(answer_id)
-    @answer.update_attributes(params[:answer])
-    redirect_to question_url(question), notice: "Resposta editada"
+    if @answer.update_attributes(params[:answer])
+      redirect_to question_url(question), notice: "Resposta editada"
+    else
+      render 'edit'
+    end
   end
   
   def vote_up

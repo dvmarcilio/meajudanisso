@@ -16,7 +16,7 @@ Então(/^eu devo ver que ele não fez nenhuma pergunta$/) do
 end
 
 Dado(/^que ele fez (\d+) perguntas$/) do |count|
-  Integer(count).times { FactoryGirl.create(:question, user: @user) }
+  Integer(count).times { FactoryGirl.create(:full_question, user: @user) }
   expect(@user.questions.count).to eq Integer(count) 
 end
 
@@ -49,7 +49,7 @@ Dado(/^que um usuário cadastrado, com (\d+) respostas feitas, existe$/) do |cou
 end
 
 Dado(/^que ele fez (\d+) respostas$/) do |count|
-	question = FactoryGirl.create(:question)
+	question = FactoryGirl.create(:full_question, user: @user)
   Integer(count).times { FactoryGirl.create(:answer, user: @user, question: question) }
   expect(@user.answers.count).to eq Integer(count)
 end

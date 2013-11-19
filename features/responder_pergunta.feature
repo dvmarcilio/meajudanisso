@@ -30,3 +30,10 @@ Funcionalidade: Responder uma pergunta
     E que eu estou na página de visualização dessa pergunta
     Então eu devo ver a resposta sem as tags HTML
     
+  Cenário: Criar uma resposta sem conteúdo
+    Dado que eu estou na página de visualização de uma pergunta
+    Quando eu deixo o campo de texto da resposta em branco
+    E clico no botão "Responder"
+    Então eu devo estar na página de visualização dessa pergunta
+    E ver uma mensagem que o conteúdo da resposta não pode estar em branco 
+    

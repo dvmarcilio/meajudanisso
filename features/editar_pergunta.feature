@@ -16,3 +16,15 @@ Funcionalidade: Editar uma pergunta
     Então eu devo estar na página de visualização dessa pergunta
     E ver uma mensagem de confirmação da edição da pergunta
     E a pergunta atualizada
+    
+  Esquema do Cenário: Criar pergunta com dados inválidos
+    Dado que eu estou na página de edição de uma pergunta
+    Quando eu deixo o campo <campo> em branco
+    E clico no botão "Editar"
+    Então eu devo ver a mensagem de aviso <mensagem>
+    
+    Exemplos:
+      | campo       | mensagem                            |
+      | "Título"    | "Titulo não pode ficar em branco"   |
+      | "Conteúdo"  | "Conteudo não pode ficar em branco" |
+      | "Tags"      | "Tags não pode ficar em branco"     |

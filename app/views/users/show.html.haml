@@ -5,21 +5,27 @@ Nome:
 Email: 
 = @user.email
 %br
-#perguntas.perguntas
-  %h4#qtde_perguntas= @user.questions.any? ? pluralize(@user.questions.count, 'Pergunta', 'Perguntas') : 'O usuário ainda não fez uma pergunta.'
+%hr
+#perguntas.listas
+  %h2#qtde_perguntas= @user.questions.any? ? pluralize(@user.questions.count, 'Pergunta', 'Perguntas') : 'O usuário ainda não fez uma pergunta.'
   - @user.questions.each do |question|
     .question[question]
       %table
         %td
           = question.plusminus
-        %td
+          .descricao
+            = "Votos"
+        %td.tamanho
           = link_to question.titulo, question_path(question)
-#respostas.respostas
-  %h4#qtde_respostas= @user.answers.any? ? pluralize(@user.answers.count, 'Resposta', 'Respostas') : 'O usuário ainda não respondeu nenhuma pergunta.'
+%br
+#respostas.listas
+  %h2#qtde_respostas= @user.answers.any? ? pluralize(@user.answers.count, 'Resposta', 'Respostas') : 'O usuário ainda não respondeu nenhuma pergunta.'
   - @user.answers.each do |answer|
     .answer[answer]
       %table
         %td
           = answer.plusminus
-        %td
+          .descricao
+            = "Votos"
+        %td.tamanho
           = link_to answer.question.titulo, question_path(answer.question)

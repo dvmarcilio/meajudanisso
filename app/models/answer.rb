@@ -19,6 +19,8 @@ class Answer < ActiveRecord::Base
   
   acts_as_voteable
   
+  validates :conteudo, :presence => true
+  
   def accept
     update_attribute(:accepted, true)
   end
