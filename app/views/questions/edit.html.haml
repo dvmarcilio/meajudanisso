@@ -1,8 +1,8 @@
 %h1 Editar pergunta
 
 - unless @question.errors.empty?
-  #warning
-    = 'Os seguintes erros impediram a pergunta de ser editada:'
+  #validation
+    %h2= 'Os seguintes erros impediram a pergunta de ser editada:'
     %ul
       - @question.errors.full_messages.each do |erro|
         %li#warning-message= erro
