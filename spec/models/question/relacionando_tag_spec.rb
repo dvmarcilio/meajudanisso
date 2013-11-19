@@ -48,5 +48,10 @@ describe "Relacionando tags" do
     pergunta = Question.create(tags_string: tags_string)
     expect(pergunta.tags_string).to eq(tags_string)
   end
+  
+  it "tags_string retorna string vazia se tags for vazio" do
+    pergunta = Question.new
+    expect(pergunta.tags_string).to eq("")
+  end
 
 end

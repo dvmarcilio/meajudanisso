@@ -1,10 +1,11 @@
 %h1 Fazer uma pergunta
 
 - unless @question.errors.empty?
-  = 'Os seguintes erros impediram a pergunta de ser criada:'
-  %ul
-    - @question.errors.full_messages.each do |erro|
-      %li.warning#warning-message= erro
+  #warning
+    = 'Os seguintes erros impediram a pergunta de ser criada:'
+    %ul
+      - @question.errors.full_messages.each do |erro|
+        %li#warning-message= erro
 
 = form_tag questions_path do
 
@@ -17,8 +18,8 @@
   = tinymce
   %br
   %br
-  = label :question, :tags, 'Tags'
-  = text_field :question, :tags
+  = label :question, :tags_string, 'Tags'
+  = text_field :question, :tags_string
   %br
   %br
   = submit_tag 'Criar Pergunta'

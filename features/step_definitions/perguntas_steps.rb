@@ -14,7 +14,7 @@ end
 
 def attrs_to_fill
   attrs_hash = {}
-  FactoryGirl.attributes_for(:full_question, :with_content).each do |attribute, value|
+  FactoryGirl.attributes_for(:full_question).each do |attribute, value|
     attr_name = 'question_' + attribute.to_s
     attrs_hash.update(attr_name => value) 
   end
