@@ -23,10 +23,13 @@ class QuestionsController < ApplicationController
 	end
 	
 	def update
-	  @pergunta = Question.find(pergunta_id)
-	  @pergunta.update_attributes!(params[:question])
-	  flash[:notice] = "Pergunta editada"
-	  redirect_to question_url(@pergunta)
+	  @question = Question.find(pergunta_id)
+	  if @question.update_attributes(params[:question])
+	    flash[:notice] = "Pergunta editada"
+	    redirect_to question_url(@question)
+	  else
+	    render 'edit'
+	  end
 	end
 	
 	def index

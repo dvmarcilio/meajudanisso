@@ -116,25 +116,44 @@ describe QuestionsController do
   end
   
   describe "PUT /:id (#update)" do
-    before(:each) { @pergunta = FactoryGirl.create(:full_question) }
+  
+    let(:pergunta) { FactoryGirl.create(:full_question) }
     
-    it "redireciona para a pagina de visualizacao" do
-      put :update, id: @pergunta.id
-      expect(response).to redirect_to question_url(@pergunta)
+    context "dados validos" do
+      it "redireciona para a pagina de visualizacao" do
+        put :update, id: pergunta.id
+        expect(response).to redirect_to question_url(pergunta)
+      end
+      
+      it "atualiza os atributos de pergunta" do
+        attrs = { :titulo => "Novo titulo", :conteudo => "Novo conteudo", :tags => "Ruby" }
+        put :update, id: pergunta, question: attrs
+        pergunta.reload
+        expect(pergunta.titulo).to eq(attrs[:titulo])
+        expect(pergunta.conteudo).to eq(attrs[:conteudo])
+        expect(pergunta.tags_string).to eq(attrs[:tags])
+      end
+      
+      it "adiciona uma mensagem no flash" do
+        put :update, id: pergunta.id
+        expect(request.flash[:notice]).to_not be_empty
+      end
     end
     
-    it "atualiza os atributos de pergunta" do
-      attrs = { :titulo => "Novo titulo", :conteudo => "Novo conteudo", :tags => "Ruby" }
-      put :update, id: @pergunta, question: attrs
-      @pergunta.reload
-      expect(@pergunta.titulo).to eq(attrs[:titulo])
-      expect(@pergunta.conteudo).to eq(attrs[:conteudo])
-      expect(@pergunta.tags_string).to eq(attrs[:tags])
-    end
-    
-    it "adiciona uma mensagem no flash" do
-      put :update, id: @pergunta.id
-      expect(request.flash[:notice]).to_not be_empty
+    context "dados invalidos" do
+      let(:attrs) { { :titulo => "", :conteudo => "", :tags => ""} } 
+      let(:put_update) { put :update, id: pergunta, question: attrs } 
+      
+      it "nao altera a pergunta" do
+        pergunta_pre = pergunta
+        put_update
+        expect(pergunta).to eq(pergunta_pre)
+      end
+      
+      it "renderiza a pagina de edicao" do
+        put_update
+        response.should render_template('edit')
+      end
     end
   end
   
