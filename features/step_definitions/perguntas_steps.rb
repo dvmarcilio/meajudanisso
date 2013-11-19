@@ -485,7 +485,7 @@ private
   end
   
   def create_solved_question
-    @pergunta = FactoryGirl.create(:question, solved: true, user: retrieve_user)
+    @pergunta = FactoryGirl.create(:full_question, solved: true, user: retrieve_user)
   end
   
   def create_accepted_question_answer
