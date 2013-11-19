@@ -29,8 +29,6 @@ class Question < ActiveRecord::Base
   validates :titulo, :presence => true
   validates :conteudo, :presence => true
   validates :tags, :presence => true
-  
-  validates :user, :presence => true
 
   searchable do
     text :titulo, :boost => 5
