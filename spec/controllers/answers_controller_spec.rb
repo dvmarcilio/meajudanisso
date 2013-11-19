@@ -69,26 +69,41 @@ describe AnswersController do
   end
   
   describe "PUT /questions/:question_id/answers/:id (#update)" do
+    
+    let(:put_update) { put :update, answer: attrs, id: answer.id, question_id: answer.question.id }
   
-    describe "request/response" do
-      before(:each) do
-        put :update, id: answer.id, question_id: answer.question.id
-      end
-  
+    context "dados validos" do
+      let(:attrs) { FactoryGirl.attributes_for(:answer) } 
+      before(:each) { put_update }
+     
       it "redireciona para a pagina de visualizacao da pergunta" do
         expect(response).to redirect_to question_url(answer.question.id)
       end
-      
+        
       it "adiciona uma mensagem :notice no flash" do
         expect(request.flash[:notice]).to_not be_empty
       end
-    end 
+      
+      it "atualiza os atributos de resposta" do
+        put_update
+        answer.reload
+        expect(answer.conteudo).to eq(attrs[:conteudo])
+      end
+    end
     
-    it "atualiza os atributos de resposta" do
-      attrs = { :conteudo => "Novo Conteudo" }
-      put :update, answer: attrs, id: answer.id, question_id: answer.question.id
-      answer.reload
-      expect(answer.conteudo).to eq(attrs[:conteudo])
+    context "dados invalidos" do
+      let(:attrs) { { :conteudo => "" } }
+      
+      it "nao altera a resposta" do
+        resposta_pre = answer
+        put_update
+        expect(answer).to eq(resposta_pre)
+      end
+      
+      it "renderiza a pagina de edicao" do
+        put_update
+        response.should render_template('edit')
+      end
     end
   end
   

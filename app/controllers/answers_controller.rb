@@ -24,6 +24,7 @@ class AnswersController < ApplicationController
       redirect_to question_url(question), notice: "Resposta editada"
     else
       render 'edit'
+    end
   end
   
   def vote_up

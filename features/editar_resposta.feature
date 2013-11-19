@@ -21,3 +21,9 @@ Funcionalidade: Editar uma resposta
     Então eu devo estar na página de visualização dessa pergunta
     E ver uma mensagem de confirmação da edição da resposta
     E a resposta atualizada
+    
+  Cenário: Editar resposta sem preencher conteúdo
+    Dado que eu estou na página de edição de uma resposta
+    Mas eu deixo o conteúdo da resposta em branco
+    Quando eu clico no botão para editar a resposta
+    Então eu devo ver uma mensagem de aviso que o conteúdo da resposta não pode estar em branco
