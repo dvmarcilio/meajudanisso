@@ -210,9 +210,4 @@ pt-BR:
     errors:
       messages:
         record_invalid: "Validação falhou: %{errors}"
-      models:
-        question:
-          attributes:
-            titulo:
-              blank: "não pode ser deixado em branco"
       <<: *errors
