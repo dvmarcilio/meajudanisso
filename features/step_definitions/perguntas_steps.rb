@@ -425,6 +425,17 @@ Então(/^eu devo ver a mensagem de aviso "(.*?)"$/) do |msg|
   page_should_have_warning_msg(msg)
 end
 
+Quando(/^eu deixo o campo de texto da resposta em branco$/) do
+  responder_field_id = answer_text_field_id.gsub('#', '')
+  fill_in(responder_field_id, with: '')
+end
+
+Então(/^ver uma mensagem que o conteúdo da resposta não pode estar em branco$/) do
+  page_should_have_warning_msg("Sua resposta não foi criada")
+  page_should_have_warning_msg("Conteudo não pode ficar em branco")
+end
+
+
 private
   def current_answer_div
     answer_div(@resposta.id)
