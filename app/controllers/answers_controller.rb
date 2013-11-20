@@ -16,6 +16,10 @@ class AnswersController < ApplicationController
   
   def edit 
     @answer = Answer.find_by_id(answer_id)
+    if @answer.user != current_user
+      flash[:error] = 'Você não tem autorização para isso.'
+      redirect_to(root_path)
+    end
   end
   
   def update

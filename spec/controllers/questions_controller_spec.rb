@@ -112,17 +112,25 @@ describe QuestionsController do
     let(:user) { FactoryGirl.create(:user) }
     let(:pergunta) { FactoryGirl.create(:full_question, user: user) }
     let(:get_edit) { get :edit, id: pergunta.id }
+    
+    before(:each) { get_edit } 
      
     it "deve expor @question a partir do id passado" do
-      get_edit
       expect(assigns(:question)).to eq(pergunta)
     end
     
     context "usuario nao dono" do
       before(:each) { test_sign_in(FactoryGirl.create(:user2)) } 
       it "nao renderiza a pagina de edicao" do
-        get_edit
         response.should_not render_template('edit')
+      end
+      
+      it "adiciona uma mensagem :error no flash" do
+        expect(request.flash[:error]).to_not be_empty
+      end
+      
+      it "response deve ser um redirect" do
+        expect(response).to be_redirect
       end
     end
   end

@@ -505,6 +505,9 @@ end
 
 Dado(/^que eu não respondi uma pergunta$/) do
   step 'que eu estou visualizando uma pergunta, feita por outro usuário, com respostas'
+  @pergunta.answers.each do |resposta|
+    expect(resposta.user).to_not eq @user
+  end
 end
 
 Então(/^eu não devo ver o link para editar em nenhuma resposta$/) do
@@ -516,6 +519,14 @@ Então(/^eu não devo ver o link para editar em nenhuma resposta$/) do
   end
 end
 
+Dado(/^que eu não fiz uma resposta$/) do
+  step 'que eu não respondi uma pergunta'
+  @resposta = @pergunta.answers.first
+end
+
+Quando(/^eu tento acessar a página de edição dessa resposta$/) do
+  visit edit_answer_path(@resposta)
+end
 
 private
   def current_answer_div
