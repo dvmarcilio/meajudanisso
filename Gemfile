@@ -12,8 +12,6 @@ gem 'omniauth'
 gem 'omniauth-facebook','1.4.0'
 gem 'omniauth-google-oauth2'
 
-gem 'sqlite3'
-
 gem 'sass'
 gem 'haml'
 
@@ -29,6 +27,10 @@ gem 'thumbs_up'
 gem 'jquery-rails'
 gem 'selenium-webdriver'
 
+group :production do
+  gem 'pg'
+end
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -36,6 +38,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'sqlite3'
 	gem 'database_cleaner', '1.0.1'
 	gem 'rspec-rails'
 	gem 'cucumber-rails',  :require => false
