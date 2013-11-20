@@ -3,6 +3,7 @@
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
+$white: #FFF;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -54,7 +55,7 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $grayLight;
+  color: #999;
 }
 
 p {
@@ -87,11 +88,11 @@ footer {
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid $grayMediumLight;
-  color: $grayLight;
+  color: #999;
   a {
     color: $gray;
     &:hover { 
-      color: $grayDarker;
+      color: #222;
     }
   }  
   small { 
@@ -122,7 +123,7 @@ footer {
 aside {
   section {
     padding: 10px 0;
-    border-top: 1px solid $grayLighter;
+    border-top: 1px solid #eee;
     &:first-child {
       border: 0;
       padding-top: 0;
@@ -151,7 +152,7 @@ aside {
   a {
     float: left;
     padding: 0 10px;
-    border-left: 1px solid $grayLighter;
+    border-left: 1px solid #eee;
     color: gray;
     &:first-child {
       padding-left: 0;
@@ -206,9 +207,9 @@ input, textarea, select, .uneditable-input {
   li {
     overflow: auto;
     padding: 10px 0;
-    border-top: 1px solid $grayLighter;
+    border-top: 1px solid #eee;
     &:last-child {
-      border-bottom: 1px solid $grayLighter;
+      border-bottom: 1px solid #eee;
     }
   }
 }
