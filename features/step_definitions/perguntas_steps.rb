@@ -250,11 +250,6 @@ Então(/^eu devo estar na página de edição da resposta$/) do
   current_url.should eq(edit_answer_url(@resposta))
 end
 
-Dado(/^que eu estou na página de edição de uma resposta$/) do
-  create_answer_question
-  visit edit_answer_url(@resposta)
-end
-
 Então(/^eu devo ver os dados da pergunta$/) do
   step('eu devo ver o título dessa pergunta')
   step('o conteúdo dessa pergunta')
@@ -525,6 +520,11 @@ Dado(/^que eu não fiz uma resposta$/) do
 end
 
 Quando(/^eu tento acessar a página de edição dessa resposta$/) do
+  visit edit_answer_path(@resposta)
+end
+
+Dado(/^que eu estou na página de edição de uma resposta$/) do
+  step 'que eu respondi uma pergunta'
   visit edit_answer_path(@resposta)
 end
 
