@@ -4,7 +4,7 @@ describe AnswersController do
 
   let(:user) { FactoryGirl.create(:user) }
   let(:question) { FactoryGirl.create(:full_question, user: user) }
-  let(:answer) { FactoryGirl.create(:answer, question: question) }
+  let(:answer) { FactoryGirl.create(:answer, question: question, user: user) }
   
   describe "POST /questions/:question_id/answers/create" do  
     context "valores validos" do
@@ -62,9 +62,27 @@ describe AnswersController do
   end
   
   describe "GET /questions/:question_id/answers/:id/edit" do
+    
+    let(:get_edit) { get :edit, question_id: answer.question.id, id: answer.id }
+    before(:each) { get_edit }
+    
     it "deve expor @answer a partir do id passado" do
-      get :edit, question_id: answer.question.id, id: answer.id
       expect(assigns(:answer)).to eq(answer) 
+    end
+    
+    context "usuario nao dono" do
+      before (:each) { test_sign_in(FactoryGirl.create(:user2)) }
+      it "nao renderiza a pagina de edicao" do
+        response.should_not render_template('edit')
+      end
+      
+      it "adiciona uma mensagem :error no flash" do
+        expect(request.flash[:error]).to_not be_empty
+      end
+      
+      it "response deve ser um redirect" do
+        expect(response).to be_redirect
+      end
     end
   end
   
