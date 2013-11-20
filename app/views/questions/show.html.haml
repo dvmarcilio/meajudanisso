@@ -22,7 +22,8 @@
         %td.editada#pergunta_editada
           = @pergunta.updated_at ? "Editada em: #{@pergunta.updated_at}" : '  '
         %td#pergunta_editar
-          = link_to 'Editar', edit_question_path(@pergunta), id: 'editar_pergunta'
+          - if @pergunta.user.eql?(current_user)
+            = link_to 'Editar', edit_question_path(@pergunta), id: 'editar_pergunta'
       %tr
         %td#pergunta_tags
           = "Tags: #{@pergunta.tags_string}"

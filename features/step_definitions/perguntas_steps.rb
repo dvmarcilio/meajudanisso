@@ -448,6 +448,31 @@ Então(/^eu devo ver uma mensagem de aviso que o conteúdo da resposta não pode
   page_should_have_warning_msg("Conteudo não pode ficar em branco")
 end
 
+Dado(/^que eu fiz uma pergunta$/) do
+  step 'que eu fiz login no sistema'
+  @pergunta = create_question_with_user
+end
+
+Então(/^eu devo ver o link para editar a pergunta$/) do
+  expression = find_link(edit_link_id('pergunta')).visible?
+  expect(expression).to eq true
+end
+
+Dado(/^que eu estou visualizando uma pergunta que eu não fiz$/) do
+  @pergunta = create_question_with_user
+  step 'que eu fiz login no sistema como outro usuário'
+  step 'eu estou na página de visualização dessa pergunta' 
+end
+
+Então(/^eu não devo ver o link para editar a pergunta$/) do
+  page.should have_no_selector(:css, edit_link_id('pergunta'))
+end
+
+Dado(/^que eu estou na página de visualização da minha pergunta$/) do
+  step 'que eu fiz uma pergunta'
+  step 'eu estou na página de visualização dessa pergunta'
+end
+
 private
   def current_answer_div
     answer_div(@resposta.id)
