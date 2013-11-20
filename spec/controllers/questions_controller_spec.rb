@@ -107,11 +107,23 @@ describe QuestionsController do
       end
   end
   
-  describe "GET /:id/edit/" do   
+  describe "GET /:id/edit/" do
+  
+    let(:user) { FactoryGirl.create(:user) }
+    let(:pergunta) { FactoryGirl.create(:full_question, user: user) }
+    let(:get_edit) { get :edit, id: pergunta.id }
+     
     it "deve expor @question a partir do id passado" do
-      pergunta = FactoryGirl.create(:full_question)
-      get :edit, id: pergunta.id
+      get_edit
       expect(assigns(:question)).to eq(pergunta)
+    end
+    
+    context "usuario nao dono" do
+      before(:each) { test_sign_in(FactoryGirl.create(:user2)) } 
+      it "nao renderiza a pagina de edicao" do
+        get_edit
+        response.should_not render_template('edit')
+      end
     end
   end
   

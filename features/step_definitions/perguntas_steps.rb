@@ -211,8 +211,8 @@ Então(/^os dados da pergunta estarem preenchidos$/) do
   find_field("question_tags_string").value.should eq(@pergunta.tags_string)
 end
 
-Dado(/^que eu estou na página de edição de uma pergunta$/) do
-  @pergunta = create_question_with_user
+Dado(/^que eu estou na página de edição de uma pergunta que eu fiz$/) do
+  step 'que eu fiz uma pergunta'
   visit edit_question_path(@pergunta)
 end
 
@@ -471,6 +471,26 @@ end
 Dado(/^que eu estou na página de visualização da minha pergunta$/) do
   step 'que eu fiz uma pergunta'
   step 'eu estou na página de visualização dessa pergunta'
+end
+
+Dado(/^que eu não fiz uma pergunta$/) do
+  step 'que eu estou visualizando uma pergunta que eu não fiz'  
+end
+
+Quando(/^eu tento acessar a página de edição dessa pergunta$/) do
+  visit edit_question_path(@pergunta)
+end
+
+Então(/^eu devo ser redirecionado para a página principal$/) do
+  current_url.should eq root_url
+end
+
+Então(/^ver uma mensagem de erro que eu não tenho autorização para isso$/) do
+  page_should_have_error_msg 'Você não tem autorização para isso.'
+end
+
+def page_should_have_error_msg(msg)
+  page.should have_css("#error-message", text: msg)
 end
 
 private

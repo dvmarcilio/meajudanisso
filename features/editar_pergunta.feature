@@ -23,14 +23,14 @@ Funcionalidade: Editar uma pergunta
     E os dados da pergunta estarem preenchidos
     
   Cenário: Editar uma pergunta
-    Dado que eu estou na página de edição de uma pergunta
+    Dado que eu estou na página de edição de uma pergunta que eu fiz
     Quando eu edito a pergunta
     Então eu devo estar na página de visualização dessa pergunta
     E ver uma mensagem de confirmação da edição da pergunta
     E a pergunta atualizada
     
   Esquema do Cenário: Criar pergunta com dados inválidos
-    Dado que eu estou na página de edição de uma pergunta
+    Dado que eu estou na página de edição de uma pergunta que eu fiz
     Quando eu deixo o campo <campo> em branco
     E clico no botão "Editar"
     Então eu devo ver a mensagem de aviso <mensagem>
