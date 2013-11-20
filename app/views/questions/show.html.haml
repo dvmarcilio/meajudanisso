@@ -61,7 +61,8 @@
             %td.editada#resposta_editada
               = answer.updated_at ? "Editada em: #{answer.updated_at}" : ' '
             %td#resposta_editar
-              = link_to 'Editar', edit_answer_path(answer), id: "editar_resposta_#{answer.id}"
+              - if answer.user.eql?(current_user)
+                = link_to 'Editar', edit_answer_path(answer), id: "editar_resposta_#{answer.id}"
           %tr
             %td#resposta_usuario
               Respondido por:
