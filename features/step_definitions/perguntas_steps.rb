@@ -454,8 +454,7 @@ Dado(/^que eu fiz uma pergunta$/) do
 end
 
 Então(/^eu devo ver o link para editar a pergunta$/) do
-  expression = find_link(edit_link_id('pergunta')).visible?
-  expect(expression).to eq true
+  edit_link_visible('pergunta')
 end
 
 Dado(/^que eu estou visualizando uma pergunta que eu não fiz$/) do
@@ -465,7 +464,7 @@ Dado(/^que eu estou visualizando uma pergunta que eu não fiz$/) do
 end
 
 Então(/^eu não devo ver o link para editar a pergunta$/) do
-  page.should have_no_selector(:css, edit_link_id('pergunta'))
+  edit_link_not_visible('pergunta')
 end
 
 Dado(/^que eu estou na página de visualização da minha pergunta$/) do
@@ -492,6 +491,31 @@ end
 def page_should_have_error_msg(msg)
   page.should have_css("#error-message", text: msg)
 end
+
+Dado(/^que eu respondi uma pergunta$/) do
+  step 'que eu fiz login no sistema'
+  create_answer_question
+end
+
+Então(/^eu devo ver o link para editar a minha resposta$/) do
+  within(current_answer_div) do
+    edit_link_visible('resposta')
+  end
+end
+
+Dado(/^que eu não respondi uma pergunta$/) do
+  step 'que eu estou visualizando uma pergunta, feita por outro usuário, com respostas'
+end
+
+Então(/^eu não devo ver o link para editar em nenhuma resposta$/) do
+  @pergunta.answers.each do |resposta|
+    within(answer_div(resposta.id)) do
+      @resposta = resposta
+      edit_link_not_visible('resposta')
+    end
+  end
+end
+
 
 private
   def current_answer_div
@@ -566,6 +590,15 @@ private
   
   def create_accepted_question_answer
     @resposta = FactoryGirl.create(:answer, question: @pergunta, accepted: true, user: retrieve_user)
+  end
+  
+  def edit_link_visible(type)
+    expression = find_link(edit_link_id(type)).visible?
+    expect(expression).to eq true
+  end
+  
+  def edit_link_not_visible(type)
+    page.should have_no_selector(:link, edit_link_id(type))
   end
   
   def pergunta_titulo
