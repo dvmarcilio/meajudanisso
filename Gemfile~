@@ -28,7 +28,7 @@ gem 'jquery-rails'
 gem 'selenium-webdriver'
 
 group :production do
-  
+  gem 'pg'
 end
 
 group :assets do

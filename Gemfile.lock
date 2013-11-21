@@ -242,7 +242,7 @@ DEPENDENCIES
   annotate (= 2.5.0)
   bootstrap-sass
   bootstrap-will_paginate
-  coffee-rails (~> 3.2.1)
+  coffee-rails
   cucumber-rails
   database_cleaner (= 1.0.1)
   devise
@@ -257,7 +257,7 @@ DEPENDENCIES
   rails (= 3.2.14)
   rspec-rails
   sass
-  sass-rails (~> 3.2.3)
+  sass-rails
   selenium-webdriver
   shoulda-matchers
   sqlite3
@@ -266,5 +266,5 @@ DEPENDENCIES
   therubyracer
   thumbs_up
   tinymce-rails
-  uglifier (>= 1.0.3)
+  uglifier
   will_paginate

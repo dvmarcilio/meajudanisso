@@ -1,0 +1,20 @@
+- README.md (Sobre)
+- (Pergunta):
+  - fazer_pergunta.feature
+  - relacionar_tags_a_pergunta.feature
+  - visualizar_pergunta.feature
+  - editar_pergunta.feature
+- (Resposta): 
+  - responder_pergunta.feature
+  - aceitar_resposta.feature
+  - editar_resposta.feature
+- (Votar):
+  - votar_na_pergunta.feature
+  - votar_na_resposta.feature
+- (Usuário):
+  - cadastrar_usuario.feature
+  - logar_usuario.feature
+  - logout_usuario.feature
+  - visualizar_perfil_usuario.feature
+- (Sistema):
+  - negar_acessos_nao_autorizados.feature
