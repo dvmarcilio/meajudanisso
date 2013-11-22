@@ -29,7 +29,7 @@ gem 'selenium-webdriver'
 
 group :production do
   gem 'pg'
-  gem omniauth-heroku
+  gem 'omniauth-heroku'
 end
 
 group :assets do
