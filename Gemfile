@@ -9,6 +9,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook','1.4.0'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-heroku'
 
 gem 'sass'
 gem 'haml'
