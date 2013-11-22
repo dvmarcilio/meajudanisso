@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 
 gem 'rails', '3.2.14'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '2.3.2.2'
 gem 'devise'
 
 gem 'omniauth'
@@ -26,6 +26,10 @@ gem 'thumbs_up'
 
 gem 'jquery-rails'
 gem 'selenium-webdriver'
+
+group :production do
+  gem 'pg'
+end
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
