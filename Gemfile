@@ -11,6 +11,7 @@ gem 'bootstrap-will_paginate'
 gem 'omniauth'
 gem 'omniauth-facebook','1.4.0'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-heroku'
 
 gem 'sass'
 gem 'haml'
@@ -29,7 +30,6 @@ gem 'selenium-webdriver'
 
 group :production do
   gem 'pg'
-  gem 'omniauth-heroku'
 end
 
 group :assets do

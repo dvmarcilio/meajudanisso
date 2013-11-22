@@ -62,7 +62,8 @@ def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     unless user
         user = User.create(name: data["name"],
              email: data["email"],
-             password: Devise.friendly_token[0,20]
+             password: Devise.friendly_token[0,20],
+             provider: "google",
             )
     end
     user
