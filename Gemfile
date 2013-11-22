@@ -10,8 +10,6 @@ gem 'omniauth'
 gem 'omniauth-facebook','1.4.0'
 gem 'omniauth-google-oauth2'
 
-gem 'sqlite3'
-
 gem 'sass'
 gem 'haml'
 
@@ -38,6 +36,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'sqlite3'
 	gem 'database_cleaner', '1.0.1'
 	gem 'rspec-rails'
 	gem 'cucumber-rails',  :require => false
