@@ -27,6 +27,7 @@ gem 'punching_bag'
 gem 'thumbs_up'
 
 gem 'jquery-rails'
+gem 'selenium-webdriver'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -40,6 +41,6 @@ group :development, :test do
 	gem 'cucumber-rails',  :require => false
 	gem 'factory_girl_rails'
 	gem "shoulda-matchers"
-	gem 'annotate'
+	gem 'annotate', '2.5.0'
 end
 
