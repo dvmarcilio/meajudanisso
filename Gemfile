@@ -5,8 +5,6 @@ ruby '1.9.3'
 gem 'rails', '3.2.14'
 gem 'bootstrap-sass'
 gem 'devise'
-gem 'will_paginate'
-gem 'bootstrap-will_paginate'
 
 gem 'omniauth'
 gem 'omniauth-facebook','1.4.0'
