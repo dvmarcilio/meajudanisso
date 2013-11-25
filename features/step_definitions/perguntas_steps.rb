@@ -108,12 +108,12 @@ end
 
 #TODO formatar essas datas.
 Então(/^quando ela foi criada$/) do
-  page.should have_css(pergunta_criada, text: @pergunta.created_at)
+  page.should have_css(pergunta_criada, text: I18n.localize(@pergunta.created_at, format: :views))
 end
 
 Então(/^quando ela foi editada$/) do
   if @pergunta.updated_at
-    page.should have_css(pergunta_editada, text: @pergunta.updated_at)
+    page.should have_css(pergunta_editada, text: I18n.localize(@pergunta.created_at, format: :views))
   end
 end
 

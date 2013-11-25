@@ -18,9 +18,9 @@
     %table
       %tr
         %td.criada#pergunta_criada
-          Criada em: #{@pergunta.created_at}
+          Criada em: #{I18n.localize(@pergunta.created_at, format: :views)}
         %td.editada#pergunta_editada
-          = @pergunta.updated_at ? "Editada em: #{@pergunta.updated_at}" : '  '
+          = @pergunta.updated_at ? "Editada em: #{I18n.localize(@pergunta.updated_at, format: :views)}" : '  '
         %td#pergunta_editar
           - if @pergunta.user.eql?(current_user)
             = link_to 'Editar', edit_question_path(@pergunta), id: 'editar_pergunta'
@@ -57,9 +57,9 @@
         %table
           %tr
             %td.criada#resposta_criada
-              Criada em: #{answer.created_at}
+              Criada em: #{I18n.localize(answer.created_at, format: :views)}
             %td.editada#resposta_editada
-              = answer.updated_at ? "Editada em: #{answer.updated_at}" : ' '
+              = answer.updated_at ? "Editada em: #{I18n.localize(answer.updated_at, format: :views)}" : ' '
             %td#resposta_editar
               - if answer.user.eql?(current_user)
                 = link_to 'Editar', edit_answer_path(answer), id: "editar_resposta_#{answer.id}"
