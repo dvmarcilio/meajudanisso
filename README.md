@@ -14,7 +14,7 @@
   
 ### Code
   Sure there is room for a lot of improvement. There might be ones that we don't even know about it. But the ones we know of are:  
-* Redo how votes are being processed. [StackOverflow question](http://stackoverflow.com/questions/19591401/drying-up-rails-app-with-a-new-controller)
+* Redo how votes are being done. [StackOverflow question](http://stackoverflow.com/questions/19591401/drying-up-rails-app-with-a-new-controller)
 * Use partials
 * Organize cucumber steps better. (perguntas_steps.rb has 500 LOC)
   
