@@ -1,7 +1,5 @@
 # MeAjudaNisso
 
-[Application](https://meajudanisso.herokuapp.com) | [Authors](https://github.com/dvmarcilio/meajudanisso/contributors)
-
 ## About
   This is a question and answer application, heavily based on StackOverflow(http://www.stackoverflow.com).
   It was made as a college project, specifically as the final requirement to get a degree in Computer Science in Universidade Católica de Brasília (UCB), in Brazil. It was targeted to be used internally in the university, initially for students from IT.    
